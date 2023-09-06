@@ -4,6 +4,7 @@
 public class belajarLooping {
 
     public static void main(String[] args) {
+        System.out.println("yok belajar");
         int a,b,c,d,e,f,g,h,i,j,k,l,m;
         for (a = 0 ; a < 34 ; a++) {
             if (a <= 10) {
