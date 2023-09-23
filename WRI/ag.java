@@ -23,7 +23,32 @@ public class ag {
             pNl = nilai.nextInt();
             switch (pNl) {
                 case 1:
-                    System.out.println("Bahasa Inggris 1");
+                for (int i = 0; i < 5; i++) {
+                    if (i == 0 || i == 4) {
+                        for (int a = 0; a < 65; a++) {
+                            System.out.print("=");
+                        }
+                    } else if (i == 2) {
+                        for (int b = 0; b < 50; b++) {
+                            if (b == 0 || b == 49) {
+                                System.out.print("|");
+                            } else if (b == 26) {
+                                System.out.print("BAHASA INGGRIS 1");
+                            } else {
+                                System.out.print(" ");
+                            }
+                        }
+                    } else {
+                        for (int c = 0; c < 65; c++) {
+                            if (c == 0 || c == 64) {
+                                System.out.print("|");
+                            } else {
+                                System.out.print(" ");
+                            }
+                        }
+                    }
+                    System.out.println("");
+                }
                     System.out.print("Masukkan nilai rata-rata Tugas Bahasa Inggris 1 : ");
                     tgBing1 = nilai.nextFloat();
                     System.out.print("Masukkan nilai QUIZ Bahasa Inggris 1 : ");

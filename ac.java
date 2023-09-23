@@ -61,8 +61,8 @@ public class ac {
             }
 
             // BERANDA
-            for (int e = 0; e < 23; e++) {
-                if (e == 0 || e == 4 || e == 10 || e == 16 || e == 22) {
+            for (int e = 0; e < 29; e++) {
+                if (e == 0 || e == 4 || e == 10 || e == 16 || e == 22 || e == 28) {
                     for (int f = 0; f < 65; f++) {
                         System.out.print("=");
                     }
@@ -85,49 +85,81 @@ public class ac {
                         }
                     }
                 } else if (e == 7) {
-                    for (int b = 0; b < 60; b++) {
-                        if (b == 0 || b == 6 || b == 25 || b == 27 || b == 33 || b == 53) {
+                    for (int b = 0; b < 52; b++) {
+                        if (b == 0 || b == 6 || b == 25 || b == 27 || b == 33 || b == 51) {
                             System.out.print("|");
                         } else if (b == 3) {
                             System.out.print("1");
                         } else if (b == 8) {
                             System.out.print("BIODATA");
                         } else if (b == 30) {
-                            System.out.print("4");
+                            System.out.print("2");
                         } else if (b == 35) {
-                            System.out.print("MATKUL");
+                            System.out.print("PRESENSI");
+                        } else {
+                            System.out.print(" ");
+                        }
+                    }
+                } else if (e == 13) {
+                    for (int b = 0; b < 37; b++) {
+                        if (b == 0 || b == 6 || b == 13 || b == 15 || b == 21 || b == 36) {
+                            System.out.print("|");
+                        } else if (b == 3) {
+                            System.out.print("3");
+                        } else if (b == 8) {
+                            System.out.print("KARTU RENCANA STUDI");
+                        } else if (b == 18) {
+                            System.out.print("4");
+                        } else if (b == 23) {
+                            System.out.print("MATA KULIAH");
+                        } else {
+                            System.out.print(" ");
+                        }
+                    }
+                } else if (e == 19) {
+                    for (int b = 0; b < 43; b++) {
+                        if (b == 0 || b == 6 || b == 27 || b == 29 || b == 35 || b == 42) {
+                            System.out.print("|");
+                        } else if (b == 3) {
+                            System.out.print("5");
+                        } else if (b == 8) {
+                            System.out.print("NILAI");
+                        } else if (b == 32) {
+                            System.out.print("6");
+                        } else if (b == 37) {
+                            System.out.print("UANG KULIAH TUNGGAL");
                         } else {
                             System.out.print(" ");
                         }
                     }
                 } else if (e == 13) {
                     for (int b = 0; b < 60; b++) {
-                        if (b == 0 || b == 6 || b == 24 || b == 26 || b == 32 || b == 53) {
+                        if (b == 0 || b == 6 || b == 59) {
                             System.out.print("|");
                         } else if (b == 3) {
-                            System.out.print("2");
-                        } else if (b == 8) {
-                            System.out.print("PRESENSI");
+                            System.out.print("3");
                         } else if (b == 29) {
-                            System.out.print("5");
-                        } else if (b == 34) {
-                            System.out.print("NILAI");
+                            System.out.print("KELUAR");
                         } else {
                             System.out.print(" ");
                         }
                     }
-                } else if (e == 19) {
-                    for (int b = 0; b < 64; b++) {
-                        if (b == 0 || b == 6 || b == 29 || b == 31 || b == 37 || b == 60) {
+                } else if (e == 25) {
+                    for (int b = 0; b < 60; b++) {
+                        if (b == 0 || b == 6 || b == 59) {
                             System.out.print("|");
                         } else if (b == 3) {
-                            System.out.print("3");
-                        } else if (b == 8) {
-                            System.out.print("KRS");
-                        } else if (b == 34) {
-                            System.out.print("6");
-                        } else if (b == 39) {
-                            System.out.print("UKT");
+                            System.out.print("7");
+                        } else if (b == 29) {
+                            System.out.print("KELUAR");
+                        } else {
+                            System.out.print(" ");
+                        }
+                    }
+                } else if (e == 23 || e == 24 || e == 26 || e == 27) {
+                    for (int b = 0; b < 65; b++) {
+                        if (b == 0 || b == 6 || b == 64) {
+                            System.out.print("|");
                         } else {
                             System.out.print(" ");
                         }
@@ -325,13 +357,200 @@ public class ac {
                         case 1:
                             System.out.println("MASUKKAN NILAI");
                             do {
-                                System.out.println(
-                                        "1. Bahasa Inggris 1\n2. Critical Thingking and Problem Solving\n3. Dasar Pemrograman\n4. Keselamatan kesehatan Kerja\n5. Konsep Teknologi Informasi\n6. Matematika Dasar\n7. Pacasila\n8. Praktikum Dasar Pemrograman\n9. IPS");
-                                System.out.println("Masukkan Angka : ");
+                                for (int e = 0; e < 35; e++) {
+                                    if (e == 0 || e == 4 || e == 10 || e == 16 || e == 22 || e == 28 || e == 34) {
+                                        for (int f = 0; f < 65; f++) {
+                                            System.out.print("=");
+                                        }
+                                    } else if (e == 2) {
+                                        for (int b = 0; b < 61; b++) {
+                                            if (b == 0 || b == 60) {
+                                                System.out.print("|");
+                                            } else if (b == 30) {
+                                                System.out.print("NILAI");
+                                            } else {
+                                                System.out.print(" ");
+                                            }
+                                        }
+                                    } else if (e == 1 || e == 3) {
+                                        for (int b = 0; b < 65; b++) {
+                                            if (b == 0 || b == 64) {
+                                                System.out.print("|");
+                                            } else {
+                                                System.out.print(" ");
+                                            }
+                                        }
+                                    } else if (e == 7) {
+                                        for (int b = 0; b < 30; b++) {
+                                            if (b == 0 || b == 6 || b == 16 || b == 18 || b == 24 || b == 29) {
+                                                System.out.print("|");
+                                            } else if (b == 3) {
+                                                System.out.print("1");
+                                            } else if (b == 8) {
+                                                System.out.print("BAHASA INGGRIS 1");
+                                            } else if (b == 21) {
+                                                System.out.print("2");
+                                            } else if (b == 26) {
+                                                System.out.print("CRITICAL THINKING AND");
+                                            } else {
+                                                System.out.print(" ");
+                                            }
+                                        }
+                                    } else if (e == 8) {
+                                        for (int b = 0; b < 51; b++) {
+                                            if (b == 0 || b == 6 || b == 31 || b == 33 || b == 39 || b == 50) {
+                                                System.out.print("|");
+                                            } else if (b == 41) {
+                                                System.out.print("PROBLEM SOLVING");
+                                            } else {
+                                                System.out.print(" ");
+                                            }
+                                        }
+                                    } else if (e == 13) {
+                                        for (int b = 0; b < 29; b++) {
+                                            if (b == 0 || b == 6 || b == 15 || b == 17 || b == 23 || b == 28) {
+                                                System.out.print("|");
+                                            } else if (b == 3) {
+                                                System.out.print("3");
+                                            } else if (b == 8) {
+                                                System.out.print("DASAR PEMROGRAMAN");
+                                            } else if (b == 20) {
+                                                System.out.print("4");
+                                            } else if (b == 25) {
+                                                System.out.print("KESELAMATAN KESEHATAN");
+                                            } else {
+                                                System.out.print(" ");
+                                            }
+                                        }
+                                    } else if (e == 14) {
+                                        for (int b = 0; b < 61; b++) {
+                                            if (b == 0 || b == 6 || b == 31 || b == 33 || b == 39 || b == 60) {
+                                                System.out.print("|");
+                                            } else if (b == 41) {
+                                                System.out.print("KERJA");
+                                            } else {
+                                                System.out.print(" ");
+                                            }
+                                        }
+                                    } else if (e == 19) {
+                                        for (int b = 0; b < 35; b++) {
+                                            if (b == 0 || b == 6 || b == 16 || b == 18 || b == 24 || b == 34) {
+                                                System.out.print("|");
+                                            } else if (b == 3) {
+                                                System.out.print("5");
+                                            } else if (b == 8) {
+                                                System.out.print("KONSEP TEKNOLOGI");
+                                            } else if (b == 21) {
+                                                System.out.print("6");
+                                            } else if (b == 26) {
+                                                System.out.print("MATEMATIKA DASAR");
+                                            } else {
+                                                System.out.print(" ");
+                                            }
+                                        }
+                                    } else if (e == 20) {
+                                        for (int b = 0; b < 57; b++) {
+                                            if (b == 0 || b == 6 || b == 23 || b == 25 || b == 31 || b == 56) {
+                                                System.out.print("|");
+                                            } else if (b == 8) {
+                                                System.out.print("INFORMASI");
+                                            } else {
+                                                System.out.print(" ");
+                                            }
+                                        }
+                                    } else if (e == 25) {
+                                        for (int b = 0; b < 43; b++) {
+                                            if (b == 0 || b == 6 || b == 23 || b == 25 || b == 31 || b == 42) {
+                                                System.out.print("|");
+                                            } else if (b == 3) {
+                                                System.out.print("7");
+                                            } else if (b == 8) {
+                                                System.out.print("PANCASILA");
+                                            } else if (b == 28) {
+                                                System.out.print("8");
+                                            } else if (b == 33) {
+                                                System.out.print("PRAKTIKUM DASAR");
+                                            } else {
+                                                System.out.print(" ");
+                                            }
+                                        }
+                                    } else if (e == 26) {
+                                        for (int b = 0; b < 55; b++) {
+                                            if (b == 0 || b == 6 || b == 31 || b == 33 || b == 39 || b == 54) {
+                                                System.out.print("|");
+                                            } else if (b == 41) {
+                                                System.out.print("PEMROGRAMAN");
+                                            } else {
+                                                System.out.print(" ");
+                                            }
+                                        }
+                                    } else if (e == 31) {
+                                        for (int b = 0; b < 48; b++) {
+                                            if (b == 0 || b == 6 || b == 18 || b == 20 || b == 25 || b == 45) {
+                                                System.out.print("|");
+                                            } else if (b == 3) {
+                                                System.out.print("9");
+                                            } else if (b == 8) {
+                                                System.out.print("INDEK PRESTASI");
+                                            } else if (b == 23) {
+                                                System.out.print("10");
+                                            } else if (b == 27) {
+                                                System.out.print("KELUAR");
+                                            } else {
+                                                System.out.print(" ");
+                                            }
+                                        }
+                                    } else if (e == 32) {
+                                        for (int b = 0; b < 58; b++) {
+                                            if (b == 0 || b == 6 || b == 24 || b == 26 || b == 32 || b == 57) {
+                                                System.out.print("|");
+                                            } else if (b == 8) {
+                                                System.out.print("SEMESTER");
+                                            } else {
+                                                System.out.print(" ");
+                                            }
+                                        }
+                                    } else {
+                                        for (int g = 0; g < 65; g++) {
+                                            if (g == 0 || g == 6 || g == 31 || g == 33 || g == 39 || g == 64) {
+                                                System.out.print("|");
+                                            } else {
+                                                System.out.print(" ");
+                                            }
+                                        }
+                                    }
+                                    System.out.println("");
+                                }
+                                System.out.print("Masukkan Angka : ");
                                 pNl = scflt.nextInt();
                                 switch (pNl) {
                                     case 1:
-                                        System.out.println("Bahasa Inggris 1");
+                                    for (int i = 0; i < 5; i++) {
+                                        if (i == 0 || i == 4) {
+                                            for (int a = 0; a < 65; a++) {
+                                                System.out.print("=");
+                                            }
+                                        } else if (i == 2) {
+                                            for (int b = 0; b < 50; b++) {
+                                                if (b == 0 || b == 49) {
+                                                    System.out.print("|");
+                                                } else if (b == 26) {
+                                                    System.out.print("BAHASA INGGRIS 1");
+                                                } else {
+                                                    System.out.print(" ");
+                                                }
+                                            }
+                                        } else {
+                                            for (int c = 0; c < 65; c++) {
+                                                if (c == 0 || c == 64) {
+                                                    System.out.print("|");
+                                                } else {
+                                                    System.out.print(" ");
+                                                }
+                                            }
+                                        }
+                                        System.out.println("");
+                                    }
                                         System.out.print("Masukkan nilai rata-rata Tugas Bahasa Inggris 1 : ");
                                         tgBing1 = scflt.nextFloat();
                                         System.out.print("Masukkan nilai QUIZ Bahasa Inggris 1 : ");
@@ -350,7 +569,32 @@ public class ac {
                                         }
                                         break;
                                     case 2:
-                                        System.out.println("Critical Thinking and Problem Solving");
+                                    for (int i = 0; i < 5; i++) {
+                                        if (i == 0 || i == 4) {
+                                            for (int a = 0; a < 65; a++) {
+                                                System.out.print("=");
+                                            }
+                                        } else if (i == 2) {
+                                            for (int b = 0; b < 29; b++) {
+                                                if (b == 0 || b == 28) {
+                                                    System.out.print("|");
+                                                } else if (b == 14) {
+                                                    System.out.print("CRITICAL THINKING AND PROBLEM SOLVING");
+                                                } else {
+                                                    System.out.print(" ");
+                                                }
+                                            }
+                                        } else {
+                                            for (int c = 0; c < 65; c++) {
+                                                if (c == 0 || c == 64) {
+                                                    System.out.print("|");
+                                                } else {
+                                                    System.out.print(" ");
+                                                }
+                                            }
+                                        }
+                                        System.out.println("");
+                                    }
                                         System.out.print("Masukkan nilai rata-rata Tugas CTPS : ");
                                         tgCtps = scflt.nextFloat();
                                         System.out.print("Masukkan nilai QUIZ CTPS : ");
@@ -369,7 +613,32 @@ public class ac {
                                         }
                                         break;
                                     case 3:
-                                        System.out.println("Dasar Pemrograman");
+                                    for (int i = 0; i < 5; i++) {
+                                        if (i == 0 || i == 4) {
+                                            for (int a = 0; a < 65; a++) {
+                                                System.out.print("=");
+                                            }
+                                        } else if (i == 2) {
+                                            for (int b = 0; b < 49; b++) {
+                                                if (b == 0 || b == 48) {
+                                                    System.out.print("|");
+                                                } else if (b == 24) {
+                                                    System.out.print("DASAR PEMROGRAMAN");
+                                                } else {
+                                                    System.out.print(" ");
+                                                }
+                                            }
+                                        } else {
+                                            for (int c = 0; c < 65; c++) {
+                                                if (c == 0 || c == 64) {
+                                                    System.out.print("|");
+                                                } else {
+                                                    System.out.print(" ");
+                                                }
+                                            }
+                                        }
+                                        System.out.println("");
+                                    }
                                         System.out.print("Masukkan nilai rata-rata Tugas Daspro : ");
                                         tgDaspro = scflt.nextFloat();
                                         System.out.print("Masukkan nilai QUIZ Daspro : ");
@@ -498,7 +767,8 @@ public class ac {
                                 }
                             } while (nlAkhirBing1 >= 0 && nlAkhirCtps >= 0 && nlAkhirDaspro >= 0 && nlAkhirK3 >= 0
                                     && nlAkhirKti >= 0
-                                    && nlAkhirMatDas >= 0 && nlAkhirPancasila >= 0 && nlAkhirPrakDaspro >= 0 && back.equalsIgnoreCase("y"));
+                                    && nlAkhirMatDas >= 0 && nlAkhirPancasila >= 0 && nlAkhirPrakDaspro >= 0
+                                    && back.equalsIgnoreCase("y"));
                             break;
                         case 2:
                             System.out.println("LIHAT NILAI");
