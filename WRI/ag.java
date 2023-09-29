@@ -21,8 +21,7 @@ public class ag {
                     "1. Bahasa Inggris 1\n2. Critical Thingking and Problem Solving\n3. Dasar Pemrograman\n4. Keselamatan kesehatan Kerja\n5. Konsep Teknologi Informasi\n6. Matematika Dasar\n7. Pacasila\n8. Praktikum Dasar Pemrograman\n9. IPS");
             System.out.println("Masukkan Angka : ");
             pNl = nilai.nextInt();
-            switch (pNl) {
-                case 1:
+            if (pNl == 1){
                 for (int i = 0; i < 5; i++) {
                     if (i == 0 || i == 4) {
                         for (int a = 0; a < 65; a++) {
@@ -64,8 +63,8 @@ public class ag {
                     for (d = 0; d < 5; d++) {
                         System.out.println(" ");
                     }
-                    break;
-                case 2:
+                }
+                else if (pNl):
                     System.out.println("Critical Thinking and Problem Solving");
                     System.out.print("Masukkan nilai rata-rata Tugas CTPS : ");
                     tgCtps = nilai.nextFloat();

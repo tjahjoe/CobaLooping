@@ -15,7 +15,7 @@ public class ac {
         float nlAkhirBing1 = 0, nlAkhirCtps = 0, nlAkhirDaspro = 0, nlAkhirK3 = 0, nlAkhirKti = 0, nlAkhirMatDas = 0,
                 nlAkhirPancasila = 0, nlAkhirPrakDaspro = 0;
         float t = 0.2f, qz = 0.2f, ut = 0.3f, ua = 0.3f, ips;
-        int pNl, d;
+        int pNl = 0, pilihNl = 0, d;
         String back = "y";
 
         // SELAMAT DATANG
@@ -281,6 +281,7 @@ public class ac {
                 // nilai
                 case 5:
                     // tabel nilai
+                    do {
                     for (int e = 0; e < 17; e++) {
                         if (e == 0 || e == 4 || e == 10 || e == 16 || e == 22) {
                             for (int f = 0; f < 65; f++) {
@@ -288,10 +289,10 @@ public class ac {
                             }
                         } else if (e == 2) {
                             for (int b = 0; b < 61; b++) {
-                                if (b == 0 || b == 58) {
+                                if (b == 0 || b == 60) {
                                     System.out.print("|");
-                                } else if (b == 29) {
-                                    System.out.print("BIODATA");
+                                } else if (b == 30) {
+                                    System.out.print("NILAI");
                                 } else {
                                     System.out.print(" ");
                                 }
@@ -352,7 +353,7 @@ public class ac {
                         System.out.println("");
                     }
                     System.out.print("MASUKKAN ANGKA : ");
-                    int pilihNl = scInt.nextInt();
+                    pilihNl = scInt.nextInt();
                     switch (pilihNl) {
                         case 1:
                             System.out.println("MASUKKAN NILAI");
@@ -755,7 +756,7 @@ public class ac {
                                         System.out.println("Indeks Prestasi Semester");
                                         ips = (nlAkhirBing1 + nlAkhirCtps + nlAkhirDaspro + nlAkhirK3 + nlAkhirKti
                                                 + nlAkhirMatDas
-                                                + nlAkhirPancasila + nlAkhirPrakDaspro) / 20;
+                                                + nlAkhirPancasila + nlAkhirPrakDaspro) / 200;
                                         System.out.printf("Indek Prestasi Semester : %.2f", ips);
                                         for (d = 0; d < 5; d++) {
                                             System.out.println(" ");
@@ -768,7 +769,7 @@ public class ac {
                             } while (nlAkhirBing1 >= 0 && nlAkhirCtps >= 0 && nlAkhirDaspro >= 0 && nlAkhirK3 >= 0
                                     && nlAkhirKti >= 0
                                     && nlAkhirMatDas >= 0 && nlAkhirPancasila >= 0 && nlAkhirPrakDaspro >= 0
-                                    && back.equalsIgnoreCase("y"));
+                                    && back.equalsIgnoreCase("y") && pNl < 10);
                             break;
                         case 2:
                             System.out.println("LIHAT NILAI");
@@ -776,6 +777,7 @@ public class ac {
                         case 3:
                             System.out.println("KEMBALI");
                     }
+                }while(pNl == 10);
                     break;
                 case 6:
                     System.out.println("UKT");
