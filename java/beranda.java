@@ -1,19 +1,5 @@
-package WRI;
-
-import java.util.Scanner;
-
-public class as {
-    public static void main(String[] args) {
-        Scanner scStr = new Scanner(System.in);
-        String b = scStr.nextLine();
-        if (b.equals("a")){
-        coba();
-    }else {
-        System.out.println("jalan");
-    }
-    }
-
-    public static void coba() {
+public class beranda {
+    public void getberanda(){
         for (int i = 0; i < 29; i++) {
             for (int a = 0; a < 65; a++) {
                 if (i == 0 || i == 4 || i == 10 || i == 16 || i == 22 || i == 28) {
