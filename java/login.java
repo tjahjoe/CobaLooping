@@ -12,37 +12,17 @@ public class login {
         Scanner scInt = new Scanner(System.in);
         Scanner scFlt = new Scanner(System.in);
 
+        String[][] pres = new String[8][16];
         String[] matkul = { "BING 1", "CTPS", "DASPRO", "K3", "KTI", "MATDAS", "PANCASILA", "PRAK DASPRO" };
-
         String[] nilai = { "TUGAS", "KUIS", "UTS", "UAS" };
-
         float[][] n = new float[8][4];
-        // float[] nBing1 = new float[4];
-        // float[] nCTPS = new float[4];
-        // float[] nDaspro = new float[4];
-        // float[] nK3 = new float[4];
-        // float[] nKTI = new float[4];
-        // float[] nMatdas = new float[4];
-        // float[] nPancasila = new float[4];
-        // float[] nPrakDaspro = new float[4];
-        // n[0] = nBing1;
-        // n[1] = nCTPS;
-        // n[2] = nDaspro;
-        // n[3] = nK3;
-        // n[4] = nKTI;
-        // n[5] = nMatdas;
-        // n[6] = nPancasila;
-        // n[7] = nPrakDaspro;
-
         float[] nlAkhir = { 0, 0, 0, 0, 0, 0, 0, 0, 0, };
-
         float[] presen = { 0.2f, 0.2f, 0.3f, 0.3f, };
 
-        int start, pilihan1, kembali = 0, masuk = 0, aaa = 0;
-
+        String username = "", password = "", user = "", pass = "", back = "y", indeks = "Indeks Prestasi Semester";
+        int start, pilihan1, kembali = 0, masuk = 0, aaa = 0, inPres1, inPres2;
         float d = 0f, ips;
 
-        String username = "", password = "", user = "", pass = "", back = "y", indeks = "Indeks Prestasi Semester";
         //
         chose.getPemilihan();
         space.getPembatas();
@@ -98,8 +78,74 @@ public class login {
                             space.getPembatas();
                             break;
                         case 2:
-                            chose.getPemilihan2();
-                            space.getPembatas();
+                            do {
+                                chose.getPemilihan2();
+                                space.getPembatas();
+                                do {
+                                    System.out.print("MASSUKKAN ANGKA : ");
+                                    kembali = scInt.nextInt();
+                                    space.getPembatas();
+                                    switch (kembali) {
+                                        case 1:
+                                            b.getPberanda();
+                                            space.getPembatas();
+                                            System.out.print("Masukkan Angka Mata Kuliah\t\t: ");
+                                            inPres1 = scInt.nextInt();
+                                            System.out.print("Pertemuan\t\t\t\t: ");
+                                            inPres2 = scInt.nextInt();
+                                            System.out.print("keterangan (H / S / I / A(Berapa jam))\t: ");
+
+                                            try {
+                                                pres[inPres1][inPres2] = scStr.nextLine();
+                                                space.getPembatas();
+                                            } catch (Exception e) {
+                                                System.out.println(
+                                                        "Angka yang kamu masukkan tidak valid\nUlangi kembali");
+                                            }
+                                            System.out.println("!!Teliti Kembali!!");
+                                            space.getPembatas();
+                                            do {
+                                                System.out.print("KETIK Y JIKA INGIN KEMBALI : ");
+                                                back = scStr.nextLine();
+                                                if (!back.equalsIgnoreCase("y")) {
+                                                    space.getPembatas();
+                                                    System.out.println("!!TIDAK VALID!!");
+                                                }
+                                                space.getPembatas();
+                                            } while (!back.equalsIgnoreCase("y"));
+                                            break;
+                                        case 2:
+                                            b.getPberanda();
+                                            space.getPembatas();
+                                            System.out.print("Masukkan Angka Mata Kuliah\t\t: ");
+                                            inPres1 = scInt.nextInt();
+                                            System.out.print("Pertemuan\t\t\t\t: ");
+                                            inPres2 = scInt.nextInt();
+                                            System.out.print("keterangan\t\t\t\t: ");
+                                            try {
+                                                System.out.println(pres[inPres1][inPres2]);
+                                                space.getPembatas();
+                                            } catch (Exception e) {
+                                                System.out.println(
+                                                        "Angka yang kamu masukkan tidak valid\nUlangi kembali");
+                                                space.getPembatas();
+                                            }
+                                            do {
+                                                System.out.print("KETIK Y JIKA INGIN KEMBALI : ");
+                                                back = scStr.nextLine();
+                                                if (!back.equalsIgnoreCase("y")) {
+                                                    space.getPembatas();
+                                                    System.out.println("!!TIDAK VALID!!");
+                                                }
+                                                space.getPembatas();
+                                            } while (!back.equalsIgnoreCase("y"));
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                } while (kembali <= 0 || kembali >= 4);
+                            } while (back.equalsIgnoreCase("y") && kembali != 3);
+
                             break;
                         case 3:
                             chose.getPemilihan3();
