@@ -12,7 +12,7 @@ public class login {
         Scanner scInt = new Scanner(System.in);
         Scanner scFlt = new Scanner(System.in);
 
-        String[][] pres = new String[8][16];
+        String[][] pres = new String[8][32];
         String[] matkul = { "BING 1", "CTPS", "DASPRO", "K3", "KTI", "MATDAS", "PANCASILA", "PRAK DASPRO" };
         String[] nilai = { "TUGAS", "KUIS", "UTS", "UAS" };
         float[][] n = new float[8][4];
@@ -97,11 +97,13 @@ public class login {
 
                                             try {
                                                 pres[inPres1][inPres2] = scStr.nextLine();
-                                                space.getPembatas();
                                             } catch (Exception e) {
+                                                space.getPembatas();
+                                                space.getPembatas();
                                                 System.out.println(
                                                         "Angka yang kamu masukkan tidak valid\nUlangi kembali");
                                             }
+                                            space.getPembatas();
                                             System.out.println("!!Teliti Kembali!!");
                                             space.getPembatas();
                                             do {
@@ -126,6 +128,8 @@ public class login {
                                                 System.out.println(pres[inPres1][inPres2]);
                                                 space.getPembatas();
                                             } catch (Exception e) {
+                                                space.getPembatas();
+                                                space.getPembatas();
                                                 System.out.println(
                                                         "Angka yang kamu masukkan tidak valid\nUlangi kembali");
                                                 space.getPembatas();
