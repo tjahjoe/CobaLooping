@@ -12,7 +12,7 @@ public class login {
         Scanner scInt = new Scanner(System.in);
         Scanner scFlt = new Scanner(System.in);
 
-        String[][] pres = new String[8][32];
+        String[][] pres = new String[9][33];
         String[] matkul = { "BING 1", "CTPS", "DASPRO", "K3", "KTI", "MATDAS", "PANCASILA", "PRAK DASPRO" };
         String[] nilai = { "TUGAS", "KUIS", "UTS", "UAS" };
         float[][] n = new float[8][4];
@@ -66,9 +66,7 @@ public class login {
             do {
                 menu.getberanda();
                 space.getPembatas();
-
                 do {
-
                     System.out.print("MASSUKKAN ANGKA : ");
                     pilihan1 = scInt.nextInt();
                     space.getPembatas();
@@ -272,6 +270,7 @@ public class login {
                                                             c.getBarMatdas();
                                                             space.getPembatas();
                                                             System.out.println("Masukkan");
+                                                            try {
                                                             for (int i = 0; i < nilai.length; i++) {
                                                                 System.out.printf("Nilai %-5s %-26s : ", nilai[i],
                                                                         matkul[5]);
@@ -279,6 +278,8 @@ public class login {
                                                                 if (n[5][i] < 0 || n[5][i] > 100) {
                                                                     n[5][i] = 0;
                                                                 }
+                                                            }} catch (Exception e) {
+                                                                // TODO: handle exception
                                                             }
                                                             nlAkhir[5] = (n[5][0] * presen[0]) + (n[5][1] * presen[1])
                                                                     + (n[5][2] * presen[2]) + (n[5][3] * presen[3]);
