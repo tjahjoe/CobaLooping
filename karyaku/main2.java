@@ -15,7 +15,7 @@ public class main2 {
         String bio[] = { "Nama", "NIM", "kelas" };
         String mhsn[][] = { { "Wahyu", "1234455", "1C" }, { "Rizky", "1122334", "1C" }, { "Cahyana", "1234466", "1C" },
                 { "Dizky", "1177334", "1C" } };
-        int nilai [] = {100, 98, 100, 89, 0, 0, 0, 0, 0, 0};
+        int nilai [] = {100, 98, 100, 89, 100, 0, 0, 0, 0, 0};
         String ab[] = new String[3];
         do {
             System.out.println("Bayak siswa");
@@ -35,6 +35,24 @@ public class main2 {
                 }
             }
             do {
+                for (int s = 0; s < mhs.length; s++) {
+                    System.out.printf("%d.\t: %s\n", s + 1, mhs[s][0]);
+                }
+                System.out.println("Masukkan angka");
+                n = scInt.nextInt();
+                n -= 1;
+                for (j = 0; j < bio.length; j++) {
+                    System.out.printf("Masukkan %s : ", bio[j]);
+                    mhs[n][j] = scStr.nextLine();
+                }
+                System.out.println(nilai[6]);
+                for (int q = 0 ; q < mhs.length; q++){
+                    System.out.printf("%-3d|.\t|", q+1);
+                    for(int t = 0 ; t < bio.length; t++){
+                        System.out.printf(" %-6s|%-10s|", bio[t], mhs[q][t]);
+                    }
+                    System.out.printf("\t%d\n", nilai[q]);
+                }
                 for (int a = 0; a < mhs.length; a++) {
                     for (int b = 0; b < mhs.length; b++) {
                         if (nilai[a] > nilai[b]){
@@ -63,24 +81,24 @@ public class main2 {
                     }
                     }
                 }
-                for (int s = 0; s < mhs.length; s++) {
-                    System.out.printf("%d.\t: %s\n", s + 1, mhs[s][0]);
-                }
-                System.out.println("Masukkan angka");
-                n = scInt.nextInt();
-                n -= 1;
-                for (j = 0; j < bio.length; j++) {
-                    System.out.printf("Masukkan %s : ", bio[j]);
-                    mhs[n][j] = scStr.nextLine();
-                }
-                System.out.println(nilai[6]);
-                for (int q = 0 ; q < mhs.length; q++){
-                    System.out.printf("%-3d|.\t|", q+1);
-                    for(int t = 0 ; t < bio.length; t++){
-                        System.out.printf(" %-6s|%-10s|", bio[t], mhs[q][t]);
-                    }
-                    System.out.printf("\t%d\n", nilai[q]);
-                }
+                // for (int s = 0; s < mhs.length; s++) {
+                //     System.out.printf("%d.\t: %s\n", s + 1, mhs[s][0]);
+                // }
+                // System.out.println("Masukkan angka");
+                // n = scInt.nextInt();
+                // n -= 1;
+                // for (j = 0; j < bio.length; j++) {
+                //     System.out.printf("Masukkan %s : ", bio[j]);
+                //     mhs[n][j] = scStr.nextLine();
+                // }
+                // System.out.println(nilai[6]);
+                // for (int q = 0 ; q < mhs.length; q++){
+                //     System.out.printf("%-3d|.\t|", q+1);
+                //     for(int t = 0 ; t < bio.length; t++){
+                //         System.out.printf(" %-6s|%-10s|", bio[t], mhs[q][t]);
+                //     }
+                //     System.out.printf("\t%d\n", nilai[q]);
+                // }
 
                 System.out.println("ketik y");
                 back = scStr.nextLine();
