@@ -1,4 +1,4 @@
-package karyaku;
+//package karyaku;
 
 import java.util.Scanner;
 
@@ -6,12 +6,17 @@ public class main1 {
     public static void main(String[] args) {
         Scanner scStr = new Scanner(System.in);
         Scanner scInt = new Scanner(System.in);
-
+        // login
         String choice[] = new String[3];
         String repeat[] = new String[4];
         String mhs[] = new String[6 + 1];
         String pss[] = new String[6 + 1];
         String username = "", password = "", user = "", pass = "";
+        // tambah mahasiswa
+        String masMaSis[][] = { { "Wahyu", "1234455", "1C" }, { "Rizky", "1122334", "1C" },
+                { "Cahyana", "1234466", "1C" },
+                { "Dizky", "1177334", "1C" } };
+        String tamMaSis[][] = new String[100][3];
 
         do {
             repeat[0] = "";
@@ -146,6 +151,7 @@ public class main1 {
         } while (repeat[0].equalsIgnoreCase("y")
                 && (!choice[1].equalsIgnoreCase("3") || !choice[1].equalsIgnoreCase("keluar"))
                 && (choice[0].equalsIgnoreCase("3") || choice[0].equalsIgnoreCase("keluar")));
+        //
 
         if (((choice[1].equalsIgnoreCase("1") || choice[1].equalsIgnoreCase("dosen"))
                 && (choice[0].equalsIgnoreCase("1") || choice[0].equalsIgnoreCase("Buat akun")) && user.equals(username)
@@ -156,18 +162,17 @@ public class main1 {
                         && password.equals("aa"))) {
             System.out.print("1. Mahasiswa\n2. Mata Kuliah\n3. Keluar\nMasukkan angka : ");
             choice[2] = scStr.nextLine();
-            if(choice[2].equalsIgnoreCase("1") || choice[2].equals("Mahasiswa")){
+            if (choice[2].equalsIgnoreCase("1") || choice[2].equals("Mahasiswa")) {
                 System.out.println("1. Tambah mahasiswa\n2. Biodata mahasiswa");
 
-            } else if (choice[2].equalsIgnoreCase("2") || choice[2].equalsIgnoreCase("Mata Kuliah")){
+            } else if (choice[2].equalsIgnoreCase("2") || choice[2].equalsIgnoreCase("Mata Kuliah")) {
 
-            } else if (choice[2].equalsIgnoreCase("3") || choice[2].equalsIgnoreCase("keluar")){
+            } else if (choice[2].equalsIgnoreCase("3") || choice[2].equalsIgnoreCase("keluar")) {
                 System.out.println("Terimakasih");
             } else {
                 System.out.println("Tidak Valid");
             }
 
-            
         } else if (mhs.equals(true)) {
             System.out.println("zz");
         }
