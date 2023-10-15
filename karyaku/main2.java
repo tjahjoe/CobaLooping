@@ -21,30 +21,23 @@ public class main2 {
         int nil[] = new int[100];
         String ab[] = new String[3];
         for (int r = 0; r < mhsn.length; r++) {
-                        for (int l = 0; l < bio.length; l++) {
-                            aa[r][l] = mhsn[r][l];
-                        }
-                    }
-                    for (int k = 0; k < nilai.length; k++) {
-                    nil[k] = nilai[k];
-                }
-                    
+            for (int l = 0; l < bio.length; l++) {
+                aa[r][l] = mhsn[r][l];
+            }
+        }
+        for (int k = 0; k < nilai.length; k++) {
+            nil[k] = nilai[k];
+        }
+
         do {
 
             System.out.println("Ingin tambah mahasiswa");
             String pilih = scStr.nextLine();
             if (pilih.equalsIgnoreCase("y")) {
-                System.out.println("Tambah siswa");
-                d = scInt.nextInt();
-
-                m = d + m;
-
+                m++;
                 String mhs[][] = new String[mhsn.length + m][3];
 
                 int nila[] = new int[nilai.length + m];
-                System.out.println(aa[4][0]);
-
-                System.out.println(mhs.length);
                 for (int x = 0; x < mhs.length; x++) {
                     nila[x] = 0;
                     for (int w = 0; w < bio.length; w++) {
@@ -57,10 +50,11 @@ public class main2 {
                             mhs[r][l] = aa[r][l];
                             mhs[n][l] = aa[n][l];
                         }
-                    }for (int k = 0; k < nilai.length; k++) {
-                    nila[k] = nil[k];
-                }
-                nila[n] = nil[n];
+                    }
+                    for (int k = 0; k < nilai.length; k++) {
+                        nila[k] = nil[k];
+                    }
+                    nila[n] = nil[n];
                     for (int s = 0; s < mhs.length; s++) {
                         System.out.printf("%d.\t: %s\n", s + 1, aa[s][0]);
                     }
@@ -115,11 +109,8 @@ public class main2 {
                     for (int s = 0; s < mhs.length; s++) {
                         System.out.printf("%d.\t: %s\n", s + 1, aa[s][0]);
                     }
-                    System.out.println("ketik y");
+                    System.out.println("ingin ubah mahasiswa y");
                     back = scStr.nextLine();
-                    if (back.equalsIgnoreCase("a")) {
-                        xi++;
-                    }
                 } while (back.equalsIgnoreCase("y"));
             } else if (pilih.equalsIgnoreCase("t")) {
                 String mhs[][] = new String[mhsn.length + m][3];
@@ -210,12 +201,12 @@ public class main2 {
                 for (int s = 0; s < mhs.length; s++) {
                     System.out.printf("%d.\t: %s\n", s + 1, aa[s][0]);
                 }
-                System.out.println("ketik y");
+                System.out.println("ketik t");
                 back = scStr.nextLine();
                 // if(back.equalsIgnoreCase("a")){
                 // xi++;
                 // }
             }
-        } while (back.equalsIgnoreCase("a"));
+        } while (back.equalsIgnoreCase("t"));
     }
 }
