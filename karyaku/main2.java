@@ -33,7 +33,16 @@ public class main2 {
 
             System.out.println("Ingin tambah mahasiswa");
             String pilih = scStr.nextLine();
-            if (pilih.equalsIgnoreCase("y")) {
+//pelajari lebih lanjut
+            if (pilih.equalsIgnoreCase("1")){
+                String mhs[][] = new String[mhsn.length + m][3];
+
+                int nila[] = new int[nilai.length + m];
+                System.out.println(aa[4][0]);
+                System.out.println(mhs[4][0]);
+                
+            }
+           else if (pilih.equalsIgnoreCase("y")) {
                 m++;
                 String mhs[][] = new String[mhsn.length + m][3];
 
@@ -117,7 +126,6 @@ public class main2 {
 
                 int nila[] = new int[nilai.length + m];
                 System.out.println(aa[4][0]);
-
                 System.out.println(mhs.length);
                 for (int x = 0; x < mhs.length; x++) {
                     nila[x] = 0;
