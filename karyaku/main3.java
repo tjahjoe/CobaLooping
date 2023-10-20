@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import WRI.ba;
 
-public class main1 {
+public class main3 {
     public static void main(String[] args) {
         Scanner scStr = new Scanner(System.in);
         Scanner scInt = new Scanner(System.in);
@@ -171,7 +171,8 @@ public class main1 {
             choice[2] = scStr.nextLine();
             if (choice[2].equalsIgnoreCase("1") || choice[2].equals("Mahasiswa")) {
                 do {
-                    System.out.println("1. Tambah mahasiswa\n2. Ubah Biodata\n3. Biodata mahasiswa");
+                    System.out.println(
+                            "1. Tambah Mahasiswa\n2. Kurangi Mahasiswa\n3. Ubah Biodata\n4. Biodata Mahasiswa");
                     String pilih = scStr.nextLine();
                     if (pilih.equalsIgnoreCase("1")) {
                         m++;
@@ -188,25 +189,189 @@ public class main1 {
                         for (int r = 0; r < parMaSis.length; r++) {// masMasis diganti ParMasis
                             for (int l = 0; l < bio.length; l++) {
                                 parMaSis[r][l] = tamMaSis[r][l];
-                                parMaSis[n][l] = tamMaSis[n][l];
+                                // parMaSis[n][l] = tamMaSis[n][l];
                             }
                         }
                         for (int k = 0; k < parNil.length; k++) {
                             parNil[k] = tamNil[k];
                         }
-                        parNil[n] = tamNil[n];
+                        // parNil[n] = tamNil[n];
                         for (int s = 0; s < parMaSis.length; s++) {
                             System.out.printf("%d.\t: %s\n", s + 1, tamMaSis[s][0]);
                         }
-                        System.out.println("Masukkan angka");
-                        n = scInt.nextInt();
-                        n -= 1;
-                        if ((n + 2) <= (masMaSis.length + m)) {
-                            System.out.println("tidak bisa merubah biodata disini");
-                            m--;
-                            System.out.println("ketik t jika ingin keluar");
+                        // System.out.println("Masukkan angka");
+                        // n = scInt.nextInt();
+                        // n -= 1;
+                        // if ((n + 2) <= (masMaSis.length + m)) {
+                        // System.out.println("tidak bisa merubah biodata disini");
+                        // m--;
+                        // System.out.println("ketik t jika ingin keluar");
+                        // back = scStr.nextLine();
+                        // } else {
+                        // for (int j = 0; j < bio.length; j++) {
+                        // System.out.printf("Masukkan %s : ", bio[j]);
+                        // tamMaSis[n][j] = scStr.nextLine();
+                        // parMaSis[n][j] = tamMaSis[n][j];
+                        // }
+                        // System.out.print("Masukkan nilai : ");
+                        // tamNil[n] = scInt.nextInt();
+                        // parNil[n] = tamNil[n];
+                        // for (int a = 0; a < parMaSis.length; a++) {
+                        // for (int b = 0; b < parMaSis.length; b++) {
+                        // if (parNil[a] > parNil[b]) {
+                        // c = parNil[a];
+                        // parNil[a] = parNil[b];
+                        // parNil[b] = c;
+
+                        // for (int v = 0; v < bio.length; v++) {
+                        // ab[v] = parMaSis[a][v];
+                        // parMaSis[a][v] = parMaSis[b][v];
+                        // parMaSis[b][v] = ab[v];
+                        // }
+                        // } else if (parNil[a] == parNil[b]) {
+                        // if (parMaSis[a][0].compareTo(parMaSis[b][0]) < 0) {
+                        // c = parNil[a];
+                        // parNil[a] = parNil[b];
+                        // parNil[b] = c;
+
+                        // for (int v = 0; v < bio.length; v++) {
+                        // ab[v] = parMaSis[a][v];
+                        // parMaSis[a][v] = parMaSis[b][v];
+                        // parMaSis[b][v] = ab[v];
+                        // }
+                        // }
+                        // }
+                        // }
+                        // }
+
+                        // for (int q = 0; q < parMaSis.length; q++) {
+                        // System.out.printf("%-3d|.\t|", q + 1);
+                        // for (int t = 0; t < bio.length; t++) {
+                        // System.out.printf(" %-6s|%-10s|", bio[t], parMaSis[q][t]);
+                        // }
+                        // System.out.printf("\t%d\n", parNil[q]);
+                        // }
+                        // for (int s = 0; s < parMaSis.length; s++) {
+                        // System.out.printf("%d.\t: %s\n", s + 1, tamMaSis[s][0]);
+                        // }
+                        System.out.println("ketik t jika ingin keluar");
+                        back = scStr.nextLine();
+                        // }
+                    } else if (pilih.equalsIgnoreCase("2")) {
+                        m--;
+                        String parMaSis[][] = new String[masMaSis.length + m][3];
+
+                        int parNil[] = new int[masNil.length + m];
+
+                        for (int x = 0; x < parMaSis.length; x++) {
+                            parNil[x] = 0;
+                            for (int w = 0; w < bio.length; w++) {
+                                parMaSis[x][w] = "null";
+                            }
+                        }
+                        for (int r = 0; r < parMaSis.length; r++) {// masMasis diganti ParMasis
+                            for (int l = 0; l < bio.length; l++) {
+                                parMaSis[r][l] = tamMaSis[r][l];
+                                // tamMaSis[n][l] = parMaSis[n][l];
+                            }
+                        }
+                        for (int k = 0; k < parNil.length; k++) {
+                            parNil[k] = tamNil[k];
+                        }
+                        // tamNil[n] = parNil[n];
+                        for (int s = 0; s < parMaSis.length; s++) {
+                            System.out.printf("%d.\t: %s\n", s + 1, tamMaSis[s][0]);
+                        }
+                        // System.out.println("Masukkan angka");
+                        // n = scInt.nextInt();
+                        // n -= 1;
+                        // if ((n + 2) <= (masMaSis.length + m)) {
+                        // System.out.println("tidak bisa merubah biodata disini");
+                        // m--;
+                        // System.out.println("ketik t jika ingin keluar");
+                        // back = scStr.nextLine();
+                        // } else {
+                        // for (int j = 0; j < bio.length; j++) {
+                        // System.out.printf("Masukkan %s : ", bio[j]);
+                        // tamMaSis[n][j] = scStr.nextLine();
+                        // parMaSis[n][j] = tamMaSis[n][j];
+                        // }
+                        // System.out.print("Masukkan nilai : ");
+                        // tamNil[n] = scInt.nextInt();
+                        // parNil[n] = tamNil[n];
+                        // for (int a = 0; a < parMaSis.length; a++) {
+                        // for (int b = 0; b < parMaSis.length; b++) {
+                        // if (parNil[a] > parNil[b]) {
+                        // c = parNil[a];
+                        // parNil[a] = parNil[b];
+                        // parNil[b] = c;
+
+                        // for (int v = 0; v < bio.length; v++) {
+                        // ab[v] = parMaSis[a][v];
+                        // parMaSis[a][v] = parMaSis[b][v];
+                        // parMaSis[b][v] = ab[v];
+                        // }
+                        // } else if (parNil[a] == parNil[b]) {
+                        // if (parMaSis[a][0].compareTo(parMaSis[b][0]) < 0) {
+                        // c = parNil[a];
+                        // parNil[a] = parNil[b];
+                        // parNil[b] = c;
+
+                        // for (int v = 0; v < bio.length; v++) {
+                        // ab[v] = parMaSis[a][v];
+                        // parMaSis[a][v] = parMaSis[b][v];
+                        // parMaSis[b][v] = ab[v];
+                        // }
+                        // }
+                        // }
+                        // }
+                        // }
+
+                        // for (int q = 0; q < parMaSis.length; q++) {
+                        // System.out.printf("%-3d|.\t|", q + 1);
+                        // for (int t = 0; t < bio.length; t++) {
+                        // System.out.printf(" %-6s|%-10s|", bio[t], parMaSis[q][t]);
+                        // }
+                        // System.out.printf("\t%d\n", parNil[q]);
+                        // }
+                        // for (int s = 0; s < parMaSis.length; s++) {
+                        // System.out.printf("%d.\t: %s\n", s + 1, tamMaSis[s][0]);
+                        // }
+                        System.out.println("ketik t jika ingin keluar");
+                        back = scStr.nextLine();
+                        // }
+                    } else if (pilih.equalsIgnoreCase("3")) {
+                        if (masMaSis.length + m == 0) {
+                            System.out.println("Biodata tidak tersedia");
+                            System.out.println("ketik t jika ingin keluar : ");
                             back = scStr.nextLine();
                         } else {
+                            String parMaSis[][] = new String[masMaSis.length + m][3];
+
+                            int parNil[] = new int[masNil.length + m];
+
+                            for (int x = 0; x < parMaSis.length; x++) {
+                                parNil[x] = 0;
+                                for (int w = 0; w < bio.length; w++) {
+                                    parMaSis[x][w] = "null";
+                                }
+                            }
+                            for (int r = 0; r < parMaSis.length; r++) {
+                                for (int l = 0; l < bio.length; l++) {
+                                    parMaSis[r][l] = tamMaSis[r][l];
+                                    // parMaSis[n][l] = tamMaSis[n][l];
+                                }
+                            }
+                            for (int k = 0; k < parNil.length; k++) {
+                                parNil[k] = tamNil[k];
+                            }
+                            // parNil[n] = tamNil[n];
+                            for (int s = 0; s < parMaSis.length; s++) {
+                                System.out.printf("%d.\t: %s\n", s + 1, tamMaSis[s][0]);
+                            }
+                            System.out.println("Masukkan angka");
+                            n = scInt.nextInt();
+                            n -= 1;
                             for (int j = 0; j < bio.length; j++) {
                                 System.out.printf("Masukkan %s : ", bio[j]);
                                 tamMaSis[n][j] = scStr.nextLine();
@@ -253,119 +418,50 @@ public class main1 {
                             for (int s = 0; s < parMaSis.length; s++) {
                                 System.out.printf("%d.\t: %s\n", s + 1, tamMaSis[s][0]);
                             }
-                            System.out.println("ketik t jika ingin keluar");
+                            System.out.print("ketik t jika ingin keluar : ");
                             back = scStr.nextLine();
                         }
-                    } else if (pilih.equalsIgnoreCase("2")) {
-                        String parMaSis[][] = new String[masMaSis.length + m][3];
+                    } else if (pilih.equalsIgnoreCase("4")) {
+                        if (masMaSis.length + m == 0) {
+                            System.out.println("Biodata tidak tersedia");
+                            System.out.println("ketik t jika ingin keluar : ");
+                            back = scStr.nextLine();
+                        } else {
+                            String parMaSis[][] = new String[masMaSis.length + m][3];
+                            int parNil[] = new int[masNil.length + m];
 
-                        int parNil[] = new int[masNil.length + m];
-
-                        for (int x = 0; x < parMaSis.length; x++) {
-                            parNil[x] = 0;
-                            for (int w = 0; w < bio.length; w++) {
-                                parMaSis[x][w] = "null";
-                            }
-                        }
-                        for (int r = 0; r < parMaSis.length; r++) {
-                            for (int l = 0; l < bio.length; l++) {
-                                parMaSis[r][l] = tamMaSis[r][l];
-                                parMaSis[n][l] = tamMaSis[n][l];
-                            }
-                        }
-                        for (int k = 0; k < parNil.length; k++) {
-                            parNil[k] = tamNil[k];
-                        }
-                        parNil[n] = tamNil[n];
-                        for (int s = 0; s < parMaSis.length; s++) {
-                            System.out.printf("%d.\t: %s\n", s + 1, tamMaSis[s][0]);
-                        }
-                        System.out.println("Masukkan angka");
-                        n = scInt.nextInt();
-                        n -= 1;
-                        for (int j = 0; j < bio.length; j++) {
-                            System.out.printf("Masukkan %s : ", bio[j]);
-                            tamMaSis[n][j] = scStr.nextLine();
-                            parMaSis[n][j] = tamMaSis[n][j];
-                        }
-                        System.out.print("Masukkan nilai : ");
-                        tamNil[n] = scInt.nextInt();
-                        parNil[n] = tamNil[n];
-                        for (int a = 0; a < parMaSis.length; a++) {
-                            for (int b = 0; b < parMaSis.length; b++) {
-                                if (parNil[a] > parNil[b]) {
-                                    c = parNil[a];
-                                    parNil[a] = parNil[b];
-                                    parNil[b] = c;
-
-                                    for (int v = 0; v < bio.length; v++) {
-                                        ab[v] = parMaSis[a][v];
-                                        parMaSis[a][v] = parMaSis[b][v];
-                                        parMaSis[b][v] = ab[v];
-                                    }
-                                } else if (parNil[a] == parNil[b]) {
-                                    if (parMaSis[a][0].compareTo(parMaSis[b][0]) < 0) {
-                                        c = parNil[a];
-                                        parNil[a] = parNil[b];
-                                        parNil[b] = c;
-
-                                        for (int v = 0; v < bio.length; v++) {
-                                            ab[v] = parMaSis[a][v];
-                                            parMaSis[a][v] = parMaSis[b][v];
-                                            parMaSis[b][v] = ab[v];
-                                        }
-                                    }
+                            for (int x = 0; x < parMaSis.length; x++) {
+                                parNil[x] = 0;
+                                for (int w = 0; w < bio.length; w++) {
+                                    parMaSis[x][w] = "null";
                                 }
                             }
-                        }
-
-                        for (int q = 0; q < parMaSis.length; q++) {
-                            System.out.printf("%-3d|.\t|", q + 1);
-                            for (int t = 0; t < bio.length; t++) {
-                                System.out.printf(" %-6s|%-10s|", bio[t], parMaSis[q][t]);
+                            for (int r = 0; r < parMaSis.length; r++) {
+                                for (int l = 0; l < bio.length; l++) {
+                                    parMaSis[r][l] = tamMaSis[r][l];
+                                    parMaSis[n][l] = tamMaSis[n][l];
+                                }
                             }
-                            System.out.printf("\t%d\n", parNil[q]);
-                        }
-                        for (int s = 0; s < parMaSis.length; s++) {
-                            System.out.printf("%d.\t: %s\n", s + 1, tamMaSis[s][0]);
-                        }
-                        System.out.print("ketik t jika ingin keluar : ");
-                        back = scStr.nextLine();
-                    } else if (pilih.equalsIgnoreCase("3")) {
-                        String parMaSis[][] = new String[masMaSis.length + m][3];
-                        int parNil[] = new int[masNil.length + m];
-
-                        for (int x = 0; x < parMaSis.length; x++) {
-                            parNil[x] = 0;
-                            for (int w = 0; w < bio.length; w++) {
-                                parMaSis[x][w] = "null";
+                            // for (int r = masMaSis.length; r < parMaSis.length; r++) {
+                            // for (int l = 0; l < bio.length; l++) {
+                            // parMaSis[r][l] = tamMaSis[r][l];
+                            // parMaSis[n][l] = tamMaSis[n][l];
+                            // }
+                            // }
+                            for (int k = 0; k < parNil.length; k++) {
+                                parNil[k] = tamNil[k];
                             }
-                        }
-                        for (int r = 0; r < parMaSis.length; r++) {
-                            for (int l = 0; l < bio.length; l++) {
-                                parMaSis[r][l] = tamMaSis[r][l];
-                                parMaSis[n][l] = tamMaSis[n][l];
-                            }
-                        }
-                        // for (int r = masMaSis.length; r < parMaSis.length; r++) {
-                        // for (int l = 0; l < bio.length; l++) {
-                        // parMaSis[r][l] = tamMaSis[r][l];
-                        // parMaSis[n][l] = tamMaSis[n][l];
-                        // }
-                        // }
-                        for (int k = 0; k < parNil.length; k++) {
-                            parNil[k] = tamNil[k];
-                        }
-                        // for (int k = masNil.length; k < parNil.length; k++) {
-                        // parNil[k] = tamNil[k];
-                        // }
-                        parNil[n] = tamNil[n];
+                            // for (int k = masNil.length; k < parNil.length; k++) {
+                            // parNil[k] = tamNil[k];
+                            // }
+                            parNil[n] = tamNil[n];
 
-                        for (int s = 0; s < parMaSis.length; s++) {
-                            System.out.printf("%d.\t: %s\n", s + 1, parMaSis[s][0]);
+                            for (int s = 0; s < parMaSis.length; s++) {
+                                System.out.printf("%d.\t: %s\n", s + 1, parMaSis[s][0]);
+                            }
+                            System.out.println("ketik t jika ingin keluar : ");
+                            back = scStr.nextLine();
                         }
-                        System.out.println("ketik t jika ingin keluar : ");
-                        back = scStr.nextLine();
                     }
                 } while (back.equalsIgnoreCase("t"));
             } else if (choice[2].equalsIgnoreCase("2") || choice[2].equalsIgnoreCase("Mata Kuliah")) {
