@@ -6,6 +6,7 @@ public class at {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         String a = input.nextLine();
+        
         for (int i = 0; i <= 6; i++) {
             for (int j = 0; j <= 65; j++) {
                 if ((i == 0 || i == 6) && (j >= 0 && j <= 64)) {

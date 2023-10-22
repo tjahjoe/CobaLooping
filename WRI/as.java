@@ -14,6 +14,7 @@ public class as {
     }
 
     public static void coba() {
+        for(int o = 0;o < 2;o++){
         for (int i = 0; i < 29; i++) {
             for (int a = 0; a < 65; a++) {
                 if (i == 0 || i == 4 || i == 10 || i == 16 || i == 22 || i == 28) {
@@ -67,6 +68,6 @@ public class as {
                 }
             }
             System.out.println("");
-        }
+        }}
     }
 }
