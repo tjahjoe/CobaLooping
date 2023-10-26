@@ -147,11 +147,25 @@ String nama = "1";
     //     String ana = String.valueOf(i);
     //     System.out.println(ana);
     //   }
-int haha = 1;
-     String ana;
-     System.out.println(nama.equalsIgnoreCase(ana= String.valueOf(haha)));
-     if (nama.equalsIgnoreCase(ana= String.valueOf(haha))){
-        System.out.println("sasa");
-     }
+// int haha = 1;
+//      String ana;
+//      System.out.println(nama.equalsIgnoreCase(ana= String.valueOf(haha)));
+//      if (nama.equalsIgnoreCase(ana= String.valueOf(haha))){
+//         System.out.println("sasa");
+//      }
+
+//      int nilai[][][] = {{{}},{{}},{{}},};
+int masNil[][][] = { {{100, 98, 100, 89}},{{88, 87, 89, 82}},{{90, 91, 89, 88}},{{99, 86, 98, 85}}};
+        int tamNil[][][] = new int[100][100][4];
+        for (int k = 0; k < masNil.length; k++) {
+            for(int c = 0; c < masNil[0].length; c++){
+                for(int z = 0; z < masNil[0][0].length; z++){
+                    tamNil[k][c][z] = masNil[k][c][z];
+                    System.out.print(tamNil[k][c][z]);
+                    System.out.print(" ");
+                }
+                System.out.println("");
+            }
+        }
     }
 }
