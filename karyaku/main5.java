@@ -1,9 +1,11 @@
-
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class main4 {
+public class main5 {
+    
+
+
     // package karyaku;
 
     public static void main(String[] args) {
@@ -21,6 +23,11 @@ public class main4 {
         String masDos[][] = { { "Zanuar", "12" }, { "Zaki", "23" } };
         String tamDos[][] = new String[100][2];
         int u = 0;
+        for (int r = 0; r < tamDos.length; r++) {
+            for (int l = 0; l < tamDos[0].length; l++) {
+                tamDos[r][l] = "null";
+            }
+        }
         for (int r = 0; r < masDos.length; r++) {
             for (int l = 0; l < masDos[0].length; l++) {
                 tamDos[r][l] = masDos[r][l];
@@ -36,6 +43,11 @@ public class main4 {
         String bio[] = { "Nama", "NIM", "kelas" };
         int m = 0;
         int n = 0;
+        for (int r = 0; r < tamMaSis.length; r++) {
+            for (int l = 0; l < bio.length; l++) {
+                tamMaSis[r][l] = "null";
+            }
+        }
         for (int r = 0; r < masMaSis.length; r++) {
             for (int l = 0; l < bio.length; l++) {
                 tamMaSis[r][l] = masMaSis[r][l];
@@ -49,6 +61,9 @@ public class main4 {
         String tamMatKul[] = new String[100];
         String o;
         int g = 0;
+        for (int k = 0; k < tamMatKul.length; k++) {
+            tamMatKul[k] = "null";
+        }
         for (int k = 0; k < masMatKul.length; k++) {
             tamMatKul[k] = masMatKul[k];
         }
@@ -66,6 +81,13 @@ public class main4 {
         int masNil[][][] = { { { 100, 98, 100, 89 } }, { { 88, 87, 89, 82 } }, { { 90, 91, 89, 88 } },
                 { { 99, 86, 98, 85 } } };
         int tamNil[][][] = new int[100][100][4];
+        for (int k = 0; k < tamNil.length; k++) {
+            for (int c = 0; c < tamNil[0].length; c++) {
+                for (int z = 0; z < tamNil[0][0].length; z++) {
+                    tamNil[k][c][z] = 0;
+                }
+            }
+        }
         for (int k = 0; k < masNil.length; k++) {
             for (int c = 0; c < masNil[0].length; c++) {
                 for (int z = 0; z < masNil[0][0].length; z++) {
@@ -230,12 +252,8 @@ public class main4 {
                             String parMaSis[][] = new String[masMaSis.length + m][3];
                             for (int x = 0; x < parMaSis.length; x++) {
                                 for (int w = 0; w < bio.length; w++) {
-                                    parMaSis[x][w] = "null";
-                                }
-                            }
-                            for (int r = 0; r < parMaSis.length; r++) {
-                                for (int l = 0; l < bio.length; l++) {
-                                    parMaSis[r][l] = tamMaSis[r][l];
+                                    
+                                    parMaSis[x][w] = tamMaSis[x][w];
                                 }
                             }
                             for (int q = 0; q < parMaSis.length; q++) {
@@ -255,12 +273,8 @@ public class main4 {
                                 String parMaSis[][] = new String[masMaSis.length + m][3];
                                 for (int x = 0; x < parMaSis.length; x++) {
                                     for (int w = 0; w < bio.length; w++) {
-                                        parMaSis[x][w] = "null";
-                                    }
-                                }
-                                for (int r = 0; r < parMaSis.length; r++) {
-                                    for (int l = 0; l < bio.length; l++) {
-                                        parMaSis[r][l] = tamMaSis[r][l];
+                                        
+                                        parMaSis[x][w] = tamMaSis[x][w];
 
                                     }
                                 }
@@ -282,14 +296,9 @@ public class main4 {
                                 System.out.println(m);
                                 String parMaSis[][] = new String[masMaSis.length + m][3];
                                 for (int x = 0; x < parMaSis.length; x++) {
-
                                     for (int w = 0; w < bio.length; w++) {
-                                        parMaSis[x][w] = "null";
-                                    }
-                                }
-                                for (int r = 0; r < parMaSis.length; r++) {
-                                    for (int l = 0; l < bio.length; l++) {
-                                        parMaSis[r][l] = tamMaSis[r][l];
+                                        
+                                        parMaSis[x][w] = tamMaSis[x][w];
                                     }
                                 }
                                 for (int q = 0; q < parMaSis.length; q++) {
@@ -335,12 +344,8 @@ public class main4 {
                                 String parMaSis[][] = new String[masMaSis.length + m][3];
                                 for (int x = 0; x < parMaSis.length; x++) {
                                     for (int w = 0; w < bio.length; w++) {
-                                        parMaSis[x][w] = "null";
-                                    }
-                                }
-                                for (int r = 0; r < parMaSis.length; r++) {
-                                    for (int l = 0; l < bio.length; l++) {
-                                        parMaSis[r][l] = tamMaSis[r][l];
+                                        
+                                        parMaSis[x][w] = tamMaSis[x][w];
                                     }
                                 }
                                 for (int s = 0; s < parMaSis.length; s++) {
@@ -360,10 +365,8 @@ public class main4 {
                             g++;
                             String parMatKul[] = new String[masMatKul.length + g];
                             for (int x = 0; x < parMatKul.length; x++) {
-                                parMatKul[x] = "null";
-                            }
-                            for (int k = 0; k < parMatKul.length; k++) {
-                                parMatKul[k] = tamMatKul[k];
+                                
+                                parMatKul[x] = tamMatKul[x];
                             }
                             parMatKul[n] = tamMatKul[n];
                             for (int t = 0; t < parMatKul.length; t++) {
@@ -379,10 +382,8 @@ public class main4 {
                                 g--;
                                 String parMatKul[] = new String[masMatKul.length + g];
                                 for (int x = 0; x < parMatKul.length; x++) {
-                                    parMatKul[x] = "null";
-                                }
-                                for (int k = 0; k < parMatKul.length; k++) {
-                                    parMatKul[k] = tamMatKul[k];
+                                    
+                                    parMatKul[x] = tamMatKul[x];
                                 }
                                 parMatKul[n] = tamMatKul[n];
                                 for (int t = 0; t < parMatKul.length; t++) {
@@ -395,10 +396,8 @@ public class main4 {
                             String parMatKul[] = new String[masMatKul.length + g];
 
                             for (int x = 0; x < parMatKul.length; x++) {
-                                parMatKul[x] = "null";
-                            }
-                            for (int k = 0; k < parMatKul.length; k++) {
-                                parMatKul[k] = tamMatKul[k];
+                                
+                                parMatKul[x] = tamMatKul[x];
                             }
                             parMatKul[n] = tamMatKul[n];
                             for (int t = 0; t < parMatKul.length; t++) {
@@ -429,10 +428,8 @@ public class main4 {
                             String parMatKul[] = new String[masMatKul.length + g];
 
                             for (int x = 0; x < parMatKul.length; x++) {
-                                parMatKul[x] = "null";
-                            }
-                            for (int k = 0; k < parMatKul.length; k++) {
-                                parMatKul[k] = tamMatKul[k];
+                                
+                                parMatKul[x] = tamMatKul[x];
                             }
                             parMatKul[n] = tamMatKul[n];
                             for (int a = 0; a < parMatKul.length; a++) {
@@ -462,12 +459,8 @@ public class main4 {
 
                             for (int x = 0; x < parMaSis.length; x++) {
                                 for (int w = 0; w < bio.length; w++) {
-                                    parMaSis[x][w] = "null";
-                                }
-                            }
-                            for (int r = 0; r < parMaSis.length; r++) {
-                                for (int l = 0; l < bio.length; l++) {
-                                    parMaSis[r][l] = tamMaSis[r][l];
+                                    
+                                    parMaSis[x][w] = tamMaSis[x][w];
                                 }
                             }
                             for (int s = 0; s < parMaSis.length; s++) {
@@ -488,10 +481,8 @@ public class main4 {
                                 String parMatKul[] = new String[masMatKul.length + g];
 
                                 for (int x = 0; x < parMatKul.length; x++) {
-                                    parMatKul[x] = "null";
-                                }
-                                for (int k = 0; k < parMatKul.length; k++) {
-                                    parMatKul[k] = tamMatKul[k];
+                                    
+                                    parMatKul[x] = tamMatKul[x];
                                 }
                                 parMatKul[n] = tamMatKul[n];
                                 for (int a = 0; a < parMatKul.length; a++) {
@@ -533,12 +524,8 @@ public class main4 {
 
                             for (int x = 0; x < parMaSis.length; x++) {
                                 for (int w = 0; w < bio.length; w++) {
-                                    parMaSis[x][w] = "null";
-                                }
-                            }
-                            for (int r = 0; r < parMaSis.length; r++) {
-                                for (int l = 0; l < bio.length; l++) {
-                                    parMaSis[r][l] = tamMaSis[r][l];
+                                    
+                                    parMaSis[x][w] = tamMaSis[x][w];
                                 }
                             }
                             for (int s = 0; s < parMaSis.length; s++) {
@@ -560,10 +547,8 @@ public class main4 {
                                 int parNil[][][] = new int[parMaSis.length][parMatKul.length][bagian.length];
 
                                 for (int x = 0; x < parMatKul.length; x++) {
-                                    parMatKul[x] = "null";
-                                }
-                                for (int k = 0; k < parMatKul.length; k++) {
-                                    parMatKul[k] = tamMatKul[k];
+                                    
+                                    parMatKul[x] = tamMatKul[x];
                                 }
                                 for (int k = 0; k < parMaSis.length; k++) {
                                     for (int c = 0; c < parMatKul.length; c++) {
