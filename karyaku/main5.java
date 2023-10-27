@@ -82,10 +82,10 @@ public class main5 {
         int tam = 0;
         int za = 0;
         int zi = 0;
-        String bagian[] = { "Tugas", "Kuis", "UTS", "UAS" };
+        String bagian[] = { "Tugas", "Kuis", "UTS", "UAS", "Akhir" };
         int masNil[][][] = { { { 100, 98, 100, 89 } }, { { 88, 87, 89, 82 } }, { { 90, 91, 89, 88 } },
                 { { 99, 86, 98, 85 } } };
-        int tamNil[][][] = new int[100][100][4];
+        int tamNil[][][] = new int[100][100][5];
         for (int k = 0; k < tamNil.length; k++) {
             for (int c = 0; c < tamNil[0].length; c++) {
                 for (int z = 0; z < tamNil[0][0].length; z++) {
@@ -102,6 +102,8 @@ public class main5 {
         }
 
         do {
+            choice[2] = "";
+            repeat[1] = "";
             System.out.print("1. Masuk\n2. Tambah akun\n3. Keluar\nKetik angka : ");
             choice[0] = scStr.nextLine();
             if (choice[0].equalsIgnoreCase("1") || choice[0].equalsIgnoreCase("Masuk")) {
@@ -130,13 +132,55 @@ public class main5 {
                         }
                     } while (repeat[2].equalsIgnoreCase("y"));
                 } while (repeat[3].equalsIgnoreCase("y"));
-            } else if (choice[0].equalsIgnoreCase("2") || choice[0].equalsIgnoreCase("keluar")) {
+            } else if (choice[0].equalsIgnoreCase("2") || choice[0].equalsIgnoreCase("buat akun")) {
+                System.out.println("Masukkan password : ");
+                password2 = scStr.nextLine();
+                if (password2.equalsIgnoreCase("WzyRoKa")) {
+                    do {
+                        repeat[3] = "";
+                        u++;// jangan menggunakan (int m) karena membuat nilai m = 1
+                        System.out.print("Masukkan username : ");
+                        tamDos[masDos.length + u - 1][0] = scStr.nextLine();
+                        System.out.print("Masukkan password : ");
+                        tamDos[masDos.length + u - 1][1] = scStr.nextLine();
+                        System.out.println("Akun berhasil dibuat");
+                        do {
+                            repeat[2] = "";
+                            System.out.print("Masukkan username : ");
+                            username = scStr.nextLine();
+                            for (int i = 0; i < tamDos.length; i++) {
+                                if (username.equals(tamDos[i][0])) {
+                                    yahoo = tamDos[i][0];
+                                    yahaa = i;
+                                }
+                            }
+                            if (username.equals(yahoo)) {
+                                System.out.print("Masukkan password : ");
+                                password = scStr.nextLine();
+                                if (!password.equals(tamDos[yahaa][1])) {
+                                    System.out.println("Password tidak valid\nKetik y jika ingin mengulang");
+                                    repeat[3] = scStr.nextLine();
+                                }
+                            } else {
+                                System.out.print(
+                                        "Username yang anda masukkan salah\nKetik y jika ingin mengulang : ");
+                                repeat[2] = scStr.nextLine();
+                            }
+                        } while (repeat[2].equalsIgnoreCase("y"));
+                    } while (repeat[3].equalsIgnoreCase("y"));
+                } else {
+                    System.out.println("password salah");
+                    System.out.println("Ketik y jika ingin kembali");
+                    repeat[1] = scStr.nextLine();
+                }
+            } else if (choice[0].equalsIgnoreCase("3") || choice[0].equalsIgnoreCase("keluar")) {
                 repeat[0] = "y";
             } else {
                 System.out.println("Tidak valid\nKetik y jika ingin mengulang");
                 repeat[1] = scStr.nextLine();
             }
-            if (username.equals(tamDos[yahaa][0]) && password.equals(tamDos[yahaa][1])) {
+            if (username.equals(tamDos[yahaa][0]) && password.equals(tamDos[yahaa][1])
+                    && !choice[0].equalsIgnoreCase("3") && !repeat[1].equalsIgnoreCase("y")) {
                 do {
                     pilih = "";
                     System.out.print("1. Mahasiswa\n2. Mata Kuliah\n3. Nilai\n4. Keluar\nMasukkan angka : ");
@@ -151,15 +195,15 @@ public class main5 {
                                 m++;
                                 String parMaSis[][] = new String[masMaSis.length + m][3];
                                 for (int a = 0; a < parMaSis.length; a++) {
-                                            for (int b = 0; b < parMaSis.length; b++)
-                                                if (tamMaSis[a][0].compareTo(tamMaSis[b][0]) < 0) {
-                                                    for (int v = 0; v < bio.length; v++) {
-                                                        taa = tamMaSis[a][v];
-                                                        tamMaSis[a][v] = tamMaSis[b][v];
-                                                        tamMaSis[b][v] = taa;
-                                                    }
-                                                }
+                                    for (int b = 0; b < parMaSis.length; b++)
+                                        if (tamMaSis[a][0].compareTo(tamMaSis[b][0]) < 0) {
+                                            for (int v = 0; v < bio.length; v++) {
+                                                taa = tamMaSis[a][v];
+                                                tamMaSis[a][v] = tamMaSis[b][v];
+                                                tamMaSis[b][v] = taa;
+                                            }
                                         }
+                                }
                                 for (int q = 0; q < parMaSis.length; q++) {
                                     System.out.printf("%-3d|.\t|", q + 1);
                                     for (int t = 0; t < bio.length; t++) {
@@ -175,16 +219,19 @@ public class main5 {
                                 } else {
                                     m--;
                                     String parMaSis[][] = new String[masMaSis.length + m][3];
+                                    for (int xo = 0; xo < bio.length; xo++) {
+                                        tamMaSis[masMaSis.length + m][xo] = "null";
+                                    }
                                     for (int a = 0; a < parMaSis.length; a++) {
-                                            for (int b = 0; b < parMaSis.length; b++)
-                                                if (tamMaSis[a][0].compareTo(tamMaSis[b][0]) < 0) {
-                                                    for (int v = 0; v < bio.length; v++) {
-                                                        taa = tamMaSis[a][v];
-                                                        tamMaSis[a][v] = tamMaSis[b][v];
-                                                        tamMaSis[b][v] = taa;
-                                                    }
+                                        for (int b = 0; b < parMaSis.length; b++)
+                                            if (tamMaSis[a][0].compareTo(tamMaSis[b][0]) < 0) {
+                                                for (int v = 0; v < bio.length; v++) {
+                                                    taa = tamMaSis[a][v];
+                                                    tamMaSis[a][v] = tamMaSis[b][v];
+                                                    tamMaSis[b][v] = taa;
                                                 }
-                                        }
+                                            }
+                                    }
                                     for (int q = 0; q < parMaSis.length; q++) {
                                         System.out.printf("%-3d|.\t|", q + 1);
                                         for (int t = 0; t < bio.length; t++) {
@@ -203,15 +250,15 @@ public class main5 {
                                     System.out.println(m);
                                     String parMaSis[][] = new String[masMaSis.length + m][3];
                                     for (int a = 0; a < parMaSis.length; a++) {
-                                            for (int b = 0; b < parMaSis.length; b++)
-                                                if (tamMaSis[a][0].compareTo(tamMaSis[b][0]) < 0) {
-                                                    for (int v = 0; v < bio.length; v++) {
-                                                        taa = tamMaSis[a][v];
-                                                        tamMaSis[a][v] = tamMaSis[b][v];
-                                                        tamMaSis[b][v] = taa;
-                                                    }
+                                        for (int b = 0; b < parMaSis.length; b++)
+                                            if (tamMaSis[a][0].compareTo(tamMaSis[b][0]) < 0) {
+                                                for (int v = 0; v < bio.length; v++) {
+                                                    taa = tamMaSis[a][v];
+                                                    tamMaSis[a][v] = tamMaSis[b][v];
+                                                    tamMaSis[b][v] = taa;
                                                 }
-                                        }
+                                            }
+                                    }
                                     for (int q = 0; q < parMaSis.length; q++) {
                                         System.out.printf("%-3d|.\t|", q + 1);
                                         for (int t = 0; t < bio.length; t++) {
@@ -254,15 +301,15 @@ public class main5 {
                                 } else {
                                     String parMaSis[][] = new String[masMaSis.length + m][3];
                                     for (int a = 0; a < parMaSis.length; a++) {
-                                            for (int b = 0; b < parMaSis.length; b++)
-                                                if (tamMaSis[a][0].compareTo(tamMaSis[b][0]) < 0) {
-                                                    for (int v = 0; v < bio.length; v++) {
-                                                        taa = tamMaSis[a][v];
-                                                        tamMaSis[a][v] = tamMaSis[b][v];
-                                                        tamMaSis[b][v] = taa;
-                                                    }
+                                        for (int b = 0; b < parMaSis.length; b++)
+                                            if (tamMaSis[a][0].compareTo(tamMaSis[b][0]) < 0) {
+                                                for (int v = 0; v < bio.length; v++) {
+                                                    taa = tamMaSis[a][v];
+                                                    tamMaSis[a][v] = tamMaSis[b][v];
+                                                    tamMaSis[b][v] = taa;
                                                 }
-                                        }
+                                            }
+                                    }
                                     for (int q = 0; q < parMaSis.length; q++) {
                                         System.out.printf("%-3d|.\t|", q + 1);
                                         for (int t = 0; t < bio.length; t++) {
@@ -448,10 +495,14 @@ public class main5 {
                                                 if (PilihMatkul.equalsIgnoreCase(tamMatKul[yahii])
                                                         || PilihMatkul
                                                                 .equalsIgnoreCase(asa = String.valueOf(yahii + 1))) {
-                                                    for (int z = 0; z < bagian.length; z++) {
+                                                    for (int z = 0; z < bagian.length - 1; z++) {
                                                         System.out.printf("Masukkan Nilai %s : ", bagian[z]);
                                                         tamNil[yahuu][yahii][z] = scInt.nextInt();
+                                                        tamNil[yahuu][yahii][4] += tamNil[yahuu][yahii][z];
                                                     }
+                                                    System.out.printf("Nilai %s : %d\n", bagian[4],
+                                                            tamNil[yahuu][yahii][4] / (bagian.length - 1));
+                                                    tamNil[yahuu][yahii][4] = 0;
                                                     System.out.println("Ketik t jika ingin kembali");
                                                     kembali = scStr.nextLine();
                                                 }
@@ -540,11 +591,14 @@ public class main5 {
                                                 if (PilihMatkul.equalsIgnoreCase(tamMatKul[yahii])
                                                         || PilihMatkul
                                                                 .equalsIgnoreCase(asa = String.valueOf(yahii + 1))) {
-                                                    for (int z = 0; z < bagian.length; z++) {
+                                                    for (int z = 0; z < bagian.length - 1; z++) {
                                                         System.out.printf("Nilai %s %s : %d\n", bagian[z],
                                                                 tamMatKul[yahii],
                                                                 tamNil[yahuu][yahii][z]);
-                                                    }
+                                                        tamNil[yahuu][yahii][4] += tamNil[yahuu][yahii][z];
+                                                    }System.out.printf("Nilai %s : %d\n", bagian[4],
+                                                            tamNil[yahuu][yahii][4] / (bagian.length - 1));
+                                                    tamNil[yahuu][yahii][4] = 0;
                                                     System.out.println("Ketik t jika ingin kembali");
                                                     kembali = scStr.nextLine();
                                                 }
@@ -565,7 +619,8 @@ public class main5 {
                         System.out.println("Tidak Valid");
                     }
                 } while (pilih.equalsIgnoreCase("5") || pilih.equalsIgnoreCase("4"));
-            } else if (username.equals(tamMaSis[yahaa][0]) && password.equalsIgnoreCase(tamMaSis[yahaa][0])) {
+            } else if (username.equals(tamMaSis[yahaa][0]) && password.equalsIgnoreCase(tamMaSis[yahaa][0])
+                    && !choice[0].equalsIgnoreCase("3") && !repeat[1].equalsIgnoreCase("y")) {
                 System.out.println("1. Biodata\n2. Nilai\n3. Cetak KHS\n4. Keluar");
                 choice[2] = scStr.nextLine();
                 if (choice[2].equalsIgnoreCase("1") || choice[2].equals("Mahasiswa")) {
@@ -574,6 +629,7 @@ public class main5 {
                     }
                 }
             }
-        } while (choice[2].equalsIgnoreCase("4"));
+        } while (choice[2].equalsIgnoreCase("4") || !choice[0].equalsIgnoreCase("3")
+                || repeat[1].equalsIgnoreCase("y"));
     }
 }
