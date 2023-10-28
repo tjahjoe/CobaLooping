@@ -82,9 +82,11 @@ public class main5 {
         int tam = 0;
         int za = 0;
         int zi = 0;
+        int gl = 0;
         String bagian[] = { "Tugas", "Kuis", "UTS", "UAS", "Akhir" };
-        int masNil[][][] = { { { 100, 98, 100, 89 } }, { { 88, 87, 89, 82 } }, { { 90, 91, 89, 88 } },
-                { { 99, 86, 98, 85 } } };
+        int masNil[][][] = { { { 100, 98, 100, 89 }, { 85, 83, 89, 81 } }, { { 88, 87, 89, 82 }, { 90, 82, 84, 88 } },
+                { { 90, 91, 89, 88 }, { 93, 85, 83, 89 } },
+                { { 99, 86, 98, 85 }, { 88, 86, 86, 83 } } };
         int tamNil[][][] = new int[100][100][5];
         for (int k = 0; k < tamNil.length; k++) {
             for (int c = 0; c < tamNil[0].length; c++) {
@@ -781,6 +783,67 @@ public class main5 {
                                 } while (PilihMatkul.equalsIgnoreCase(ava = String.valueOf(zi + 1)));
                             } else if (pilih.equalsIgnoreCase("3")) {
                                 System.out.println("Ranking");
+
+                                String parMaSis[][] = new String[masMaSis.length + m][3];
+                                String parMatKul[] = new String[masMatKul.length + g];
+                                int parNil[][][] = new int[parMaSis.length][parMatKul.length + 2][bagian.length];
+                                zi = parMatKul.length + 1;
+                                for (int zzz = 0; zzz < parMaSis.length; zzz++) {
+                                    for (int zz = 0; zz < parMatKul.length; zz++) {
+                                        for (int z = 0; z < bagian.length - 1; z++) {
+                                            parNil[zzz][zz][z] = tamNil[zzz][zz][z];
+                                        }
+                                    }
+                                }
+                                for (int zzz = 0; zzz < parMaSis.length; zzz++) {
+                                    for (int zz = 0; zz < parMatKul.length; zz++) {
+                                        for (int z = 0; z < bagian.length - 1; z++) {
+                                            parNil[zzz][zz][4] += parNil[zzz][zz][z];
+                                        }
+                                        parNil[zzz][zi][0] += (parNil[zzz][zz][4]
+                                                / (bagian.length - 1));
+                                    }
+                                    parNil[zzz][zi][0] /= (parMatKul.length * 25);
+                                }
+                                for (int r = 0; r < parMaSis.length; r++) {
+                                    for (int l = 0; l < bio.length; l++) {
+                                        parMaSis[r][l] = tamMaSis[r][l];
+                                    }
+                                }
+
+                                for (int a = 0; a < parMaSis.length; a++) {
+                                    for (int b = 0; b < parMaSis.length; b++) {
+                                        if (parNil[a][zi][0] > parNil[b][zi][0]) {
+                                            gl = parNil[a][zi][0];
+                                            parNil[a][zi][0] = parNil[b][zi][0];
+                                            parNil[b][zi][0] = gl;
+
+                                            taa = parMaSis[a][0];
+                                            parMaSis[a][0] = parMaSis[b][0];
+                                            parMaSis[b][0] = taa;
+                                        } else if (parNil[a][zi][0] > parNil[b][zi][0]) {
+                                            if (parMaSis[a][0].compareTo(parMaSis[b][0]) < 0) {
+                                                gl = parNil[a][zi][0];
+                                                parNil[a][zi][0] = parNil[b][zi][0];
+                                                parNil[b][zi][0] = gl;
+
+                                                taa = parMaSis[a][0];
+                                                parMaSis[a][0] = parMaSis[b][0];
+                                                parMaSis[b][0] = taa;
+                                            }
+                                        }
+
+                                    }
+                                }
+                                for (int i = 0; i < parMaSis.length; i++) {
+                                    System.out.printf(i + 1 + ". %s : %d\n", parMaSis[i][0], parNil[i][zi][0]);
+                                }
+                                // for (int zzz = 0; zzz < parMaSis.length; zzz++) {
+                                //     for (int zz = 0; zz < parMatKul.length; zz++) {
+                                //         tamNil[zzz][zz][4] = 0;
+                                //     }
+                                //     tamNil[zzz][zi][0] = 0;
+                                // }
                                 System.out.println("Ketik t jika ingin kembali");
                                 kembali1 = scStr.nextLine();
                             }
