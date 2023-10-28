@@ -314,6 +314,11 @@ public class main5 {
                                     System.out.print("Masukkan angka : ");
                                     n = scInt.nextInt();
                                     n -= 1;
+                                    for (int vv = 0; vv < parMatKul.length; vv++) {
+                                        for (int z = 0; z < bagian.length; z++) {
+                                            tamNil[n][vv][z] = 0;
+                                        }
+                                    }
                                     if (n <= -2 || masMaSis.length + m < n + 1) {
                                         System.out.println("tidak valid");
                                     } else {
@@ -339,11 +344,7 @@ public class main5 {
                                                     }
                                                 }
                                         }
-                                        for (int vv = 0; vv < parMatKul.length; vv++) {
-                                            for (int z = 0; z < bagian.length; z++) {
-                                                tamNil[n][vv][z] = 0;
-                                            }
-                                        }
+
                                         for (int q = 0; q < parMaSis.length; q++) {
                                             System.out.printf("%-3d|.\t|", q + 1);
                                             for (int t = 0; t < bio.length; t++) {
@@ -496,6 +497,11 @@ public class main5 {
                                 System.out.println("Masukkan angka");
                                 n = scInt.nextInt();
                                 n -= 1;
+                                for (int vv = 0; vv < parMatKul.length; vv++) {
+                                    for (int z = 0; z < bagian.length; z++) {
+                                        tamNil[n][vv][z] = 0;
+                                    }
+                                }
                                 if (n <= -2 || masMatKul.length + g < n + 1) {
                                     System.out.println("tidak valid");
                                 } else {
@@ -516,11 +522,6 @@ public class main5 {
                                                     }
                                                 }
                                             }
-                                        }
-                                    }
-                                    for (int vv = 0; vv < parMatKul.length; vv++) {
-                                        for (int z = 0; z < bagian.length; z++) {
-                                            tamNil[n][vv][z] = 0;
                                         }
                                     }
                                     for (int t = 0; t < parMatKul.length; t++) {
@@ -616,10 +617,12 @@ public class main5 {
                                                             tamMatKul[a] = tamMatKul[b];
                                                             tamMatKul[b] = o;
 
-                                                            for (int z = 0; z < bagian.length; z++) {
-                                                                tam = tamNil[yahuu][a][z];
-                                                                tamNil[yahuu][a][z] = tamNil[yahuu][b][z];
-                                                                tamNil[yahuu][b][z] = tam;
+                                                            for (int vv = 0; vv < parMaSis.length; vv++) {
+                                                                for (int z = 0; z < bagian.length; z++) {
+                                                                    tam = tamNil[vv][a][z];
+                                                                    tamNil[vv][a][z] = tamNil[vv][b][z];
+                                                                    tamNil[vv][b][z] = tam;
+                                                                }
                                                             }
                                                         }
 
@@ -674,11 +677,11 @@ public class main5 {
                                                         tamMaSis[a][v] = tamMaSis[b][v];
                                                         tamMaSis[b][v] = taa;
                                                     }
-                                                    for (int v = 0; v < parMatKul.length; v++) {
+                                                    for (int vv = 0; vv < parMatKul.length; vv++) {
                                                         for (int z = 0; z < bagian.length; z++) {
-                                                            tam = tamNil[a][v][z];
-                                                            tamNil[a][v][z] = tamNil[b][v][z];
-                                                            tamNil[b][v][z] = tam;
+                                                            tam = tamNil[a][vv][z];
+                                                            tamNil[a][vv][z] = tamNil[b][vv][z];
+                                                            tamNil[b][vv][z] = tam;
                                                         }
                                                     }
                                                 }
@@ -712,10 +715,12 @@ public class main5 {
                                                             tamMatKul[a] = tamMatKul[b];
                                                             tamMatKul[b] = o;
 
-                                                            for (int z = 0; z < bagian.length; z++) {
-                                                                tam = tamNil[yahuu][a][z];
-                                                                tamNil[yahuu][a][z] = tamNil[yahuu][b][z];
-                                                                tamNil[yahuu][b][z] = tam;
+                                                            for (int vv = 0; vv < parMaSis.length; vv++) {
+                                                                for (int z = 0; z < bagian.length; z++) {
+                                                                    tam = tamNil[vv][a][z];
+                                                                    tamNil[vv][a][z] = tamNil[vv][b][z];
+                                                                    tamNil[vv][b][z] = tam;
+                                                                }
                                                             }
                                                         }
 
@@ -764,6 +769,8 @@ public class main5 {
                                                                 / (bagian.length - 1));
                                                     }
                                                     System.out.println(tamNil[yahuu][zi][0] / (parMatKul.length * 25));
+                                                    tamNil[yahuu][yahii][4] = 0;
+                                                    tamNil[yahuu][zi][0] = 0;
 
                                                     System.out.println("Ketik t jika ingin kembali");
                                                     kembali = scStr.nextLine();
