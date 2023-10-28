@@ -577,7 +577,8 @@ public class main5 {
                                                     System.out.printf("%d.\t: %s\n", t + 1, tamMatKul[t]);
                                                 }
                                                 zi = parMatKul.length + 1;
-                                                System.out.println(zi + ".\t: Keluar\nMasukkan Angka atau Nama");
+                                                System.out.println(zi + ".\t: IPS");
+                                                System.out.println(zi + 1 + ".\t: Keluar\nMasukkan Angka atau Nama");
                                                 PilihMatkul = scStr.nextLine();
                                                 for (i3 = 0; i3 < parMatKul.length; i3++) {
                                                     if (PilihMatkul.equals(tamMatKul[i3])) {
@@ -596,16 +597,29 @@ public class main5 {
                                                                 tamMatKul[yahii],
                                                                 tamNil[yahuu][yahii][z]);
                                                         tamNil[yahuu][yahii][4] += tamNil[yahuu][yahii][z];
-                                                    }System.out.printf("Nilai %s : %d\n", bagian[4],
-                                                            tamNil[yahuu][yahii][4] / (bagian.length - 1));
-                                                    tamNil[yahuu][yahii][4] = 0;
+                                                    }
+
+                                                    System.out.println("Ketik t jika ingin kembali");
+                                                    kembali = scStr.nextLine();
+                                                } else if (PilihMatkul.equalsIgnoreCase(asa = String.valueOf(zi))) {
+
+                                                    for (int zz = 0; zz < parMatKul.length; zz++) {
+                                                        for (int z = 0; z < bagian.length - 1; z++) {
+                                                            tamNil[yahuu][zz][4] += tamNil[yahuu][zz][z];
+                                                        }
+                                                        System.out.printf("Nilai %s %s: %d\n", bagian[4], tamMatKul[zz],
+                                                                tamNil[yahuu][zz][4] / (bagian.length - 1));
+                                                        tamNil[yahuu][zi][0] += (tamNil[yahuu][zz][4]/ (bagian.length - 1));
+                                                    }
+                                                    System.out.println(tamNil[yahuu][zi][0]/(parMatKul.length*25));
+                                                    
                                                     System.out.println("Ketik t jika ingin kembali");
                                                     kembali = scStr.nextLine();
                                                 }
                                             } while (kembali.equalsIgnoreCase("t"));
                                         }
                                     }
-                                } while (PilihMatkul.equalsIgnoreCase(ava = String.valueOf(zi)));
+                                } while (PilihMatkul.equalsIgnoreCase(ava = String.valueOf(zi + 1)));
                             } else if (pilih.equalsIgnoreCase("3")) {
                                 System.out.println("Ranking");
                                 System.out.println("Ketik t jika ingin kembali");
