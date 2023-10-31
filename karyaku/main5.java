@@ -23,7 +23,7 @@ public class main5 {
         int u = 0;
         for (int r = 0; r < tamDos.length; r++) {
             for (int l = 0; l < tamDos[0].length; l++) {
-                tamDos[r][l] = "null";
+                tamDos[r][l] = "~";
             }
         }
         for (int r = 0; r < masDos.length; r++) {
@@ -44,7 +44,7 @@ public class main5 {
         String taa = "";
         for (int r = 0; r < tamMaSis.length; r++) {
             for (int l = 0; l < bio.length; l++) {
-                tamMaSis[r][l] = "null";
+                tamMaSis[r][l] = "~";
             }
         }
         for (int r = 0; r < masMaSis.length; r++) {
@@ -61,7 +61,7 @@ public class main5 {
         String o;
         int g = 0;
         for (int k = 0; k < tamMatKul.length; k++) {
-            tamMatKul[k] = "null";
+            tamMatKul[k] = "~";
         }
         for (int k = 0; k < masMatKul.length; k++) {
             tamMatKul[k] = masMatKul[k];
@@ -213,9 +213,7 @@ public class main5 {
                                                     tamNil[b][vv][z] = tam;
                                                 }
                                             } // ini harus dikembangkan
-
                                         }
-
                                 }
                                 for (int q = 0; q < parMaSis.length; q++) {
                                     System.out.printf("%-3d|.\t|", q + 1);
@@ -227,10 +225,8 @@ public class main5 {
                                 System.out.println("ketik t jika ingin keluar");
                                 back = scStr.nextLine();
                             } else if (pilih.equalsIgnoreCase("2")) {
-                                if (masMaSis.length - 1 + m == 0) {
+                                if (masMaSis.length - 1 + m == -1) {
                                     System.out.println("Biodata tidak tersedia");
-                                    System.out.println("ketik t jika ingin keluar");
-                                    back = scStr.nextLine();
                                 } else {
 
                                     String parMaSis[][] = new String[masMaSis.length + m][3];
@@ -271,7 +267,7 @@ public class main5 {
                                     }
                                     m--;
                                     for (int xo = 0; xo < bio.length; xo++) {
-                                        tamMaSis[masMaSis.length + m][xo] = "null";
+                                        tamMaSis[masMaSis.length + m][xo] = "~";
                                     }
                                     for (int vv = 0; vv < parMatKul.length; vv++) {
                                         for (int z = 0; z < bagian.length; z++) {
@@ -284,7 +280,6 @@ public class main5 {
                                 back = scStr.nextLine();
                             } else if (pilih.equalsIgnoreCase("3")) {
                                 if (masMaSis.length + m == 0) {
-                                    System.out.println("!!!Input eror!!!");
                                     System.out.println("Biodata tidak tersedia");
                                 } else {
                                     System.out.println(m);
@@ -394,9 +389,13 @@ public class main5 {
                                 System.out.println("ketik t jika ingin keluar : ");
                                 back = scStr.nextLine();
                             }
-                        } while (back.equalsIgnoreCase("t") && !pilih.equals("5"));
+                        } while (back.equalsIgnoreCase("t")
+                                && !(pilih.equalsIgnoreCase("1") || pilih.equalsIgnoreCase("2")
+                                        || pilih.equalsIgnoreCase("3") || pilih.equalsIgnoreCase("4"))
+                                || !pilih.equals("5"));
                     } else if (choice[2].equalsIgnoreCase("2") || choice[2].equalsIgnoreCase("Mata Kuliah")) {
                         do {
+                            back = "";
                             System.out.println(
                                     "1. Tambah Mata Kuliah\n2. Kurangi Mata Kuliah\n3. Ubah Mata Kuliah\n4. Mata Kuliah\n5. Keluar");
                             pilih = scStr.nextLine();
@@ -427,10 +426,8 @@ public class main5 {
                                 System.out.println("ketik t jika ingin keluar");
                                 back = scStr.nextLine();
                             } else if (pilih.equalsIgnoreCase("2")) {
-                                if (masMaSis.length + m == 0) {
-                                    System.out.println("Biodata tidak tersedia");
-                                    System.out.println("ketik t jika ingin keluar");
-                                    back = scStr.nextLine();
+                                if (masMatKul.length - 1 + g == -1) {
+                                    System.out.println("Mata Kulih tidak tersedia");
                                 } else {
                                     String parMaSis[][] = new String[masMaSis.length + m][3];
                                     String parMatKul[] = new String[masMatKul.length + g];
@@ -464,52 +461,85 @@ public class main5 {
                                         System.out.printf("%d.\t: %s\n", t + 1, tamMatKul[t]);
                                     }
                                     g--;
-                                    tamMatKul[masMatKul.length + g] = "null";
+                                    tamMatKul[masMatKul.length + g] = "~";
                                     for (int vv = 0; vv < parMatKul.length; vv++) {
                                         for (int z = 0; z < bagian.length; z++) {
                                             tamNil[masMatKul.length + g][vv][z] = 0;
                                         }
                                     }
                                 }
-
                                 System.out.println("ketik t jika ingin keluar");
                                 back = scStr.nextLine();
                             } else if (pilih.equalsIgnoreCase("3")) {
-                                String parMaSis[][] = new String[masMaSis.length + m][3];
-                                String parMatKul[] = new String[masMatKul.length + g];
-                                for (int a = 0; a < parMatKul.length; a++) {
-                                    for (int b = 0; b < parMatKul.length; b++) {
-                                        if (tamMatKul[a].compareTo(tamMatKul[b]) < 0) {
-                                            o = tamMatKul[a];
-                                            tamMatKul[a] = tamMatKul[b];
-                                            tamMatKul[b] = o;
+                                if (masMatKul.length + g == 0) {
+                                    System.out.println("Mata Kuliah tidak tersedia");
+                                } else {
+                                    String parMaSis[][] = new String[masMaSis.length + m][3];
+                                    String parMatKul[] = new String[masMatKul.length + g];
+                                    for (int a = 0; a < parMatKul.length; a++) {
+                                        for (int b = 0; b < parMatKul.length; b++) {
+                                            if (tamMatKul[a].compareTo(tamMatKul[b]) < 0) {
+                                                o = tamMatKul[a];
+                                                tamMatKul[a] = tamMatKul[b];
+                                                tamMatKul[b] = o;
 
-                                            for (int vv = 0; vv < parMaSis.length; vv++) {
-                                                for (int z = 0; z < bagian.length; z++) {
-                                                    tam = tamNil[vv][a][z];
-                                                    tamNil[vv][a][z] = tamNil[vv][b][z];
-                                                    tamNil[vv][b][z] = tam;
+                                                for (int vv = 0; vv < parMaSis.length; vv++) {
+                                                    for (int z = 0; z < bagian.length; z++) {
+                                                        tam = tamNil[vv][a][z];
+                                                        tamNil[vv][a][z] = tamNil[vv][b][z];
+                                                        tamNil[vv][b][z] = tam;
+                                                    }
                                                 }
                                             }
                                         }
                                     }
-                                }
-                                for (int t = 0; t < parMatKul.length; t++) {
-                                    System.out.printf("%d.\t: %s\n", t + 1, tamMatKul[t]);
-                                }
-                                System.out.println("Masukkan angka");
-                                n = scInt.nextInt();
-                                n -= 1;
-                                for (int vv = 0; vv < parMaSis.length; vv++) {
-                                    for (int z = 0; z < bagian.length; z++) {
-                                        tamNil[vv][n][z] = 0;
+                                    for (int t = 0; t < parMatKul.length; t++) {
+                                        System.out.printf("%d.\t: %s\n", t + 1, tamMatKul[t]);
+                                    }
+                                    System.out.println("Masukkan angka");
+                                    n = scInt.nextInt();
+                                    n -= 1;
+                                    for (int vv = 0; vv < parMaSis.length; vv++) {
+                                        for (int z = 0; z < bagian.length; z++) {
+                                            tamNil[vv][n][z] = 0;
+                                        }
+                                    }
+                                    if (n <= -2 || masMatKul.length + g < n + 1) {
+                                        System.out.println("tidak valid");
+                                    } else {
+                                        System.out.print("Masukkan Mata Kuliah : ");
+                                        tamMatKul[n] = scStr.nextLine();
+                                        for (int a = 0; a < parMatKul.length; a++) {
+                                            for (int b = 0; b < parMatKul.length; b++) {
+                                                if (tamMatKul[a].compareTo(tamMatKul[b]) < 0) {
+                                                    o = tamMatKul[a];
+                                                    tamMatKul[a] = tamMatKul[b];
+                                                    tamMatKul[b] = o;
+
+                                                    for (int vv = 0; vv < parMaSis.length; vv++) {
+                                                        for (int z = 0; z < bagian.length; z++) {
+                                                            tam = tamNil[vv][a][z];
+                                                            tamNil[vv][a][z] = tamNil[vv][b][z];
+                                                            tamNil[vv][b][z] = tam;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        for (int t = 0; t < parMatKul.length; t++) {
+                                            System.out.printf("%d.\t: %s\n", t + 1, tamMatKul[t]);
+                                        }
                                     }
                                 }
-                                if (n <= -2 || masMatKul.length + g < n + 1) {
-                                    System.out.println("tidak valid");
+                                System.out.println("ketik t jika ingin keluar");
+                                back = scStr.nextLine();
+                            } else if (pilih.equalsIgnoreCase("4")) {
+                                if (masMatKul.length + g == 0) {
+                                    System.out.println("!!!Input eror!!!");
+                                    System.out.println("Biodata tidak tersedia");
                                 } else {
-                                    System.out.print("Masukkan Mata Kuliah : ");
-                                    tamMatKul[n] = scStr.nextLine();
+                                    String parMaSis[][] = new String[masMaSis.length + m][3];
+                                    String parMatKul[] = new String[masMatKul.length + g];
                                     for (int a = 0; a < parMatKul.length; a++) {
                                         for (int b = 0; b < parMatKul.length; b++) {
                                             if (tamMatKul[a].compareTo(tamMatKul[b]) < 0) {
@@ -533,33 +563,11 @@ public class main5 {
                                 }
                                 System.out.println("ketik t jika ingin keluar");
                                 back = scStr.nextLine();
-                            } else if (pilih.equalsIgnoreCase("4")) {
-                                String parMaSis[][] = new String[masMaSis.length + m][3];
-                                String parMatKul[] = new String[masMatKul.length + g];
-                                for (int a = 0; a < parMatKul.length; a++) {
-                                    for (int b = 0; b < parMatKul.length; b++) {
-                                        if (tamMatKul[a].compareTo(tamMatKul[b]) < 0) {
-                                            o = tamMatKul[a];
-                                            tamMatKul[a] = tamMatKul[b];
-                                            tamMatKul[b] = o;
-
-                                            for (int vv = 0; vv < parMaSis.length; vv++) {
-                                                for (int z = 0; z < bagian.length; z++) {
-                                                    tam = tamNil[vv][a][z];
-                                                    tamNil[vv][a][z] = tamNil[vv][b][z];
-                                                    tamNil[vv][b][z] = tam;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                for (int t = 0; t < parMatKul.length; t++) {
-                                    System.out.printf("%d.\t: %s\n", t + 1, tamMatKul[t]);
-                                }
-                                System.out.println("ketik t jika ingin keluar");
-                                back = scStr.nextLine();
                             }
-                        } while (back.equalsIgnoreCase("t") && !pilih.equals("5"));
+                        } while (back.equalsIgnoreCase("t")
+                                && !(pilih.equalsIgnoreCase("1") || pilih.equalsIgnoreCase("2")
+                                        || pilih.equalsIgnoreCase("3") || pilih.equalsIgnoreCase("4"))
+                                || !pilih.equals("5"));
                     } else if (choice[2].equalsIgnoreCase("3") || choice[2].equalsIgnoreCase("Nilai")) {
                         do {
                             za = 0;
@@ -572,6 +580,10 @@ public class main5 {
                                     PilihMatkul = "";
                                     if (masMaSis.length + m == 0) {
                                         System.out.println("Biodata tidak tersedia");
+                                        String parMaSis[][] = new String[masMaSis.length + m][3];
+                                        za = parMaSis.length + 1;
+                                        System.out.println(za + ".\t: Keluar\nMasukkan Angka atau Nama");
+                                        pilihNama = scStr.nextLine();
                                     } else {
                                         String parMaSis[][] = new String[masMaSis.length + m][3];
                                         String parMatKul[] = new String[masMatKul.length + g];
@@ -678,6 +690,10 @@ public class main5 {
                                     PilihMatkul = "";
                                     if (masMaSis.length + m == 0) {
                                         System.out.println("Biodata tidak tersedia");
+                                        String parMaSis[][] = new String[masMaSis.length + m][3];
+                                        za = parMaSis.length + 1;
+                                        System.out.println(za + ".\t: Keluar\nMasukkan Angka atau Nama");
+                                        pilihNama = scStr.nextLine();
                                     } else {
                                         String parMaSis[][] = new String[masMaSis.length + m][3];
                                         String parMatKul[] = new String[masMatKul.length + g];
@@ -716,79 +732,92 @@ public class main5 {
                                                 || pilihNama.equalsIgnoreCase(ada = String.valueOf(yahuu + 1))) {
                                             do {
                                                 kembali = "";
-                                                for (int x = 0; x < parMatKul.length; x++) {
-                                                    parMatKul[x] = tamMatKul[x];
-                                                }
-                                                parMatKul[n] = tamMatKul[n];
-                                                for (int a = 0; a < parMatKul.length; a++) {
-                                                    for (int b = 0; b < parMatKul.length; b++) {
-                                                        if (tamMatKul[a].compareTo(tamMatKul[b]) < 0) {
-                                                            o = tamMatKul[a];
-                                                            tamMatKul[a] = tamMatKul[b];
-                                                            tamMatKul[b] = o;
+                                                if (masMatKul.length + g == 0) {
+                                                    System.out.println("Biodata tidak tersedia");
+                                                    zi = parMatKul.length;
+                                                    System.out.println(zi+1 + ".\t: Keluar\nMasukkan Angka atau Nama");
+                                                    PilihMatkul = scStr.nextLine();
+                                                } else {
+                                                    for (int x = 0; x < parMatKul.length; x++) {
+                                                        parMatKul[x] = tamMatKul[x];
+                                                    }
+                                                    parMatKul[n] = tamMatKul[n];
+                                                    for (int a = 0; a < parMatKul.length; a++) {
+                                                        for (int b = 0; b < parMatKul.length; b++) {
+                                                            if (tamMatKul[a].compareTo(tamMatKul[b]) < 0) {
+                                                                o = tamMatKul[a];
+                                                                tamMatKul[a] = tamMatKul[b];
+                                                                tamMatKul[b] = o;
 
-                                                            for (int vv = 0; vv < parMaSis.length; vv++) {
-                                                                for (int z = 0; z < bagian.length; z++) {
-                                                                    tam = tamNil[vv][a][z];
-                                                                    tamNil[vv][a][z] = tamNil[vv][b][z];
-                                                                    tamNil[vv][b][z] = tam;
+                                                                for (int vv = 0; vv < parMaSis.length; vv++) {
+                                                                    for (int z = 0; z < bagian.length; z++) {
+                                                                        tam = tamNil[vv][a][z];
+                                                                        tamNil[vv][a][z] = tamNil[vv][b][z];
+                                                                        tamNil[vv][b][z] = tam;
+                                                                    }
                                                                 }
                                                             }
+
                                                         }
-
                                                     }
-                                                }
-                                                for (int t = 0; t < parMatKul.length; t++) {
-                                                    System.out.printf("%d.\t: %s\n", t + 1, tamMatKul[t]);
-                                                }
-                                                zi = parMatKul.length + 1;
-                                                System.out.println(zi + ".\t: IPS");
-                                                System.out.println(zi + 1 + ".\t: Keluar\nMasukkan Angka atau Nama");
-                                                PilihMatkul = scStr.nextLine();
-                                                for (i3 = 0; i3 < parMatKul.length; i3++) {
-                                                    if (PilihMatkul.equals(tamMatKul[i3])) {
-                                                        yahii = i3;
-                                                    } else if (PilihMatkul
-                                                            .equalsIgnoreCase(asa = String.valueOf(i3 + 1))) {
-                                                        yahii = i3;
+                                                    for (int t = 0; t < parMatKul.length; t++) {
+                                                        System.out.printf("%d.\t: %s\n", t + 1, tamMatKul[t]);
                                                     }
-                                                }
-                                                System.out.println(yahii);
-                                                if (PilihMatkul.equalsIgnoreCase(tamMatKul[yahii])
-                                                        || PilihMatkul
-                                                                .equalsIgnoreCase(asa = String.valueOf(yahii + 1))) {
-                                                    for (int z = 0; z < bagian.length - 1; z++) {
-                                                        System.out.printf("Nilai %s %s : %f\n", bagian[z],
-                                                                tamMatKul[yahii],
-                                                                tamNil[yahuu][yahii][z]);
-                                                        tamNil[yahuu][yahii][4] += tamNil[yahuu][yahii][z];
+                                                    zi = parMatKul.length + 1;
+                                                    System.out.println(zi + ".\t: IPS");
+                                                    System.out
+                                                            .println(zi + 1 + ".\t: Keluar\nMasukkan Angka atau Nama");
+                                                    PilihMatkul = scStr.nextLine();
+                                                    for (i3 = 0; i3 < parMatKul.length; i3++) {
+                                                        if (PilihMatkul.equals(tamMatKul[i3])) {
+                                                            yahii = i3;
+                                                        } else if (PilihMatkul
+                                                                .equalsIgnoreCase(asa = String.valueOf(i3 + 1))) {
+                                                            yahii = i3;
+                                                        }
                                                     }
-                                                    System.out.printf("Nilai %s %s: %f\n", bagian[4], tamMatKul[yahii],
-                                                            tamNil[yahuu][yahii][4] / (bagian.length - 1));
-                                                    tamNil[yahuu][yahii][4] = 0;
-                                                    System.out.println("Ketik t jika ingin kembali");
-                                                    kembali = scStr.nextLine();
-                                                } else if (PilihMatkul.equalsIgnoreCase(asa = String.valueOf(zi))
-                                                        || PilihMatkul.equalsIgnoreCase("ips")) {
-
-                                                    for (int zz = 0; zz < parMatKul.length; zz++) {
+                                                    System.out.println(yahii);
+                                                    if (PilihMatkul.equalsIgnoreCase(tamMatKul[yahii])
+                                                            || PilihMatkul
+                                                                    .equalsIgnoreCase(
+                                                                            asa = String.valueOf(yahii + 1))) {
                                                         for (int z = 0; z < bagian.length - 1; z++) {
-                                                            tamNil[yahuu][zz][4] += tamNil[yahuu][zz][z];
+                                                            System.out.printf("Nilai %s %s : %f\n", bagian[z],
+                                                                    tamMatKul[yahii],
+                                                                    tamNil[yahuu][yahii][z]);
+                                                            tamNil[yahuu][yahii][4] += tamNil[yahuu][yahii][z];
                                                         }
-                                                        System.out.printf("Nilai %s %s: %f\n", bagian[4], tamMatKul[zz],
-                                                                tamNil[yahuu][zz][4] / (bagian.length - 1));
-                                                        tamNil[yahuu][zi][0] += (tamNil[yahuu][zz][4]
-                                                                / (bagian.length - 1));
-                                                    }
-                                                    System.out.println(tamNil[yahuu][zi][0] / (parMatKul.length * 25));
-                                                    tamNil[yahuu][yahii][4] = 0;
-                                                    tamNil[yahuu][zi][0] = 0;
+                                                        System.out.printf("Nilai %s %s: %f\n", bagian[4],
+                                                                tamMatKul[yahii],
+                                                                tamNil[yahuu][yahii][4] / (bagian.length - 1));
+                                                        tamNil[yahuu][yahii][4] = 0;
+                                                        System.out.println("Ketik t jika ingin kembali");
+                                                        kembali = scStr.nextLine();
+                                                    } else if (PilihMatkul.equalsIgnoreCase(asa = String.valueOf(zi))
+                                                            || PilihMatkul.equalsIgnoreCase("ips")) {
 
-                                                    System.out.println("Ketik t jika ingin kembali");
-                                                    kembali = scStr.nextLine();
-                                                } else if (PilihMatkul.equalsIgnoreCase(ava = String.valueOf(zi + 1))) {
-                                                    tamNil[yahuu][yahii][4] = 0;
-                                                    tamNil[yahuu][zi][0] = 0;
+                                                        for (int zz = 0; zz < parMatKul.length; zz++) {
+                                                            for (int z = 0; z < bagian.length - 1; z++) {
+                                                                tamNil[yahuu][zz][4] += tamNil[yahuu][zz][z];
+                                                            }
+                                                            System.out.printf("Nilai %s %s: %f\n", bagian[4],
+                                                                    tamMatKul[zz],
+                                                                    tamNil[yahuu][zz][4] / (bagian.length - 1));
+                                                            tamNil[yahuu][zi][0] += (tamNil[yahuu][zz][4]
+                                                                    / (bagian.length - 1));
+                                                        }
+                                                        System.out.println(
+                                                                tamNil[yahuu][zi][0] / (parMatKul.length * 25));
+                                                        tamNil[yahuu][yahii][4] = 0;
+                                                        tamNil[yahuu][zi][0] = 0;
+
+                                                        System.out.println("Ketik t jika ingin kembali");
+                                                        kembali = scStr.nextLine();
+                                                    } else if (PilihMatkul
+                                                            .equalsIgnoreCase(ava = String.valueOf(zi + 1))) {
+                                                        tamNil[yahuu][yahii][4] = 0;
+                                                        tamNil[yahuu][zi][0] = 0;
+                                                    }
                                                 }
                                             } while (kembali.equalsIgnoreCase("t") && !(PilihMatkul
                                                     .equalsIgnoreCase(tamMatKul[yahii])
@@ -877,7 +906,11 @@ public class main5 {
                     } else {
                         System.out.println("Tidak Valid");
                     }
-                } while (pilih.equalsIgnoreCase("5") || pilih.equalsIgnoreCase("4"));
+                } while ((pilih.equalsIgnoreCase("5") || pilih.equalsIgnoreCase("4"))
+                        && !((choice[2].equalsIgnoreCase("1") || choice[2].equals("Mahasiswa"))
+                                || !(choice[2].equalsIgnoreCase("2") || choice[2].equalsIgnoreCase("Mata Kuliah"))
+                                || !(choice[2].equalsIgnoreCase("3") || choice[2].equalsIgnoreCase("Nilai")))
+                        || !(choice[2].equalsIgnoreCase("4") || choice[2].equalsIgnoreCase("Keluar")));
             } else if (username.equals(tamMaSis[yahaa][0]) && password.equalsIgnoreCase(tamMaSis[yahaa][0])
                     && !choice[0].equalsIgnoreCase("3") && !repeat[1].equalsIgnoreCase("y")) {
                 System.out.println("1. Biodata\n2. Nilai\n3. Cetak KHS\n4. Keluar");
