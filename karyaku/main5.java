@@ -624,9 +624,9 @@ public class main5 {
                                                 kembali = "";
                                                 if (masMatKul.length + g == 0) {
                                                     System.out.println("Biodata tidak tersedia");
-                                                    zi = parMatKul.length;
+                                                    zi = parMatKul.length + 1;
                                                     System.out
-                                                            .println(zi + 1 + ".\t: Keluar\nMasukkan Angka atau Nama");
+                                                            .println(zi + ".\t: Keluar\nMasukkan Angka atau Nama");
                                                     PilihMatkul = scStr.nextLine();
                                                 } else {
                                                     for (int x = 0; x < parMatKul.length; x++) {
