@@ -190,7 +190,7 @@ public class main5 {
                     choice[2] = scStr.nextLine();
                     if (choice[2].equalsIgnoreCase("1") || choice[2].equals("Mahasiswa")) {
                         do {
-                            back = "";
+                            back = "";//
                             System.out.println(
                                     "1. Tambah Mahasiswa\n2. Kurangi Mahasiswa\n3. Ubah Biodata\n4. Biodata Mahasiswa\n5. Keluar");
                             pilih = scStr.nextLine();
@@ -252,33 +252,75 @@ public class main5 {
                                                 }
                                             }
                                     }
-                                    for (int a = 0; a < parMaSis.length - 1; a++) {
-                                        for (int b = 0; b < parMaSis.length - 1; b++) {
-                                            if (tamMaSis[a][0].compareTo(tamMaSis[b][0]) < 0) {
-                                                for (int v = 0; v < bio.length; v++) {
-                                                    taa = tamMaSis[a][v];
-                                                    tamMaSis[a][v] = tamMaSis[b][v];
-                                                    tamMaSis[b][v] = taa;
-                                                }
-                                            }
-                                        }
-                                    }
-                                    for (int q = 0; q < parMaSis.length - 1; q++) {
+                                    // for (int a = 0; a < parMaSis.length - 1; a++) {
+                                    // for (int b = 0; b < parMaSis.length - 1; b++) {
+                                    // if (tamMaSis[a][0].compareTo(tamMaSis[b][0]) < 0) {
+                                    // for (int v = 0; v < bio.length; v++) {
+                                    // taa = tamMaSis[a][v];
+                                    // tamMaSis[a][v] = tamMaSis[b][v];
+                                    // tamMaSis[b][v] = taa;
+                                    // }
+                                    // }
+                                    // }
+                                    // }
+                                    for (int q = 0; q < parMaSis.length; q++) {
                                         System.out.printf("%-3d|.\t|", q + 1);
                                         for (int t = 0; t < bio.length; t++) {
                                             System.out.printf(" %-6s|%-10s|", bio[t], tamMaSis[q][t]);
                                         }
                                         System.out.println("");
                                     }
-                                    m--;
-                                    for (int xo = 0; xo < bio.length; xo++) {
-                                        tamMaSis[masMaSis.length + m][xo] = "~";
-                                    }
-                                    for (int vv = 0; vv < parMatKul.length; vv++) {
-                                        for (int z = 0; z < bagian.length; z++) {
-                                            tamNil[masMaSis.length + m][vv][z] = 0;
+                                    System.out.print("Masukkan angka : ");
+                                    n = scInt.nextInt();
+                                    n -= 1;
+
+                                    if (n <= -2 || masMaSis.length + m < n + 1) {
+                                        System.out.println("tidak valid");
+                                    } else {
+                                        for (int vv = 0; vv < parMatKul.length; vv++) {
+                                            for (int z = 0; z < bagian.length; z++) {
+                                                tamNil[n][vv][z] = 0;
+                                            }
                                         }
+                                        for (int xo = 0; xo < bio.length; xo++) {
+                                            tamMaSis[n][xo] = "~";
+                                        }
+                                        for (int a = 0; a < parMaSis.length; a++) {
+                                            for (int b = 0; b < parMaSis.length; b++)
+                                                if (tamMaSis[a][0].compareTo(tamMaSis[b][0]) < 0) {
+                                                    for (int v = 0; v < bio.length; v++) {
+                                                        taa = tamMaSis[a][v];
+                                                        tamMaSis[a][v] = tamMaSis[b][v];
+                                                        tamMaSis[b][v] = taa;
+                                                    }
+                                                    for (int vv = 0; vv < parMatKul.length; vv++) {
+                                                        for (int z = 0; z < bagian.length; z++) {
+                                                            tam = tamNil[a][vv][z];
+                                                            tamNil[a][vv][z] = tamNil[b][vv][z];
+                                                            tamNil[b][vv][z] = tam;
+                                                        }
+                                                    }
+                                                }
+                                        }
+
+                                        for (int q = 0; q < parMaSis.length - 1; q++) {
+                                            System.out.printf("%-3d|.\t|", q + 1);
+                                            for (int t = 0; t < bio.length; t++) {
+                                                System.out.printf(" %-6s|%-10s|", bio[t], tamMaSis[q][t]);
+                                            }
+                                            System.out.println("");
+                                        }
+                                        m--;
                                     }
+
+                                    // for (int xo = 0; xo < bio.length; xo++) {
+                                    // tamMaSis[masMaSis.length + m][xo] = "~";
+                                    // }
+                                    // for (int vv = 0; vv < parMatKul.length; vv++) {
+                                    // for (int z = 0; z < bagian.length; z++) {
+                                    // tamNil[masMaSis.length + m][vv][z] = 0;
+                                    // }
+                                    // }
                                 }
 
                                 System.out.println("ketik t jika ingin keluar");
@@ -406,11 +448,13 @@ public class main5 {
                             pilih = scStr.nextLine();
                             if (pilih.equalsIgnoreCase("1")) {
                                 System.out.print("Masukkan Mata Kuliah : ");
-                                tamMatKul[masMatKul.length + g] = scStr.nextLine();// nilai 8, karena indeks dimulai dari 0
+                                tamMatKul[masMatKul.length + g] = scStr.nextLine();// nilai 8, karena indeks dimulai
+                                                                                   // dari 0
                                 g++;
                                 String parMaSis[][] = new String[masMaSis.length + m][3];
                                 String parMatKul[] = new String[masMatKul.length + g];
-                                for (int a = 0; a < parMatKul.length; a++) { // disini menggunakan parmatkul karena operator relasi <
+                                for (int a = 0; a < parMatKul.length; a++) { // disini menggunakan parmatkul karena
+                                                                             // operator relasi <
                                     for (int b = 0; b < parMatKul.length; b++) {// udah ada penjekasan di atas
                                         if (tamMatKul[a].compareTo(tamMatKul[b]) < 0) {
                                             o = tamMatKul[a];
@@ -444,7 +488,7 @@ public class main5 {
                                                 o = tamMatKul[a];
                                                 tamMatKul[a] = tamMatKul[b];
                                                 tamMatKul[b] = o;
-                                                
+
                                                 for (int vv = 0; vv < parMaSis.length; vv++) {
                                                     for (int z = 0; z < bagian.length; z++) {
                                                         tam = tamNil[vv][a][z];
@@ -455,7 +499,7 @@ public class main5 {
                                             }
                                         }
                                     }
-                                    //untuk memanggil output saja ->
+                                    // untuk memanggil output saja ->
                                     for (int a = 0; a < parMatKul.length - 1; a++) {
                                         for (int b = 0; b < parMatKul.length - 1; b++) {
                                             if (tamMatKul[a].compareTo(tamMatKul[b]) < 0) {
@@ -482,7 +526,7 @@ public class main5 {
                                 System.out.println("ketik t jika ingin keluar");
                                 back = scStr.nextLine();
                             } else if (pilih.equalsIgnoreCase("3")) {
-                                if (masMatKul.length + g == 0) {//jik tidak dikasih ini akan terjadi bound length....
+                                if (masMatKul.length + g == 0) {// jik tidak dikasih ini akan terjadi bound length....
                                     System.out.println("Mata Kuliah tidak tersedia");
                                 } else {
                                     String parMaSis[][] = new String[masMaSis.length + m][3];
@@ -504,7 +548,7 @@ public class main5 {
                                                 }
                                             }
                                         }
-                                    }// <-
+                                    } // <-
                                     for (int t = 0; t < parMatKul.length; t++) {
                                         System.out.printf("%d.\t: %s\n", t + 1, tamMatKul[t]);
                                     }
@@ -512,7 +556,10 @@ public class main5 {
                                     n = scInt.nextInt();
                                     n -= 1;
 
-                                    if (n <= -2 || masMatKul.length + g < n + 1) {// validasi, jika menginputkan n dengan nilai kurang dari 0 dan mengitputkan nilai lebih dari banyaknya matkul
+                                    if (n <= -2 || masMatKul.length + g < n + 1) {// validasi, jika menginputkan n
+                                                                                  // dengan nilai kurang dari 0 dan
+                                                                                  // mengitputkan nilai lebih dari
+                                                                                  // banyaknya matkul
                                         System.out.println("tidak valid");
                                     } else {
                                         // generalsisasi nilai jika mengubah mata kuliah ->
