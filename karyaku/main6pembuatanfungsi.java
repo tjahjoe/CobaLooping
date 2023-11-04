@@ -23,8 +23,8 @@ public class main6pembuatanfungsi {
     public static String masMaSis[][] = { { "Wahyu", "1234455", "1C" }, { "Rizky", "1122334", "1C" },
             { "Cahyana", "1234466", "1C" },
             { "Dizky", "1177334", "1C" } };
-    public static String tamMaSis[][] = new String[100][3];
     public static String bio[] = { "Nama", "NIM", "kelas" };
+    //public static String tamMaSis[][] = new String[100][3];
     public static int penguranganInput = 0;
 
     public static int tampilanData[] = new int[2];
@@ -49,38 +49,18 @@ public class main6pembuatanfungsi {
     public static double tamNil[][][] = new double[100][100][5];
 
     public static void main(String[] args) {
-        for (int r = 0; r < tamDos.length; r++) {
-            for (int l = 0; l < tamDos[0].length; l++) {
-                tamDos[r][l] = "~";
-            }
-        }
         for (int r = 0; r < masDos.length; r++) {
             for (int l = 0; l < masDos[0].length; l++) {
                 tamDos[r][l] = masDos[r][l];
             }
         }
-        for (int r = 0; r < tamMaSis.length; r++) {
-            for (int l = 0; l < bio.length; l++) {
-                tamMaSis[r][l] = "~";
-            }
-        }
-        for (int r = 0; r < masMaSis.length; r++) {
-            for (int l = 0; l < bio.length; l++) {
-                tamMaSis[r][l] = masMaSis[r][l];
-            }
-        }
-        for (int k = 0; k < tamMatKul.length; k++) {
-            tamMatKul[k] = "~";
-        }
+        // for (int r = 0; r < masMaSis.length; r++) {
+        //     for (int l = 0; l < bio.length; l++) {
+        //         tamMaSis[r][l] = masMaSis[r][l];
+        //     }
+        // }
         for (int k = 0; k < masMatKul.length; k++) {
             tamMatKul[k] = masMatKul[k];
-        }
-        for (int k = 0; k < tamNil.length; k++) {
-            for (int c = 0; c < tamNil[0].length; c++) {
-                for (int z = 0; z < tamNil[0][0].length; z++) {
-                    tamNil[k][c][z] = 0;
-                }
-            }
         }
         for (int k = 0; k < masNil.length; k++) {
             for (int c = 0; c < masNil[0].length; c++) {
@@ -165,19 +145,22 @@ public class main6pembuatanfungsi {
     }
 
     public static void getTambahRuangMhs() {
+        String tamMaSis[][] = new String[masMaSis.length + 1][3];
+        for (int r = 0; r < masMaSis.length; r++) {
+            for (int l = 0; l < bio.length; l++) {
+                tamMaSis[r][l] = masMaSis[r][l];
+            }
+        }
         for (int j = 0; j < bio.length; j++) {
             System.out.printf("Masukkan %s : ", bio[j]);
-            tamMaSis[masMaSis.length + menambahRuang[1]][j] = scStr.nextLine();
+            tamMaSis[masMaSis.length][j] = scStr.nextLine();
         }
-        System.out.println(tamMaSis[masMaSis.length + menambahRuang[1]][0]);
-        menambahRuang[1]++;
-        tampilanData[0] = masMaSis.length + menambahRuang[1];
-        tampilanData[1] = masMatKul.length + menambahRuang[2];
+        masMaSis = tamMaSis;
         getSortingMhs();
-        for (int q = 0; q < tampilanData[0]; q++) {
+        for (int q = 0; q < masMaSis.length; q++) {
             System.out.printf("%-3d|.\t|", q + 1);
             for (int t = 0; t < bio.length; t++) {
-                System.out.printf(" %-6s|%-10s|", bio[t], tamMaSis[q][t]);
+                System.out.printf(" %-6s|%-10s|", bio[t], masMaSis[q][t]);
             }
             System.out.println("");
         }
@@ -193,6 +176,7 @@ public class main6pembuatanfungsi {
     }
 
     public static void getKurangiRuangMhs() {
+        String tamMaSis[][] = new String[tampilanData[0]][3];
         if (masMaSis.length - 1 + menambahRuang[1] == -1) {
             System.out.println("Biodata tidak tersedia");
         } else {
@@ -202,7 +186,7 @@ public class main6pembuatanfungsi {
             for (int q = 0; q < tampilanData[0]; q++) {
                 System.out.printf("%-3d|.\t|", q + 1);
                 for (int t = 0; t < bio.length; t++) {
-                    System.out.printf(" %-6s|%-10s|", bio[t], tamMaSis[q][t]);
+                    System.out.printf(" %-6s|%-10s|", bio[t], masMaSis[q][t]);
                 }
                 System.out.println("");
             }
@@ -220,13 +204,13 @@ public class main6pembuatanfungsi {
                     }
                 }
                 for (int xo = 0; xo < bio.length; xo++) {
-                    tamMaSis[penguranganInput][xo] = "~";
+                    masMaSis[penguranganInput][xo] = "~";
                 }
                 getSortingMhs();
                 for (int q = 0; q < tampilanData[0] - 1; q++) {
                     System.out.printf("%-3d|.\t|", q + 1);
                     for (int t = 0; t < bio.length; t++) {
-                        System.out.printf(" %-6s|%-10s|", bio[t], tamMaSis[q][t]);
+                        System.out.printf(" %-6s|%-10s|", bio[t], masMaSis[q][t]);
                     }
                     System.out.println("");
                 }
@@ -244,6 +228,7 @@ public class main6pembuatanfungsi {
     }
 
     public static void getUbahMhs() {
+        String tamMaSis[][] = new String[tampilanData[0]][3];
         if (masMaSis.length + menambahRuang[1] == 0) {
             System.out.println("Biodata tidak tersedia");
         } else {
@@ -253,7 +238,7 @@ public class main6pembuatanfungsi {
             for (int q = 0; q < tampilanData[0]; q++) {
                 System.out.printf("%-3d|.\t|", q + 1);
                 for (int t = 0; t < bio.length; t++) {
-                    System.out.printf(" %-6s|%-10s|", bio[t], tamMaSis[q][t]);
+                    System.out.printf(" %-6s|%-10s|", bio[t], masMaSis[q][t]);
                 }
                 System.out.println("");
             }
@@ -271,13 +256,13 @@ public class main6pembuatanfungsi {
                 }
                 for (int j = 0; j < bio.length; j++) {
                     System.out.printf("Masukkan %s : ", bio[j]);
-                    tamMaSis[penguranganInput][j] = scStr.nextLine();
+                    masMaSis[penguranganInput][j] = scStr.nextLine();
                 }
                 getSortingMhs();
                 for (int q = 0; q < tampilanData[0]; q++) {
                     System.out.printf("%-3d|.\t|", q + 1);
                     for (int t = 0; t < bio.length; t++) {
-                        System.out.printf(" %-6s|%-10s|", bio[t], tamMaSis[q][t]);
+                        System.out.printf(" %-6s|%-10s|", bio[t], masMaSis[q][t]);
                     }
                     System.out.println("");
                 }
@@ -294,6 +279,7 @@ public class main6pembuatanfungsi {
     }
 
     public static void getLihatMhs() {
+        String tamMaSis[][] = new String[tampilanData[0]][3];
         if (masMaSis.length + menambahRuang[1] == 0) {
             System.out.println("Biodata tidak tersedia");
         } else {
@@ -303,7 +289,7 @@ public class main6pembuatanfungsi {
             for (int q = 0; q < tampilanData[0]; q++) {
                 System.out.printf("%-3d|.\t|", q + 1);
                 for (int t = 0; t < bio.length; t++) {
-                    System.out.printf(" %-6s|%-10s|", bio[t], tamMaSis[q][t]);
+                    System.out.printf(" %-6s|%-10s|", bio[t], masMaSis[q][t]);
                 }
                 System.out.println("");
             }
@@ -443,16 +429,16 @@ public class main6pembuatanfungsi {
     }
 
     public static void getSortingMhs() {
-        for (int a = 0; a < tampilanData[0]; a++) {
-            for (int b = 0; b < tampilanData[0]; b++)
-                if (tamMaSis[a][0].compareTo(tamMaSis[b][0]) < 0) {
+        for (int a = 0; a < masMaSis.length; a++) {
+            for (int b = 0; b < masMaSis.length; b++)
+                if (masMaSis[a][0].compareTo(masMaSis[b][0]) < 0) {
                     for (int v = 0; v < bio.length; v++) {
-                        tempMhs = tamMaSis[a][v];
-                        tamMaSis[a][v] = tamMaSis[b][v];
-                        tamMaSis[b][v] = tempMhs;
+                        tempMhs = masMaSis[a][v];
+                        masMaSis[a][v] = masMaSis[b][v];
+                        masMaSis[b][v] = tempMhs;
                     }
-                    for (int vv = 0; vv < tampilanData[1]; vv++) {
-                        for (int z = 0; z < bagian.length; z++) {
+                    for (int vv = 0; vv < masNil.length; vv++) {
+                        for (int z = 0; z < masNil.length; z++) {
                             tempNilai = tamNil[a][vv][z];
                             tamNil[a][vv][z] = tamNil[b][vv][z];
                             tamNil[b][vv][z] = tempNilai;
