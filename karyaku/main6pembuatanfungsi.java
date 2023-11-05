@@ -141,7 +141,7 @@ public class main6pembuatanfungsi {
     }
 
     public static void getTambahRuangMhs() {
-        String tamMaSis[][] = new String[masMaSis.length + 1][3];
+        String tamMaSis[][] = new String[masMaSis.length + 1][bio.length];
         for (int r = 0; r < masMaSis.length; r++) {
             for (int l = 0; l < bio.length; l++) {
                 tamMaSis[r][l] = masMaSis[r][l];
@@ -160,33 +160,32 @@ public class main6pembuatanfungsi {
             }
             System.out.println("");
         }
+        valid = true;
         while (valid) {
-            System.out.println("ketik t jika ingin keluar");
+            System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
             repeat[0] = scStr.nextLine();
             if (repeat[0].equalsIgnoreCase("t")) {
                 valid = false;
                 getBiodata();
-                ;
+            } else if (repeat[0].equalsIgnoreCase("r")) {
+                valid = false;
+                getTambahRuangMhs();
             }
         }
     }
 
     public static void getKurangiRuangMhs() {
-        
+
         if (masMaSis.length == 0) {
             System.out.println("Biodata tidak tersedia");
         } else {
-            String tamMaSis[][] = new String[masMaSis.length - 1][3];
+            String tamMaSis[][] = new String[masMaSis.length - 1][bio.length];
             getSortingMhs();
 
             for (int q = 0; q < masMaSis.length; q++) {
-                System.out.printf("%-3d|.\t|", q + 1);
-                for (int t = 0; t < bio.length; t++) {
-                    System.out.printf(" %-6s|%-10s|", bio[t], masMaSis[q][t]);
-                }
-                System.out.println("");
+                System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, bio[0], masMaSis[q][0]);
             }
-            System.out.print("Masukkan angka atau nama : ");
+            System.out.print("pilih angka atau nama\n(T) jika ingin keluar\nMasukkan : ");
             choice[3] = scStr.nextLine();
             for (i4 = 0; i4 < masMaSis.length; i4++) {
                 if (choice[3].equalsIgnoreCase(masMaSis[i4][0])) {
@@ -220,17 +219,22 @@ public class main6pembuatanfungsi {
                     }
                     System.out.println("");
                 }
+            } else if (choice[3].equalsIgnoreCase("t")) {
+                getBiodata();
             } else {
                 System.out.println("tidak valid");
             }
         }
         valid = true;
         while (valid) {
-            System.out.println("ketik t jika ingin keluar");
+            System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
             repeat[0] = scStr.nextLine();
             if (repeat[0].equalsIgnoreCase("t")) {
                 valid = false;
                 getBiodata();
+            } else if (repeat[0].equalsIgnoreCase("r")) {
+                valid = false;
+                getKurangiRuangMhs();
             }
         }
     }
@@ -301,12 +305,8 @@ public class main6pembuatanfungsi {
         System.out.printf("Masukkan %s : ", bio[ambilAngka[1]]);
         masMaSis[ambilAngka[0]][ambilAngka[1]] = scStr.nextLine();
         getSortingMhs();
-        for (int q = 0; q < masMaSis.length; q++) {
-            System.out.printf("%-3d|.\t|", q + 1);
-            for (int t = 0; t < bio.length; t++) {
-                System.out.printf(" %-6s|%-10s|", bio[t], masMaSis[q][t]);
-            }
-            System.out.println("");
+        for (int t = 0; t < bio.length; t++) {
+            System.out.printf("| %-5d| %-10s| %-10s|\n", t + 1, bio[t], masMaSis[ambilAngka[0]][t]);
         }
         while (valid) {
             System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
@@ -320,7 +320,6 @@ public class main6pembuatanfungsi {
             }
         }
     }
-
     public static void getLihatMhs() {
         if (masMaSis.length == 0) {
             System.out.println("Biodata tidak tersedia");
