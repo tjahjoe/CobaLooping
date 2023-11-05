@@ -187,21 +187,25 @@ public class main6pembuatanfungsi {
                 }
                 System.out.println("");
             }
-            System.out.print("Masukkan angka : ");
-            penguranganInput = scInt.nextInt();
-            penguranganInput -= 1;
-
-            if (penguranganInput < 0
-                    || masMaSis.length < penguranganInput + 1) {
-                System.out.println("tidak valid");
-            } else {
+            System.out.print("Masukkan angka atau nama : ");
+            choice[4] = scStr.nextLine();
+            for (i4 = 0; i4 < masMaSis.length; i4++) {
+                if (choice[4].equalsIgnoreCase(masMaSis[i4][0])) {
+                    ambilAngka[0] = i4;
+                } else if (choice[4]
+                        .equalsIgnoreCase(intToStr[0] = String.valueOf(i4 + 1))) {
+                    ambilAngka[0] = i4;
+                }
+            }
+            if (choice[4].equalsIgnoreCase(masMaSis[ambilAngka[0]][0]) || choice[4].equalsIgnoreCase(
+                    intToStr[0] = String.valueOf(ambilAngka[0] + 1))) {
                 for (int vv = 0; vv < masMatKul.length; vv++) {
                     for (int z = 0; z < bagian.length; z++) {
-                        tamNil[penguranganInput][vv][z] = 0;
+                        tamNil[ambilAngka[0]][vv][z] = 0;
                     }
                 }
                 for (int xo = 0; xo < bio.length; xo++) {
-                    masMaSis[penguranganInput][xo] = "~";
+                    masMaSis[ambilAngka[0]][xo] = "~";
                 }
                 getSortingMhs();
                 for (int r = 0; r < tamMaSis.length; r++) {
@@ -217,7 +221,8 @@ public class main6pembuatanfungsi {
                     }
                     System.out.println("");
                 }
-
+            } else {
+                System.out.println("tidak valid");
             }
         }
         while (valid) {
@@ -242,21 +247,29 @@ public class main6pembuatanfungsi {
                 }
                 System.out.println("");
             }
-            System.out.print("Masukkan angka : ");
-            penguranganInput = scInt.nextInt();
-            penguranganInput -= 1;
-            if (penguranganInput <= -2
-                    || masMaSis.length < penguranganInput + 1) {
-                System.out.println("tidak valid");
-            } else {
+            System.out.print("Masukkan angka atau nama : ");
+            choice[4] = scStr.nextLine();
+            for (i4 = 0; i4 < masMaSis.length; i4++) {
+                if (choice[4].equalsIgnoreCase(masMaSis[i4][0])) {
+                    ambilAngka[0] = i4;
+                } else if (choice[4]
+                        .equalsIgnoreCase(intToStr[0] = String.valueOf(i4 + 1))) {
+                    ambilAngka[0] = i4;
+                }
+            }
+            if (choice[4].equalsIgnoreCase(masMaSis[ambilAngka[0]][0]) || choice[4].equalsIgnoreCase(
+                    intToStr[0] = String.valueOf(ambilAngka[0] + 1))) {
                 for (int vv = 0; vv < masMatKul.length; vv++) {
                     for (int z = 0; z < bagian.length; z++) {
-                        tamNil[penguranganInput][vv][z] = 0;
+                        tamNil[ambilAngka[0]][vv][z] = 0;
                     }
+                }
+                for (int t = 0; t < bio.length; t++) {
+                    System.out.printf("|%-5d| %-10s| %-10s|\n",t+1, bio[t], masMaSis[ambilAngka[0]][t]);
                 }
                 for (int j = 0; j < bio.length; j++) {
                     System.out.printf("Masukkan %s : ", bio[j]);
-                    masMaSis[penguranganInput][j] = scStr.nextLine();
+                    masMaSis[ambilAngka[0]][j] = scStr.nextLine();
                 }
                 getSortingMhs();
                 for (int q = 0; q < masMaSis.length; q++) {
@@ -266,6 +279,8 @@ public class main6pembuatanfungsi {
                     }
                     System.out.println("");
                 }
+            } else {
+                System.out.println("tidak valid");
             }
         }
         while (valid) {

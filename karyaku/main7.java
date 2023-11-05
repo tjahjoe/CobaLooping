@@ -847,7 +847,7 @@ public class main7 {
                                                         repeat[5] = scStr.nextLine();
                                                     } else if (choice[3]
                                                             .equalsIgnoreCase(intToStr[3] = String.valueOf(zi + 1))) {
-                                                        tamNil[ambilAngka[1]][ambilAngka[1]][4] = 0;
+                                                        tamNil[ambilAngka[1]][ambilAngka[1]][4] = 0;// ada kesalahan
                                                         tamNil[ambilAngka[1]][zi][0] = 0;
                                                     }
                                                 }
