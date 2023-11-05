@@ -109,16 +109,12 @@ public class main6pembuatanfungsi {
                 .println("1. Tambah Ruang\n2. Kurangi Ruang\n3. Ubah Mata Kuliah\n4. Lihat Mata Kuliah\n5. Keluar");
         choice[1] = scStr.nextLine();
         if (choice[1].equalsIgnoreCase("1")) {
-            valid = true;
             getTambahRuangMatkul();
         } else if (choice[1].equalsIgnoreCase("2")) {
-            valid = true;
             getKurangiRuangMatkul();
         } else if (choice[1].equalsIgnoreCase("3")) {
-            valid = true;
             getUbahMatkul();
         } else if (choice[1].equalsIgnoreCase("4")) {
-            valid = true;
             getLihatMatkul();
         } else if (choice[1].equalsIgnoreCase("5")) {
             getRangkaDosen();
