@@ -88,11 +88,9 @@ public class main6pembuatanfungsi {
         System.out.println("1. Tambah Ruang\n2. Kurangi Ruang\n3. Ubah Biodata\n4. Lihat Biodata\n5. Keluar");
         choice[1] = scStr.nextLine();
         if (choice[1].equalsIgnoreCase("1")) {
-            valid = true;
             // System.out.println("\033[H\033[2J");
             getTambahRuangMhs();
         } else if (choice[1].equalsIgnoreCase("2")) {
-            valid = true;
             getKurangiRuangMhs();
         } else if (choice[1].equalsIgnoreCase("3")) {
             valid = true;
@@ -164,8 +162,8 @@ public class main6pembuatanfungsi {
         }
         while (valid) {
             System.out.println("ketik t jika ingin keluar");
-            repeat[6] = scStr.nextLine();
-            if (repeat[6].equalsIgnoreCase("t")) {
+            repeat[0] = scStr.nextLine();
+            if (repeat[0].equalsIgnoreCase("t")) {
                 valid = false;
                 getBiodata();
                 ;
@@ -174,6 +172,7 @@ public class main6pembuatanfungsi {
     }
 
     public static void getKurangiRuangMhs() {
+        
         if (masMaSis.length == 0) {
             System.out.println("Biodata tidak tersedia");
         } else {
@@ -188,16 +187,16 @@ public class main6pembuatanfungsi {
                 System.out.println("");
             }
             System.out.print("Masukkan angka atau nama : ");
-            choice[4] = scStr.nextLine();
+            choice[3] = scStr.nextLine();
             for (i4 = 0; i4 < masMaSis.length; i4++) {
-                if (choice[4].equalsIgnoreCase(masMaSis[i4][0])) {
+                if (choice[3].equalsIgnoreCase(masMaSis[i4][0])) {
                     ambilAngka[0] = i4;
-                } else if (choice[4]
+                } else if (choice[3]
                         .equalsIgnoreCase(intToStr[0] = String.valueOf(i4 + 1))) {
                     ambilAngka[0] = i4;
                 }
             }
-            if (choice[4].equalsIgnoreCase(masMaSis[ambilAngka[0]][0]) || choice[4].equalsIgnoreCase(
+            if (choice[3].equalsIgnoreCase(masMaSis[ambilAngka[0]][0]) || choice[3].equalsIgnoreCase(
                     intToStr[0] = String.valueOf(ambilAngka[0] + 1))) {
                 for (int vv = 0; vv < masMatKul.length; vv++) {
                     for (int z = 0; z < bagian.length; z++) {
@@ -225,10 +224,11 @@ public class main6pembuatanfungsi {
                 System.out.println("tidak valid");
             }
         }
+        valid = true;
         while (valid) {
             System.out.println("ketik t jika ingin keluar");
-            repeat[6] = scStr.nextLine();
-            if (repeat[6].equalsIgnoreCase("t")) {
+            repeat[0] = scStr.nextLine();
+            if (repeat[0].equalsIgnoreCase("t")) {
                 valid = false;
                 getBiodata();
             }
@@ -241,54 +241,82 @@ public class main6pembuatanfungsi {
         } else {
             getSortingMhs();
             for (int q = 0; q < masMaSis.length; q++) {
-                System.out.printf("%-3d|.\t|", q + 1);
-                for (int t = 0; t < bio.length; t++) {
-                    System.out.printf(" %-6s|%-10s|", bio[t], masMaSis[q][t]);
-                }
-                System.out.println("");
+                System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, bio[0], masMaSis[q][0]);
             }
-            System.out.print("Masukkan angka atau nama : ");
-            choice[4] = scStr.nextLine();
+            System.out.print("pilih angka atau nama\n(T) jika ingin keluar\nMasukkan : ");
+            choice[3] = scStr.nextLine();
             for (i4 = 0; i4 < masMaSis.length; i4++) {
-                if (choice[4].equalsIgnoreCase(masMaSis[i4][0])) {
+                if (choice[3].equalsIgnoreCase(masMaSis[i4][0])) {
                     ambilAngka[0] = i4;
-                } else if (choice[4]
+                } else if (choice[3]
                         .equalsIgnoreCase(intToStr[0] = String.valueOf(i4 + 1))) {
                     ambilAngka[0] = i4;
                 }
             }
-            if (choice[4].equalsIgnoreCase(masMaSis[ambilAngka[0]][0]) || choice[4].equalsIgnoreCase(
+            if (choice[3].equalsIgnoreCase(masMaSis[ambilAngka[0]][0]) || choice[3].equalsIgnoreCase(
                     intToStr[0] = String.valueOf(ambilAngka[0] + 1))) {
-                for (int vv = 0; vv < masMatKul.length; vv++) {
-                    for (int z = 0; z < bagian.length; z++) {
-                        tamNil[ambilAngka[0]][vv][z] = 0;
-                    }
-                }
-                for (int t = 0; t < bio.length; t++) {
-                    System.out.printf("|%-5d| %-10s| %-10s|\n",t+1, bio[t], masMaSis[ambilAngka[0]][t]);
-                }
-                for (int j = 0; j < bio.length; j++) {
-                    System.out.printf("Masukkan %s : ", bio[j]);
-                    masMaSis[ambilAngka[0]][j] = scStr.nextLine();
-                }
-                getSortingMhs();
-                for (int q = 0; q < masMaSis.length; q++) {
-                    System.out.printf("%-3d|.\t|", q + 1);
-                    for (int t = 0; t < bio.length; t++) {
-                        System.out.printf(" %-6s|%-10s|", bio[t], masMaSis[q][t]);
-                    }
-                    System.out.println("");
-                }
+                getUbahMhs1();
+            } else if (choice[3].equalsIgnoreCase("t")) {
+                getBiodata();
             } else {
                 System.out.println("tidak valid");
+                getUbahMhs();
             }
         }
+    }
+
+    public static void getUbahMhs1() {
+        for (int vv = 0; vv < masMatKul.length; vv++) {
+            for (int z = 0; z < bagian.length; z++) {
+                tamNil[ambilAngka[0]][vv][z] = 0;
+            }
+        }
+        for (int t = 0; t < bio.length; t++) {
+            System.out.printf("| %-5d| %-10s| %-10s|\n", t + 1, bio[t], masMaSis[ambilAngka[0]][t]);
+        }
+        System.out.print("pilih angka atau nama\n" +
+                "(T) jika ingin keluar\n" +
+                "Masukkan : ");
+        choice[4] = scStr.nextLine();
+        for (i4 = 0; i4 < bio.length; i4++) {
+            if (choice[4].equalsIgnoreCase(bio[i4])) {
+                ambilAngka[1] = i4;
+            } else if (choice[4]
+                    .equalsIgnoreCase(intToStr[0] = String.valueOf(i4 + 1))) {
+                ambilAngka[1] = i4;
+            }
+        }
+        if (choice[4].equalsIgnoreCase(bio[ambilAngka[1]]) || choice[4].equalsIgnoreCase(
+                intToStr[0] = String.valueOf(ambilAngka[1] + 1))) {
+            getUbahMhs2();
+        } else if (choice[4].equalsIgnoreCase("t")) {
+            getUbahMhs();
+        } else {
+            System.out.println("tidak valid");
+            getUbahMhs1();
+        }
+    }
+
+    public static void getUbahMhs2() {
+        System.out.printf("Masukkan %s : ", bio[ambilAngka[1]]);
+        masMaSis[ambilAngka[0]][ambilAngka[1]] = scStr.nextLine();
+        getSortingMhs();
+        for (int q = 0; q < masMaSis.length; q++) {
+            System.out.printf("%-3d|.\t|", q + 1);
+            for (int t = 0; t < bio.length; t++) {
+                System.out.printf(" %-6s|%-10s|", bio[t], masMaSis[q][t]);
+            }
+            System.out.println("");
+        }
         while (valid) {
-            System.out.println("ketik t jika ingin keluar");
-            repeat[6] = scStr.nextLine();
-            if (repeat[6].equalsIgnoreCase("t")) {
+            System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
+            repeat[0] = scStr.nextLine();
+            if (repeat[0].equalsIgnoreCase("t")) {
                 valid = false;
-                getBiodata();
+                getUbahMhs();
+            } else if (repeat[0].equalsIgnoreCase("r")) {
+                valid = false;
+                getUbahMhs1();
             }
         }
     }
@@ -306,10 +334,11 @@ public class main6pembuatanfungsi {
                 System.out.println("");
             }
         }
+        valid = true;
         while (valid) {
             System.out.println("ketik t jika ingin keluar");
-            repeat[6] = scStr.nextLine();
-            if (repeat[6].equalsIgnoreCase("t")) {
+            repeat[0] = scStr.nextLine();
+            if (repeat[0].equalsIgnoreCase("t")) {
                 valid = false;
                 getBiodata();
             }
@@ -330,8 +359,8 @@ public class main6pembuatanfungsi {
         }
         while (valid) {
             System.out.println("ketik t jika ingin keluar");
-            repeat[6] = scStr.nextLine();
-            if (repeat[6].equalsIgnoreCase("t")) {
+            repeat[0] = scStr.nextLine();
+            if (repeat[0].equalsIgnoreCase("t")) {
                 valid = false;
                 getMatkul();
             }
@@ -373,8 +402,8 @@ public class main6pembuatanfungsi {
         }
         while (valid) {
             System.out.println("ketik t jika ingin keluar");
-            repeat[6] = scStr.nextLine();
-            if (repeat[6].equalsIgnoreCase("t")) {
+            repeat[0] = scStr.nextLine();
+            if (repeat[0].equalsIgnoreCase("t")) {
                 valid = false;
                 getMatkul();
             }
@@ -412,8 +441,8 @@ public class main6pembuatanfungsi {
         }
         while (valid) {
             System.out.println("ketik t jika ingin keluar");
-            repeat[6] = scStr.nextLine();
-            if (repeat[6].equalsIgnoreCase("t")) {
+            repeat[0] = scStr.nextLine();
+            if (repeat[0].equalsIgnoreCase("t")) {
                 valid = false;
                 getMatkul();
             }
@@ -432,8 +461,8 @@ public class main6pembuatanfungsi {
         }
         while (valid) {
             System.out.println("ketik t jika ingin keluar");
-            repeat[6] = scStr.nextLine();
-            if (repeat[6].equalsIgnoreCase("t")) {
+            repeat[0] = scStr.nextLine();
+            if (repeat[0].equalsIgnoreCase("t")) {
                 valid = false;
                 getMatkul();
             }
