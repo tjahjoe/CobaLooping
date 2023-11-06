@@ -139,7 +139,7 @@ public class main6pembuatanfungsi {
         } else if (choice[1].equalsIgnoreCase("2")) {
             getLihatNilai();
         } else if (choice[1].equalsIgnoreCase("3")) {
-            //getLihatRanking();
+            getLihatRanking();
         } else if (choice[1].equalsIgnoreCase("4")) {
             getRangkaDosen();
         } else {
@@ -857,46 +857,76 @@ public class main6pembuatanfungsi {
             }
         }
     }
-    
 
-    // public static void getLihatRanking() {
-    //     double tamNil[][][] = new double[masMaSis.length][masMatKul.length + 1][bagian.length];
-    //     for (int vv = 0; vv < masMaSis.length; vv++) {
-    //         for (int z = 0; z < masMatKul.length; z++) {
-    //             for (int i = 0; i < bagian.length; i++) {
-    //                 tamNil[vv][z][i] = masNil[vv][z][i];
-    //             }
-    //         }
-    //     }
-    //     getSortingMhs();
-    //     for (int zz = 0; zz < masMatKul.length; zz++) {
-    //         for (int z = 0; z < bagian.length - 1; z++) {
-    //             tamNil[ambilAngka[0]][zz][4] += tamNil[ambilAngka[0]][zz][z];
-    //         }
-    //         System.out.printf("Nilai %s %s: %f\n", bagian[4],
-    //                 masMatKul[zz],
-    //                 tamNil[ambilAngka[0]][zz][4] / (bagian.length - 1));
-    //         tamNil[ambilAngka[0]][masMatKul.length][0] += (tamNil[ambilAngka[0]][zz][4]
-    //                 / (bagian.length - 1));
-    //     }
-    //     masNil = tamNil;
-    //     getSortingRanking();
-    //     for (int i = 0; i < masMaSis.length; i++) {
-    //         System.out.printf(i + 1 + ". %s : %f\n", masMaSis[i][0], masNil[i][zi][0]);
-    //     }
-    //     getSortingMhs();
-    //     valid = true;
-    //     while (valid) {
-    //         System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
-    //         repeat[0] = scStr.nextLine();
-    //         if (repeat[0].equalsIgnoreCase("t")) {
-    //             valid = false;
-    //             getNilai();
-    //         } else {
-    //             getLihatRanking();
-    //         }
-    //     }
-    // }
+    public static void getLihatRanking() {
+        String tamMaSis[][] = new String[masMaSis.length][bio.length];
+        double tamNil[][][] = new double[masMaSis.length][masMatKul.length + 1][bagian.length];
+        for (int r = 0; r < masMaSis.length; r++) {
+            for (int l = 0; l < bio.length; l++) {
+                tamMaSis[r][l] = masMaSis[r][l];
+            }
+        }
+        for (int vv = 0; vv < masMaSis.length; vv++) {
+            for (int z = 0; z < masMatKul.length; z++) {
+                for (int i = 0; i < bagian.length; i++) {
+                    tamNil[vv][z][i] = masNil[vv][z][i];
+                }
+            }
+        }
+        getSortingMhs();
+        for (int i = 0; i < masMaSis.length; i++) {
+            for (int zz = 0; zz < masMatKul.length; zz++) {
+                for (int z = 0; z < bagian.length - 1; z++) {
+                    tamNil[i][zz][4] += tamNil[i][zz][z];
+                }
+                tamNil[i][masMatKul.length][0] += (tamNil[i][zz][4]
+                        / (bagian.length - 1));
+               
+            } tamNil[i][masMatKul.length][0] /= (masMatKul.length * 25);
+        }
+        for (int a = 0; a < masMaSis.length; a++) {
+            for (int b = 0; b < masMaSis.length; b++) {
+                if (tamNil[a][masMatKul.length][0] > tamNil[b][masMatKul.length][0]) {
+
+                    tempNilai = tamNil[a][masMatKul.length][0];
+                    tamNil[a][masMatKul.length][0] = tamNil[b][masMatKul.length][0];
+                    tamNil[b][masMatKul.length][0] = tempNilai;
+
+                    tempMhs = tamMaSis[a][0];
+                    tamMaSis[a][0] = tamMaSis[b][0];
+                    tamMaSis[b][0] = tempMhs;
+                } else if (tamNil[a][masMatKul.length][0] == tamNil[b][masMatKul.length][0]) {
+                    if (tamMaSis[a][0].compareTo(tamMaSis[b][0]) < 0) {
+                        tempNilai = tamNil[a][masMatKul.length][0];
+                        tamNil[a][masMatKul.length][0] = tamNil[b][masMatKul.length][0];
+                        tamNil[b][masMatKul.length][0] = tempNilai;
+
+                        tempMhs = tamMaSis[a][0];
+                        tamMaSis[a][0] = tamMaSis[b][0];
+                        tamMaSis[b][0] = tempMhs;
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < masMaSis.length; i++) {
+            System.out.printf(i + 1 + ". %s : %f\n", tamMaSis[i][0], tamNil[i][masMatKul.length][0]);
+        }
+        for (int i = 0; i < masMaSis.length; i++) {
+            System.out.printf(i + 1 + ". %s : %f\n", tamMaSis[i][0], tamNil[i][masMatKul.length][0]);
+        }
+        valid = true;
+        while (valid) {
+            System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
+            repeat[0] = scStr.nextLine();
+            if (repeat[0].equalsIgnoreCase("t")) {
+                valid = false;
+                getNilai();
+            } else {
+                getLihatRanking();
+            }
+        }
+    }
 
     public static void getSortingMhs() {
         for (int a = 0; a < masMaSis.length; a++) {
@@ -938,30 +968,30 @@ public class main6pembuatanfungsi {
         }
     }
 
-    // public static void getSortingRanking() {
-    //     for (int a = 0; a < masMaSis.length; a++) {
-    //         for (int b = 0; b < masMaSis.length; b++) {
-    //             if (masNil[a][zi][0] > masNil[b][zi][0]) {
-    //                 tempNilai = masNil[a][zi][0];
-    //                 masNil[a][zi][0] = masNil[b][zi][0];
-    //                 masNil[b][zi][0] = tempNilai;
+    public static void getSortingRanking() {
+        for (int a = 0; a < masMaSis.length; a++) {
+            for (int b = 0; b < masMaSis.length; b++) {
+                if (masNil[a][masMatKul.length][0] > masNil[b][masMatKul.length][0]) {
+                    tempNilai = masNil[a][masMatKul.length][0];
+                    masNil[a][masMatKul.length][0] = masNil[b][masMatKul.length][0];
+                    masNil[b][masMatKul.length][0] = tempNilai;
 
-    //                 tempMhs = masMaSis[a][0];
-    //                 masMaSis[a][0] = masMaSis[b][0];
-    //                 masMaSis[b][0] = tempMhs;
-    //             } else if (masNil[a][zi][0] > masNil[b][zi][0]) {
-    //                 if (masMaSis[a][0].compareTo(masMaSis[b][0]) < 0) {
-    //                     tempNilai = masNil[a][zi][0];
-    //                     masNil[a][zi][0] = masNil[b][zi][0];
-    //                     masNil[b][zi][0] = tempNilai;
+                    tempMhs = masMaSis[a][0];
+                    masMaSis[a][0] = masMaSis[b][0];
+                    masMaSis[b][0] = tempMhs;
+                } else if (masNil[a][masMatKul.length][0] > masNil[b][masMatKul.length][0]) {
+                    if (masMaSis[a][0].compareTo(masMaSis[b][0]) < 0) {
+                        tempNilai = masNil[a][masMatKul.length][0];
+                        masNil[a][masMatKul.length][0] = masNil[b][masMatKul.length][0];
+                        masNil[b][masMatKul.length][0] = tempNilai;
 
-    //                     tempMhs = masMaSis[a][0];
-    //                     masMaSis[a][0] = masMaSis[b][0];
-    //                     masMaSis[b][0] = tempMhs;
-    //                 }
-    //             }
+                        tempMhs = masMaSis[a][0];
+                        masMaSis[a][0] = masMaSis[b][0];
+                        masMaSis[b][0] = tempMhs;
+                    }
+                }
 
-    //         }
-    //     }
-    // }
+            }
+        }
+    }
 }
