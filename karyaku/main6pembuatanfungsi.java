@@ -881,8 +881,9 @@ public class main6pembuatanfungsi {
                 }
                 tamNil[i][masMatKul.length][0] += (tamNil[i][zz][4]
                         / (bagian.length - 1));
-               
-            } tamNil[i][masMatKul.length][0] /= (masMatKul.length * 25);
+
+            }
+            tamNil[i][masMatKul.length][0] /= (masMatKul.length * 25);
         }
         for (int a = 0; a < masMaSis.length; a++) {
             for (int b = 0; b < masMaSis.length; b++) {
@@ -909,9 +910,6 @@ public class main6pembuatanfungsi {
             }
         }
 
-        for (int i = 0; i < masMaSis.length; i++) {
-            System.out.printf(i + 1 + ". %s : %f\n", tamMaSis[i][0], tamNil[i][masMatKul.length][0]);
-        }
         for (int i = 0; i < masMaSis.length; i++) {
             System.out.printf(i + 1 + ". %s : %f\n", tamMaSis[i][0], tamNil[i][masMatKul.length][0]);
         }
