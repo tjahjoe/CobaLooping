@@ -40,11 +40,19 @@ public class main6pembuatanfungsi {
     public static int za = 0;
     public static int zi = 0;
     public static String bagian[] = { "Tugas", "Kuis", "UTS", "UAS", "Akhir" };
-    public static double masNil[][][] = { { { 100, 98, 100, 89 }, { 85, 83, 89, 81 } },
-            { { 88, 87, 89, 82 }, { 90, 82, 84, 88 } },
-            { { 90, 91, 89, 88 }, { 93, 85, 83, 89 } },
-            { { 99, 86, 98, 85 }, { 88, 86, 86, 83 } } };
-    public static double tamNil[][][] = new double[100][100][5];
+    public static double masNil[][][] = {
+            { { 100, 98, 100, 89, 0 }, { 85, 83, 89, 81, 0 }, { 100, 98, 100, 89, 0 }, { 100, 98, 100, 89, 0 },
+                    { 100, 98, 100, 89, 0 }, { 100, 98, 100, 89, 0 }, { 100, 98, 100, 89, 0 },
+                    { 100, 98, 100, 89, 0 } },
+            { { 88, 87, 89, 82, 0 }, { 90, 82, 84, 88, 0 }, { 90, 82, 84, 88, 0 }, { 90, 82, 84, 88, 0 },
+                    { 90, 82, 84, 88, 0 },
+                    { 90, 82, 84, 88, 0 }, { 90, 82, 84, 88, 0 }, { 90, 82, 84, 88, 0 } },
+            { { 90, 91, 89, 88, 0 }, { 93, 85, 83, 89, 0 }, { 93, 85, 83, 89, 0 }, { 93, 85, 83, 89, 0 },
+                    { 93, 85, 83, 89, 0 },
+                    { 93, 85, 83, 89, 0 }, { 93, 85, 83, 89, 0 }, { 93, 85, 83, 89, 0 } },
+            { { 99, 86, 98, 85, 0 }, { 88, 86, 86, 83, 0 }, { 99, 86, 98, 85, 0 }, { 99, 86, 98, 85, 0 },
+                    { 99, 86, 98, 85, 0 },
+                    { 99, 86, 98, 85, 0 }, { 99, 86, 98, 85, 0 }, { 99, 86, 98, 85, 0 } } };
 
     public static void main(String[] args) {
         for (int r = 0; r < masDos.length; r++) {
@@ -60,13 +68,13 @@ public class main6pembuatanfungsi {
         // for (int k = 0; k < masMatKul.length; k++) {
         // tamMatKul[k] = masMatKul[k];
         // }
-        for (int k = 0; k < masNil.length; k++) {
-            for (int c = 0; c < masNil[0].length; c++) {
-                for (int z = 0; z < masNil[0][0].length; z++) {
-                    tamNil[k][c][z] = masNil[k][c][z];
-                }
-            }
-        }
+        // for (int k = 0; k < masNil.length; k++) {
+        // for (int c = 0; c < masNil[0].length; c++) {
+        // for (int z = 0; z < masNil[0][0].length; z++) {
+        // tamNil[k][c][z] = masNil[k][c][z];
+        // }
+        // }
+        // }
         getRangkaDosen();
     }
 
@@ -141,9 +149,17 @@ public class main6pembuatanfungsi {
 
     public static void getTambahRuangMhs() {
         String tamMaSis[][] = new String[masMaSis.length + 1][bio.length];
+        double tamNil[][][] = new double[masMaSis.length + 1][masMatKul.length][bagian.length];
         for (int r = 0; r < masMaSis.length; r++) {
             for (int l = 0; l < bio.length; l++) {
                 tamMaSis[r][l] = masMaSis[r][l];
+            }
+        }
+        for (int vv = 0; vv < masMaSis.length; vv++) {
+            for (int z = 0; z < masMatKul.length; z++) {
+                for (int i = 0; i < bagian.length; i++) {
+                    tamNil[vv][z][i] = masNil[vv][z][i];
+                }
             }
         }
         getSortingMhs();
@@ -155,6 +171,7 @@ public class main6pembuatanfungsi {
             tamMaSis[masMaSis.length][j] = scStr.nextLine();
         }
         masMaSis = tamMaSis;
+        masNil = tamNil;
         getSortingMhs();
         for (int q = 0; q < masMaSis.length; q++) {
             System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, bio[0], masMaSis[q][0]);
@@ -188,6 +205,8 @@ public class main6pembuatanfungsi {
             }
         } else {
             String tamMaSis[][] = new String[masMaSis.length - 1][bio.length];
+            double tamNil[][][] = new double[masMaSis.length - 1][masMatKul.length][bagian.length];
+
             getSortingMhs();
 
             for (int q = 0; q < masMaSis.length; q++) {
@@ -207,7 +226,7 @@ public class main6pembuatanfungsi {
                     intToStr[0] = String.valueOf(ambilAngka[0] + 1))) {
                 for (int vv = 0; vv < masMatKul.length; vv++) {
                     for (int z = 0; z < bagian.length; z++) {
-                        tamNil[ambilAngka[0]][vv][z] = 0;
+                        masNil[ambilAngka[0]][vv][z] = 0;
                     }
                 }
                 for (int xo = 0; xo < bio.length; xo++) {
@@ -219,7 +238,15 @@ public class main6pembuatanfungsi {
                         tamMaSis[r][l] = masMaSis[r][l];
                     }
                 }
+                for (int vv = 0; vv < tamMaSis.length; vv++) {
+                    for (int z = 0; z < masMatKul.length; z++) {
+                        for (int i = 0; i < bagian.length; i++) {
+                            tamNil[vv][z][i] = masNil[vv][z][i];
+                        }
+                    }
+                }
                 masMaSis = tamMaSis;
+                masNil = tamNil;
                 for (int q = 0; q < masMaSis.length; q++) {
                     System.out.printf("%-3d|.\t|", q + 1);
                     for (int t = 0; t < bio.length; t++) {
@@ -290,7 +317,7 @@ public class main6pembuatanfungsi {
     public static void getUbahMhs1() {
         for (int vv = 0; vv < masMatKul.length; vv++) {
             for (int z = 0; z < bagian.length; z++) {
-                tamNil[ambilAngka[0]][vv][z] = 0;
+                masNil[ambilAngka[0]][vv][z] = 0;
             }
         }
         for (int t = 0; t < bio.length; t++) {
@@ -386,12 +413,21 @@ public class main6pembuatanfungsi {
 
     public static void getTambahRuangMatkul() {
         String tamMatKul[] = new String[masMatKul.length + 1];
+        double tamNil[][][] = new double[masMaSis.length][masMatKul.length + 1][bagian.length];
         for (int k = 0; k < masMatKul.length; k++) {
             tamMatKul[k] = masMatKul[k];
+        }
+        for (int vv = 0; vv < masMaSis.length; vv++) {
+            for (int z = 0; z < masMatKul.length; z++) {
+                for (int i = 0; i < bagian.length; i++) {
+                    tamNil[vv][z][i] = masNil[vv][z][i];
+                }
+            }
         }
         System.out.print("Masukkan Mata Kuliah : ");
         tamMatKul[masMatKul.length] = scStr.nextLine();
         masMatKul = tamMatKul;
+        masNil = tamNil;
         getSortingMatkul();
         for (int t = 0; t < masMatKul.length; t++) {
             System.out.printf("%d.\t: %s\n", t + 1, masMatKul[t]);
@@ -424,6 +460,7 @@ public class main6pembuatanfungsi {
             }
         } else {
             String tamMatKul[] = new String[masMatKul.length - 1];
+            double tamNil[][][] = new double[masMaSis.length][masMatKul.length - 1][bagian.length];
             getSortingMatkul();
             for (int t = 0; t < masMatKul.length; t++) {
                 System.out.printf("%d.\t: %s\n", t + 1, masMatKul[t]);
@@ -442,7 +479,7 @@ public class main6pembuatanfungsi {
                     intToStr[0] = String.valueOf(ambilAngka[0] + 1))) {
                 for (int vv = 0; vv < masMaSis.length; vv++) {
                     for (int z = 0; z < bagian.length; z++) {
-                        tamNil[vv][ambilAngka[0]][z] = 0;
+                        masNil[vv][ambilAngka[0]][z] = 0;
                     }
                 }
                 masMatKul[ambilAngka[0]] = "~";
@@ -450,7 +487,15 @@ public class main6pembuatanfungsi {
                 for (int k = 0; k < tamMatKul.length; k++) {
                     tamMatKul[k] = masMatKul[k];
                 }
+                for (int vv = 0; vv < masMaSis.length; vv++) {
+                    for (int z = 0; z < tamMatKul.length; z++) {
+                        for (int i = 0; i < bagian.length; i++) {
+                            tamNil[vv][z][i] = masNil[vv][z][i];
+                        }
+                    }
+                }
                 masMatKul = tamMatKul;
+                masNil = tamNil;
                 for (int t = 0; t < masMatKul.length; t++) {
                     System.out.printf("%d.\t: %s\n", t + 1, masMatKul[t]);
                 }
@@ -489,6 +534,9 @@ public class main6pembuatanfungsi {
             }
         } else {
             getSortingMatkul();
+            for (int t = 0; t < masMatKul.length; t++) {
+                System.out.printf("%d.\t: %s\n", t + 1, masMatKul[t]);
+            }
             System.out.print("pilih angka atau nama\n(T) jika ingin keluar\nMasukkan : ");
             choice[3] = scStr.nextLine();
             for (i4 = 0; i4 < masMatKul.length; i4++) {
@@ -503,7 +551,7 @@ public class main6pembuatanfungsi {
                     intToStr[0] = String.valueOf(ambilAngka[0] + 1))) {
                 for (int vv = 0; vv < masMaSis.length; vv++) {
                     for (int z = 0; z < bagian.length; z++) {
-                        tamNil[vv][penguranganInput][z] = 0;
+                        masNil[vv][penguranganInput][z] = 0;
                     }
                 }
                 System.out.print("Masukkan Mata Kuliah : ");
@@ -531,7 +579,6 @@ public class main6pembuatanfungsi {
                 }
             }
         }
-
     }
 
     public static void getLihatMatkul() {
@@ -576,6 +623,14 @@ public class main6pembuatanfungsi {
                 }
             }
         } else {
+            double tamNil[][][] = new double[masMaSis.length][masMatKul.length][bagian.length];
+            for (int vv = 0; vv < masMaSis.length; vv++) {
+                for (int z = 0; z < masMatKul.length; z++) {
+                    for (int i = 0; i < bagian.length; i++) {
+                        tamNil[vv][z][i] = masNil[vv][z][i];
+                    }
+                }
+            }
             getSortingMhs();
             for (int q = 0; q < masMaSis.length; q++) {
                 System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, bio[0], masMaSis[q][0]);
@@ -631,11 +686,20 @@ public class main6pembuatanfungsi {
             }
             if (choice[4].equalsIgnoreCase(masMatKul[ambilAngka[1]]) || choice[4].equalsIgnoreCase(
                     intToStr[0] = String.valueOf(ambilAngka[1] + 1))) {
+                double tamNil[][][] = new double[masMaSis.length][masMatKul.length][bagian.length];
+                for (int vv = 0; vv < masMaSis.length; vv++) {
+                    for (int z = 0; z < masMatKul.length; z++) {
+                        for (int i = 0; i < bagian.length; i++) {
+                            tamNil[vv][z][i] = masNil[vv][z][i];
+                        }
+                    }
+                }
                 for (int z = 0; z < bagian.length - 1; z++) {
                     System.out.printf("Masukkan Nilai %s : ", bagian[z]);
                     tamNil[ambilAngka[0]][ambilAngka[1]][z] = scInt.nextInt();
                     tamNil[ambilAngka[0]][ambilAngka[1]][4] += tamNil[ambilAngka[0]][ambilAngka[1]][z];
                 }
+                masNil = tamNil;
             } else if (choice[4].equalsIgnoreCase("t")) {
                 getTambahNilai();
             } else {
@@ -672,9 +736,9 @@ public class main6pembuatanfungsi {
                     }
                     for (int vv = 0; vv < masMatKul.length; vv++) {
                         for (int z = 0; z < bagian.length; z++) {
-                            tempNilai = tamNil[a][vv][z];
-                            tamNil[a][vv][z] = tamNil[b][vv][z];
-                            tamNil[b][vv][z] = tempNilai;
+                            tempNilai = masNil[a][vv][z];
+                            masNil[a][vv][z] = masNil[b][vv][z];
+                            masNil[b][vv][z] = tempNilai;
                         }
                     }
                 }
@@ -691,9 +755,9 @@ public class main6pembuatanfungsi {
 
                     for (int vv = 0; vv < masMaSis.length; vv++) {
                         for (int z = 0; z < bagian.length; z++) {
-                            tempNilai = tamNil[vv][a][z];
-                            tamNil[vv][a][z] = tamNil[vv][b][z];
-                            tamNil[vv][b][z] = tempNilai;
+                            tempNilai = masNil[vv][a][z];
+                            masNil[vv][a][z] = masNil[vv][b][z];
+                            masNil[vv][b][z] = tempNilai;
                         }
                     }
                 }
