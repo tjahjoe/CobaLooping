@@ -888,8 +888,8 @@ public class main6pembuatanfungsi {
             tamNil[i][masMatKul.length][0] /= (masMatKul.length * 25);
         }
         for (int a = 0; a < masMaSis.length; a++) {
-            for (int b = 0; b < masMaSis.length; b++) {
-                if (tamNil[a][masMatKul.length][0] > tamNil[b][masMatKul.length][0]) {
+            for (int b = a; b < masMaSis.length; b++) {
+                if (tamNil[a][masMatKul.length][0] < tamNil[b][masMatKul.length][0]) {
 
                     tempNilai = tamNil[a][masMatKul.length][0];
                     tamNil[a][masMatKul.length][0] = tamNil[b][masMatKul.length][0];
@@ -899,7 +899,7 @@ public class main6pembuatanfungsi {
                     tamMaSis[a][0] = tamMaSis[b][0];
                     tamMaSis[b][0] = tempMhs;
                 } else if (tamNil[a][masMatKul.length][0] == tamNil[b][masMatKul.length][0]) {
-                    if (tamMaSis[a][0].compareTo(tamMaSis[b][0]) < 0) {
+                    if (tamMaSis[a][0].compareTo(tamMaSis[b][0]) > 0) {
                         tempNilai = tamNil[a][masMatKul.length][0];
                         tamNil[a][masMatKul.length][0] = tamNil[b][masMatKul.length][0];
                         tamNil[b][masMatKul.length][0] = tempNilai;
