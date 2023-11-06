@@ -89,6 +89,8 @@ public class main6pembuatanfungsi {
             getNilai();
         } else if (choice[2].equalsIgnoreCase("4")) {
             System.out.println("terimakasih");
+        } else {
+            getRangkaDosen();
         }
     }
 
@@ -447,7 +449,7 @@ public class main6pembuatanfungsi {
     }
 
     public static void getKurangiRuangMatkul() {
-        if (masMaSis.length == 0) {
+        if (masMatKul.length == 0) {
             System.out.println("Mata Kuliah tidak tersedia");
             valid = true;
             while (valid) {
@@ -666,7 +668,7 @@ public class main6pembuatanfungsi {
                 repeat[0] = scStr.nextLine();
                 if (repeat[0].equalsIgnoreCase("t")) {
                     valid = false;
-                    getBiodata();
+                    getTambahNilai();
                 }
             }
         } else {
@@ -699,6 +701,7 @@ public class main6pembuatanfungsi {
                     tamNil[ambilAngka[0]][ambilAngka[1]][z] = scInt.nextInt();
                     tamNil[ambilAngka[0]][ambilAngka[1]][4] += tamNil[ambilAngka[0]][ambilAngka[1]][z];
                 }
+                tamNil[ambilAngka[0]][ambilAngka[1]][4] = 0;
                 masNil = tamNil;
             } else if (choice[4].equalsIgnoreCase("t")) {
                 getTambahNilai();
@@ -763,7 +766,7 @@ public class main6pembuatanfungsi {
                 getNilai();
             } else {
                 System.out.println("tidak valid");
-                getTambahNilai();
+                getLihatNilai();
             }
         }
     }
@@ -838,7 +841,7 @@ public class main6pembuatanfungsi {
                 tamNil[ambilAngka[0]][masMatKul.length][0] = 0;
                 masNil = tamNil;
             } else if (choice[4].equalsIgnoreCase("t")) {
-                getTambahNilai();
+                getLihatNilai();
             } else {
                 System.out.println("tidak valid");
                 getTambahNilai1();
@@ -881,7 +884,6 @@ public class main6pembuatanfungsi {
                 }
                 tamNil[i][masMatKul.length][0] += (tamNil[i][zz][4]
                         / (bagian.length - 1));
-
             }
             tamNil[i][masMatKul.length][0] /= (masMatKul.length * 25);
         }
@@ -915,7 +917,7 @@ public class main6pembuatanfungsi {
         }
         valid = true;
         while (valid) {
-            System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
+            System.out.println("ketik\n(T) jika ingin keluar");
             repeat[0] = scStr.nextLine();
             if (repeat[0].equalsIgnoreCase("t")) {
                 valid = false;
