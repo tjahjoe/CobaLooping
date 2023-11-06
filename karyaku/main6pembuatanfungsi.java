@@ -137,9 +137,9 @@ public class main6pembuatanfungsi {
         if (choice[1].equalsIgnoreCase("1")) {
             getTambahNilai();
         } else if (choice[1].equalsIgnoreCase("2")) {
-
+            getLihatNilai();
         } else if (choice[1].equalsIgnoreCase("3")) {
-
+            //getLihatRanking();
         } else if (choice[1].equalsIgnoreCase("4")) {
             getRangkaDosen();
         } else {
@@ -721,9 +721,182 @@ public class main6pembuatanfungsi {
         }
     }
 
-    public static void getTambahNilai2() {
-
+    public static void getLihatNilai() {
+        if (masMaSis.length == 0) {
+            System.out.println("Biodata tidak tersedia");
+            valid = true;
+            while (valid) {
+                System.out.println("ketik\n(T) jika ingin keluar");
+                repeat[0] = scStr.nextLine();
+                if (repeat[0].equalsIgnoreCase("t")) {
+                    valid = false;
+                    getNilai();
+                }
+            }
+        } else {
+            double tamNil[][][] = new double[masMaSis.length][masMatKul.length][bagian.length];
+            for (int vv = 0; vv < masMaSis.length; vv++) {
+                for (int z = 0; z < masMatKul.length; z++) {
+                    for (int i = 0; i < bagian.length; i++) {
+                        tamNil[vv][z][i] = masNil[vv][z][i];
+                    }
+                }
+            }
+            getSortingMhs();
+            for (int q = 0; q < masMaSis.length; q++) {
+                System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, bio[0], masMaSis[q][0]);
+            }
+            System.out.print("pilih angka atau nama\n(T) jika ingin keluar\nMasukkan : ");
+            choice[3] = scStr.nextLine();
+            for (i4 = 0; i4 < masMaSis.length; i4++) {
+                if (choice[3].equalsIgnoreCase(masMaSis[i4][0])) {
+                    ambilAngka[0] = i4;
+                } else if (choice[3]
+                        .equalsIgnoreCase(intToStr[0] = String.valueOf(i4 + 1))) {
+                    ambilAngka[0] = i4;
+                }
+            }
+            if (choice[3].equalsIgnoreCase(masMaSis[ambilAngka[0]][0]) || choice[3].equalsIgnoreCase(
+                    intToStr[0] = String.valueOf(ambilAngka[0] + 1))) {
+                getLihatNilai1();
+            } else if (choice[3].equalsIgnoreCase("t")) {
+                getNilai();
+            } else {
+                System.out.println("tidak valid");
+                getTambahNilai();
+            }
+        }
     }
+
+    public static void getLihatNilai1() {
+        if (masMatKul.length == 0) {
+            System.out.println("Mata Kuliah tidak tersedia");
+            valid = true;
+            while (valid) {
+                System.out.println("ketik\n(T) jika ingin keluar");
+                repeat[0] = scStr.nextLine();
+                if (repeat[0].equalsIgnoreCase("t")) {
+                    valid = false;
+                    getBiodata();
+                }
+            }
+        } else {
+            getSortingMatkul();
+            for (int t = 0; t < masMatKul.length; t++) {
+                System.out.printf("%d.\t: %s\n", t + 1, masMatKul[t]);
+            }
+            System.out.printf("%d.\t: IPS\n", masMatKul.length + 1);
+            System.out.print("pilih angka atau nama\n(T) jika ingin keluar\nMasukkan : ");
+            choice[4] = scStr.nextLine();
+            for (i4 = 0; i4 < masMatKul.length; i4++) {
+                if (choice[4].equalsIgnoreCase(masMatKul[i4])) {
+                    ambilAngka[1] = i4;
+                } else if (choice[4]
+                        .equalsIgnoreCase(intToStr[0] = String.valueOf(i4 + 1))) {
+                    ambilAngka[1] = i4;
+                }
+            }
+            if (choice[4].equalsIgnoreCase(masMatKul[ambilAngka[1]]) || choice[4].equalsIgnoreCase(
+                    intToStr[0] = String.valueOf(ambilAngka[1] + 1))) {
+                for (int z = 0; z < bagian.length - 1; z++) {
+                    System.out.printf("Nilai %s %s : %f\n", bagian[z],
+                            masMatKul[ambilAngka[1]],
+                            masNil[ambilAngka[0]][ambilAngka[1]][z]);
+                    masNil[ambilAngka[0]][ambilAngka[1]][4] += masNil[ambilAngka[0]][ambilAngka[1]][z];
+                }
+                System.out.printf("Nilai %s %s: %f\n", bagian[4],
+                        masMatKul[ambilAngka[1]],
+                        masNil[ambilAngka[0]][ambilAngka[1]][4]
+                                / (bagian.length - 1));
+                masNil[ambilAngka[0]][ambilAngka[1]][4] = 0;
+            } else if (choice[4].equalsIgnoreCase("IPS")
+                    || choice[4].equalsIgnoreCase(intToStr[1] = String.valueOf(masMatKul.length + 1))) {
+                double tamNil[][][] = new double[masMaSis.length][masMatKul.length + 1][bagian.length];
+                for (int vv = 0; vv < masMaSis.length; vv++) {
+                    for (int z = 0; z < masMatKul.length; z++) {
+                        for (int i = 0; i < bagian.length; i++) {
+                            tamNil[vv][z][i] = masNil[vv][z][i];
+                        }
+                    }
+                }
+                getSortingMhs();
+                for (int zz = 0; zz < masMatKul.length; zz++) {
+                    for (int z = 0; z < bagian.length - 1; z++) {
+                        tamNil[ambilAngka[0]][zz][4] += tamNil[ambilAngka[0]][zz][z];
+                    }
+                    System.out.printf("Nilai %s %s: %f\n", bagian[4],
+                            masMatKul[zz],
+                            tamNil[ambilAngka[0]][zz][4] / (bagian.length - 1));
+                    tamNil[ambilAngka[0]][masMatKul.length][0] += (tamNil[ambilAngka[0]][zz][4]
+                            / (bagian.length - 1));
+                }
+                System.out.println(
+                        tamNil[ambilAngka[0]][masMatKul.length][0] / (masMatKul.length * 25));
+                for (int i = 0; i < masMatKul.length; i++) {
+                    tamNil[ambilAngka[0]][i][4] = 0;
+                }
+                tamNil[ambilAngka[0]][masMatKul.length][0] = 0;
+                masNil = tamNil;
+            } else if (choice[4].equalsIgnoreCase("t")) {
+                getTambahNilai();
+            } else {
+                System.out.println("tidak valid");
+                getTambahNilai1();
+            }
+            valid = true;
+            while (valid) {
+                System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
+                repeat[0] = scStr.nextLine();
+                if (repeat[0].equalsIgnoreCase("t")) {
+                    valid = false;
+                    getLihatNilai();
+                } else if (repeat[0].equalsIgnoreCase("r")) {
+                    valid = false;
+                    getLihatNilai1();
+                }
+            }
+        }
+    }
+    
+
+    // public static void getLihatRanking() {
+    //     double tamNil[][][] = new double[masMaSis.length][masMatKul.length + 1][bagian.length];
+    //     for (int vv = 0; vv < masMaSis.length; vv++) {
+    //         for (int z = 0; z < masMatKul.length; z++) {
+    //             for (int i = 0; i < bagian.length; i++) {
+    //                 tamNil[vv][z][i] = masNil[vv][z][i];
+    //             }
+    //         }
+    //     }
+    //     getSortingMhs();
+    //     for (int zz = 0; zz < masMatKul.length; zz++) {
+    //         for (int z = 0; z < bagian.length - 1; z++) {
+    //             tamNil[ambilAngka[0]][zz][4] += tamNil[ambilAngka[0]][zz][z];
+    //         }
+    //         System.out.printf("Nilai %s %s: %f\n", bagian[4],
+    //                 masMatKul[zz],
+    //                 tamNil[ambilAngka[0]][zz][4] / (bagian.length - 1));
+    //         tamNil[ambilAngka[0]][masMatKul.length][0] += (tamNil[ambilAngka[0]][zz][4]
+    //                 / (bagian.length - 1));
+    //     }
+    //     masNil = tamNil;
+    //     getSortingRanking();
+    //     for (int i = 0; i < masMaSis.length; i++) {
+    //         System.out.printf(i + 1 + ". %s : %f\n", masMaSis[i][0], masNil[i][zi][0]);
+    //     }
+    //     getSortingMhs();
+    //     valid = true;
+    //     while (valid) {
+    //         System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
+    //         repeat[0] = scStr.nextLine();
+    //         if (repeat[0].equalsIgnoreCase("t")) {
+    //             valid = false;
+    //             getNilai();
+    //         } else {
+    //             getLihatRanking();
+    //         }
+    //     }
+    // }
 
     public static void getSortingMhs() {
         for (int a = 0; a < masMaSis.length; a++) {
@@ -764,4 +937,31 @@ public class main6pembuatanfungsi {
             }
         }
     }
+
+    // public static void getSortingRanking() {
+    //     for (int a = 0; a < masMaSis.length; a++) {
+    //         for (int b = 0; b < masMaSis.length; b++) {
+    //             if (masNil[a][zi][0] > masNil[b][zi][0]) {
+    //                 tempNilai = masNil[a][zi][0];
+    //                 masNil[a][zi][0] = masNil[b][zi][0];
+    //                 masNil[b][zi][0] = tempNilai;
+
+    //                 tempMhs = masMaSis[a][0];
+    //                 masMaSis[a][0] = masMaSis[b][0];
+    //                 masMaSis[b][0] = tempMhs;
+    //             } else if (masNil[a][zi][0] > masNil[b][zi][0]) {
+    //                 if (masMaSis[a][0].compareTo(masMaSis[b][0]) < 0) {
+    //                     tempNilai = masNil[a][zi][0];
+    //                     masNil[a][zi][0] = masNil[b][zi][0];
+    //                     masNil[b][zi][0] = tempNilai;
+
+    //                     tempMhs = masMaSis[a][0];
+    //                     masMaSis[a][0] = masMaSis[b][0];
+    //                     masMaSis[b][0] = tempMhs;
+    //                 }
+    //             }
+
+    //         }
+    //     }
+    // }
 }
