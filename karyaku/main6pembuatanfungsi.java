@@ -37,8 +37,6 @@ public class main6pembuatanfungsi {
     // tambah nilai
     public static int i4 = 0;
     public static int i3 = 0;
-    public static int za = 0;
-    public static int zi = 0;
     public static String bagian[] = { "Tugas", "Kuis", "UTS", "UAS", "Akhir" };
     public static double masNil[][][] = {
             { { 100, 98, 100, 89, 0 }, { 85, 83, 89, 81, 0 }, { 100, 98, 100, 89, 0 }, { 100, 98, 100, 89, 0 },
@@ -78,6 +76,10 @@ public class main6pembuatanfungsi {
         getRangkaDosen();
     }
 
+    public static void getEnd() {
+        System.out.println("terimakasih");
+    }
+
     public static void getRangkaDosen() {
         System.out.println("1. Mahasiswa\n2. Mata Kuliah\n3. Nilai\n4. Keluar");
         choice[2] = scStr.nextLine();
@@ -89,6 +91,7 @@ public class main6pembuatanfungsi {
             getNilai();
         } else if (choice[2].equalsIgnoreCase("4")) {
             System.out.println("terimakasih");
+            valid = false;// ayo temukan solusi tanpa membuat fungsi
         } else {
             getRangkaDosen();
         }
@@ -105,7 +108,6 @@ public class main6pembuatanfungsi {
         } else if (choice[1].equalsIgnoreCase("3")) {
             getUbahMhs();
         } else if (choice[1].equalsIgnoreCase("4")) {
-            valid = true;
             getLihatMhs();
         } else if (choice[1].equalsIgnoreCase("5")) {
             getRangkaDosen();
@@ -348,7 +350,7 @@ public class main6pembuatanfungsi {
             System.out.println("tidak valid");
             getUbahMhs1();
         }
-        valid = true;
+        valid = true;// solusi pindah ke if
         while (valid) {
             System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
             repeat[0] = scStr.nextLine();
@@ -501,23 +503,24 @@ public class main6pembuatanfungsi {
                 for (int t = 0; t < masMatKul.length; t++) {
                     System.out.printf("%d.\t: %s\n", t + 1, masMatKul[t]);
                 }
+                valid = true;
+                while (valid) {
+                    System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
+                    repeat[0] = scStr.nextLine();
+                    if (repeat[0].equalsIgnoreCase("t")) {
+                        valid = false;
+                        getMatkul();
+                    } else if (repeat[0].equalsIgnoreCase("r")) {
+                        valid = false;
+                        getKurangiRuangMatkul();
+                    }
+                }
             } else if (choice[3].equalsIgnoreCase("t")) {
                 getBiodata();
             } else {
                 System.out.println("tidak valid");
             }
-            valid = true;
-            while (valid) {
-                System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
-                repeat[0] = scStr.nextLine();
-                if (repeat[0].equalsIgnoreCase("t")) {
-                    valid = false;
-                    getMatkul();
-                } else if (repeat[0].equalsIgnoreCase("r")) {
-                    valid = false;
-                    getKurangiRuangMatkul();
-                }
-            }
+
         }
 
     }
@@ -562,23 +565,23 @@ public class main6pembuatanfungsi {
                 for (int t = 0; t < masMatKul.length; t++) {
                     System.out.printf("%d.\t: %s\n", t + 1, masMatKul[t]);
                 }
+                valid = true;
+                while (valid) {
+                    System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
+                    repeat[0] = scStr.nextLine();
+                    if (repeat[0].equalsIgnoreCase("t")) {
+                        valid = false;
+                        getMatkul();
+                        ;
+                    } else if (repeat[0].equalsIgnoreCase("r")) {
+                        valid = false;
+                        getUbahMatkul();
+                    }
+                }
             } else if (choice[3].equalsIgnoreCase("t")) {
                 getMatkul();
             } else {
                 System.out.println("tidak valid");
-            }
-            valid = true;
-            while (valid) {
-                System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
-                repeat[0] = scStr.nextLine();
-                if (repeat[0].equalsIgnoreCase("t")) {
-                    valid = false;
-                    getMatkul();
-                    ;
-                } else if (repeat[0].equalsIgnoreCase("r")) {
-                    valid = false;
-                    getUbahMatkul();
-                }
             }
         }
     }
@@ -703,23 +706,23 @@ public class main6pembuatanfungsi {
                 }
                 tamNil[ambilAngka[0]][ambilAngka[1]][4] = 0;
                 masNil = tamNil;
+                valid = true;
+                while (valid) {
+                    System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
+                    repeat[0] = scStr.nextLine();
+                    if (repeat[0].equalsIgnoreCase("t")) {
+                        valid = false;
+                        getTambahNilai();
+                    } else if (repeat[0].equalsIgnoreCase("r")) {
+                        valid = false;
+                        getTambahNilai1();
+                    }
+                }
             } else if (choice[4].equalsIgnoreCase("t")) {
                 getTambahNilai();
             } else {
                 System.out.println("tidak valid");
                 getTambahNilai1();
-            }
-            valid = true;
-            while (valid) {
-                System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
-                repeat[0] = scStr.nextLine();
-                if (repeat[0].equalsIgnoreCase("t")) {
-                    valid = false;
-                    getTambahNilai();
-                } else if (repeat[0].equalsIgnoreCase("r")) {
-                    valid = false;
-                    getTambahNilai1();
-                }
             }
         }
     }
@@ -840,23 +843,23 @@ public class main6pembuatanfungsi {
                 }
                 tamNil[ambilAngka[0]][masMatKul.length][0] = 0;
                 masNil = tamNil;
+                valid = true;
+                while (valid) {
+                    System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
+                    repeat[0] = scStr.nextLine();
+                    if (repeat[0].equalsIgnoreCase("t")) {
+                        valid = false;
+                        getLihatNilai();
+                    } else if (repeat[0].equalsIgnoreCase("r")) {
+                        valid = false;
+                        getLihatNilai1();
+                    }
+                }
             } else if (choice[4].equalsIgnoreCase("t")) {
                 getLihatNilai();
             } else {
                 System.out.println("tidak valid");
                 getTambahNilai1();
-            }
-            valid = true;
-            while (valid) {
-                System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
-                repeat[0] = scStr.nextLine();
-                if (repeat[0].equalsIgnoreCase("t")) {
-                    valid = false;
-                    getLihatNilai();
-                } else if (repeat[0].equalsIgnoreCase("r")) {
-                    valid = false;
-                    getLihatNilai1();
-                }
             }
         }
     }
