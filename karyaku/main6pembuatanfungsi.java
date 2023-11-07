@@ -13,6 +13,7 @@ public class main6pembuatanfungsi {
     public static String tempMatkul = "";
     public static String tempMhs = "";
     public static double tempNilai = 0;
+    public static double presentase[] = { 0.2, 0.2, 0.3, 0.3 };
     public static boolean valid = true;
 
     // tambah dosen
@@ -702,8 +703,10 @@ public class main6pembuatanfungsi {
                 for (int z = 0; z < bagian.length - 1; z++) {
                     System.out.printf("Masukkan Nilai %s : ", bagian[z]);
                     tamNil[ambilAngka[0]][ambilAngka[1]][z] = scInt.nextInt();
+                    tamNil[ambilAngka[0]][ambilAngka[1]][z] *= presentase[z];
                     tamNil[ambilAngka[0]][ambilAngka[1]][4] += tamNil[ambilAngka[0]][ambilAngka[1]][z];
                 }
+                System.out.printf("Nilai %s : %f\n",bagian[4], tamNil[ambilAngka[0]][ambilAngka[1]][4]);
                 tamNil[ambilAngka[0]][ambilAngka[1]][4] = 0;
                 masNil = tamNil;
                 valid = true;
@@ -808,13 +811,25 @@ public class main6pembuatanfungsi {
                     System.out.printf("Nilai %s %s : %f\n", bagian[z],
                             masMatKul[ambilAngka[1]],
                             masNil[ambilAngka[0]][ambilAngka[1]][z]);
+                    masNil[ambilAngka[0]][ambilAngka[1]][z] *= presentase[z];
                     masNil[ambilAngka[0]][ambilAngka[1]][4] += masNil[ambilAngka[0]][ambilAngka[1]][z];
                 }
                 System.out.printf("Nilai %s %s: %f\n", bagian[4],
                         masMatKul[ambilAngka[1]],
-                        masNil[ambilAngka[0]][ambilAngka[1]][4]
-                                / (bagian.length - 1));
+                        masNil[ambilAngka[0]][ambilAngka[1]][4]);
                 masNil[ambilAngka[0]][ambilAngka[1]][4] = 0;
+                valid = true;
+                while (valid) {
+                    System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
+                    repeat[0] = scStr.nextLine();
+                    if (repeat[0].equalsIgnoreCase("t")) {
+                        valid = false;
+                        getLihatNilai();
+                    } else if (repeat[0].equalsIgnoreCase("r")) {
+                        valid = false;
+                        getLihatNilai1();
+                    }
+                }
             } else if (choice[4].equalsIgnoreCase("IPS")
                     || choice[4].equalsIgnoreCase(intToStr[1] = String.valueOf(masMatKul.length + 1))) {
                 double tamNil[][][] = new double[masMaSis.length][masMatKul.length + 1][bagian.length];

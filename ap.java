@@ -1,150 +1,129 @@
+
 import java.util.Scanner;
 
 public class ap {
     public static void main(String[] args) {
-        Scanner scflt = new Scanner(System.in);
-        float tgBing1, tgCtps, tgDaspro, tgK3, tgKti, tgMatDas, tgPancasila, tgPrakDaspro;
-        float qzBing1, qzCtps, qzDaspro, qzK3, qzKti, qzMatDas, qzPancasila, qzPrakDaspro;
-        float utsBing1, utsCtps, utsDaspro, utsK3, utsKti, utsMatDas, utsPancasila, utsPrakDaspro;
-        float uasBing1, uasCtps, uasDaspro, uasK3, uasKti, uasMatDas, uasPancasila, uasPrakDaspro;
-        float nlAkhirBing1 = 0, nlAkhirCtps = 0, nlAkhirDaspro = 0, nlAkhirK3 = 0, nlAkhirKti = 0, nlAkhirMatDas = 0,
-                nlAkhirPancasila = 0, nlAkhirPrakDaspro = 0;
-        float t = 0.2f, qz = 0.2f, ut = 0.3f, ua = 0.3f, ips;
-        int pNl = scflt.nextInt();
-        switch (pNl) {
-            case 1:
-                System.out.print("Masukkan nilai rata-rata Tugas Bahasa Inggris 1 : ");
-                tgBing1 = scflt.nextFloat();
-                System.out.print("Masukkan nilai QUIZ Bahasa Inggris 1 : ");
-                qzBing1 = scflt.nextFloat();
-                System.out.print("Masukkan nilai UTS Bahasa Inggris 1 : ");
-                utsBing1 = scflt.nextFloat();
-                System.out.print("Masukkan nilai UAS Bahasa Inggris 1 : ");
-                uasBing1 = scflt.nextFloat();
 
-                nlAkhirBing1 = (tgBing1 * t) + (qzBing1 * qz) + (utsBing1 * ut)
-                        + (uasBing1 * ua);
+        // Mahasiswa0
+        String nama = "";
+        String jenisKelamin = "";
+        String tempatTanggalLahir = "";
+        String agama = "";
+        String alamat = "";
+        String ayah = "";
+        String ibu = "";
+        String pekerjaanAyah = "";
+        String pekerjaanIbu = "";
+        String alamatOrtu = "";
+        String nomorTelepon = "";
+        String nomorTeleponAyah = "";
+        String nomorTeleponIbu = "";
+        String NIM = "";
+        String biodata[] = { "Nama", "Jenis Kelamin", "Tempat Tanggal Lahir", "Agama", "Alamat", "Ayah", "Ibu",
+                "Pekerjaan Ayah", "Pekerjaan Ibu", "Alamat Orangtuaa", "Nomor Telepon", "Nomor Telepon Ayah",
+                "Nomor Telepon Ibu", "NIM" };
 
-                System.out.printf("Nilai Akhir Bahasa Inggris : %.2f", nlAkhirBing1);
-                break;
-            case 2:
-                System.out.print("Masukkan nilai rata-rata Tugas CTPS : ");
-                tgCtps = scflt.nextFloat();
-                System.out.print("Masukkan nilai QUIZ CTPS : ");
-                qzCtps = scflt.nextFloat();
-                System.out.print("Masukkan nilai UTS CTPS : ");
-                uasCtps = scflt.nextFloat();
-                System.out.print("Masukkan nilai UAS CTPS : ");
-                utsCtps = scflt.nextFloat();
+        String mahasiswa[][] = { { "Agnes Rahmania", "Perempuan", "Malang, 17 Agustus 2005", "Islam",
+                "Jalan KH. Wachid Hasyim", "Suratno", "Siti", "Wirausaha", "Ibu rumah tangga",
+                "Jalan KH. Wachid Hasyim", "087796996123", "081754637827", "081627127456", "2541720001" },
+                { "Farhan Malik", "Laki-laki", "Surabaya, 28 Oktober 2004", "Islam",
+                        "Jalan Cendana No. 45, RT 03 RW 07, Kelurahan Damai Sejahtera, Kota Sejati", "Budi Santoso",
+                        "Rina Wati", "Wiraswasta", "Dokter",
+                        "Jalan Cendana No. 45, RT 03 RW 07, Kelurahan Damai Sejahtera, Kota Sejati", "081765357863",
+                        "082345165263", "2541720002" },
+                { "Aditya Pratama", "Laki-laki", "Bandung, 15 Agustus 2005", "Islam",
+                        "Perumahan Harapan Baru Blok E2 No. 56, Kelurahan Indah, Kota Bahagia", "Eko Susanto",
+                        "Maya Anggraini", "Insinyur", "Pengacara",
+                        "Perumahan Harapan Baru Blok E2 No. 56, Kelurahan Indah, Kota Bahagia", "081767357863",
+                        "087683938232", "2541720003" },
+                { "Dinda Fitriani", "Perempuan", "Semarang, 12 Mei 1990", "Islam",
+                        "Komplek Permata Indah Blok D3 No. 34, Kelurahan Sejahtera, Kota Damai", "Hendra Wijaya",
+                        "Siti Fatimah", "Pengusaha", "Dosen",
+                        "Komplek Permata Indah Blok D3 No. 34, Kelurahan Sejahtera, Kota Damai", "085845112341",
+                        "089213421145", "2541720022" } };
 
-                nlAkhirCtps = (tgCtps * t) + (qzCtps * qz) + (utsCtps * ut) + (uasCtps * ua);
+        // mahasiswa4
+        String nama4 = "Faisal Cahyono";
+        String jenisKelamin4 = "Laki-laki";
+        String tempatTanggalLahir4 = "Yogyakarta, 25 Maret 1988";
+        String agama4 = "Islam";
+        String alamat4 = "Jalan Dahlia No. 67, RT 08 RW 03, Kelurahan Indah, Kota Sejahtera";
+        String ayah4 = "Joko Santoso";
+        String ibu4 = "Ani Wulandari";
+        String pekerjaanAyah4 = "Wiraswasta";
+        String pekerjaanibu4 = "Pengacara";
+        String alamatOrtu4 = "Jalan Dahlia No. 67, RT 08 RW 03, Kelurahan Indah, Kota Sejahtera";
+        String nomorTeleponAyah4 = "085433163416";
+        String nomorTeleponIbu4 = "081543235731";
+        String NIM4 = "2541720012";
 
-                System.out.printf("Nilai Akhir Critical Thinking and Problem Solving : %.2f",
-                        nlAkhirCtps);
-                break;
-            case 3:
-                System.out.print("Masukkan nilai rata-rata Tugas Daspro : ");
-                tgDaspro = scflt.nextFloat();
-                System.out.print("Masukkan nilai QUIZ Daspro : ");
-                qzDaspro = scflt.nextFloat();
-                System.out.print("Masukkan nilai UTS Daspro : ");
-                utsDaspro = scflt.nextFloat();
-                System.out.print("Masukkan nilai UAS Daspro : ");
-                uasDaspro = scflt.nextFloat();
+        // mahasiswa5
+        String nama5 = "Indah Permata";
+        String jenisKelamin5 = "Perempuan";
+        String tempatTanggalLahir5 = "Medan, 18 Juli 1994";
+        String agama5 = "Islam";
+        String alamat5 = "Jalan Mawar No. 45, RT 12 RW 05, Kelurahan Damai, Kota Bahagia";
+        String ayah5 = "Rudi Pratama";
+        String ibu5 = " Dewi Safitri";
+        String pekerjaanAyah5 = "Arsitek";
+        String pekerjaanibu5 = "Penyanyi";
+        String alamatOrtu5 = "Jalan Mawar No. 45, RT 12 RW 05, Kelurahan Damai, Kota Bahagia";
+        String nomorTeleponAyah5 = "081325233112";
+        String nomorTeleponIbu5 = "087433211243";
+        String NIM5 = "2541720013";
 
-                nlAkhirDaspro = (tgDaspro * t) + (qzDaspro * qz) + (utsDaspro * ut)
-                        + (uasDaspro * ua);
+        Scanner scStr = new Scanner(System.in);
+        Scanner scInt = new Scanner(System.in);
 
-                System.out.printf("Nilai Akhir Dasar Pemrograman : %.2f", nlAkhirDaspro);
-                break;
-            case 4:
-                System.out.println("Keselamatan Kesehatan Kerja");
-                System.out.print("Masukkan nilai rata-rata K3 : ");
-                tgK3 = scflt.nextFloat();
-                System.out.print("Masukkan nilai QUIZ K3 : ");
-                qzK3 = scflt.nextFloat();
-                System.out.print("Masukkan nilai UTS K3 : ");
-                utsK3 = scflt.nextFloat();
-                System.out.print("Masukkan nilai UAS K3 : ");
-                uasK3 = scflt.nextFloat();
+        System.out.print("Nama:");
+        nama = scStr.nextLine();
+        System.out.print("NIM: ");
+        NIM = scInt.nextLine();
+        System.out.print("Tempat tanggal lahir: ");
+        tempatTanggalLahir = scStr.nextLine();
+        System.out.print("Agama: ");
+        agama = scStr.nextLine();
+        System.out.print("jenis kelamin: (L/P)");
+        jenisKelamin = scStr.nextLine();
+        System.out.print("nomor telepon: ");
+        nomorTelepon = scStr.nextLine();
+        System.out.print("alamat: ");
+        alamat = scStr.nextLine();
 
-                nlAkhirK3 = (tgK3 * t) + (qzK3 * qz) + (utsK3 * ut) + (uasK3 * ua);
+        // data keluarga
+        System.out.print("Nama ayah:");
+        ayah = scStr.nextLine();
+        System.out.print("Nama ibu:");
+        ibu = scStr.nextLine();
+        System.out.print("Pekerjaan ayah: ");
+        pekerjaanAyah = scStr.nextLine();
+        System.out.print("Pekerjaan ibu:");
+        pekerjaanIbu = scStr.nextLine();
+        System.out.print("Alamat ortu:");
+        alamatOrtu = scStr.nextLine();
+        System.out.print("Nomor telepon ayah:");
+        nomorTeleponAyah = scStr.nextLine();
+        System.out.print("Nomor telepon ibu:");
+        nomorTeleponIbu = scStr.nextLine();
 
-                System.out.printf("Nilai Akhir Keselamatan Kesehatan Kerja : %.2f", nlAkhirK3);
-                break;
-            case 5:
-                System.out.println("Konsep Teknologi Informasi");
-                System.out.print("Masukkan nilai rata-rata KTI : ");
-                tgKti = scflt.nextFloat();
-                System.out.print("Masukkan nilai QUIZ KTI : ");
-                qzKti = scflt.nextFloat();
-                System.out.print("Masukkan nilai UTS KTI : ");
-                utsKti = scflt.nextFloat();
-                System.out.print("Masukkan nilai UAS KTI : ");
-                uasKti = scflt.nextFloat();
+        System.out.println("================================");
+        System.out.println("|            BIODATA           |");
+        System.out.println("================================");
+        System.out.println("|Nama                : " + nama);
+        System.out.println("|NIM                 : " + NIM);
+        System.out.println("|Tempat tanggal lahir: " + tempatTanggalLahir);
+        System.out.println("|Agama               : " + agama);
+        System.out.println("|jenis kelamin       : " + jenisKelamin);
+        System.out.println("|nomor telepon       : " + nomorTelepon);
+        System.out.println("|alamat              : " + alamat);
+        System.out.println("|Nama ayah           : " + ayah);
+        System.out.println("|Nama ibu            : " + ibu);
+        System.out.println("|Pekerjaan ayah      : " + pekerjaanAyah);
+        System.out.println("|Pekerjaan ibu       : " + pekerjaanIbu);
+        System.out.println("|Alamat ortu         : " + alamatOrtu);
+        System.out.println("|Nomor telepon ayah  : " + nomorTeleponAyah);
+        System.out.println("|Nomor telepon ibu   : " + nomorTeleponIbu);
 
-                nlAkhirKti = (tgKti * t) + (qzKti * qz) + (utsKti * ut) + (uasKti * ua);
-
-                System.out.printf("Nila Akhir Konsep Teknologi Informasi : %.2f", nlAkhirKti);
-                break;
-            case 6:
-                System.out.println("Matematika Dasar");
-                System.out.print("Masukkan nilai rata-rata Tugas Matdas : ");
-                tgMatDas = scflt.nextFloat();
-                System.out.print("Masukkan nilai QUIZ Matdas : ");
-                qzMatDas = scflt.nextFloat();
-                System.out.print("Masukkan nilai UTS Matdas : ");
-                utsMatDas = scflt.nextFloat();
-                System.out.print("Masukkan nilai UAS Matdas : ");
-                uasMatDas = scflt.nextFloat();
-
-                nlAkhirMatDas = (tgMatDas * t) + (qzMatDas * qz) + (utsMatDas * ut)
-                        + (uasMatDas * ua);
-
-                System.out.printf("Nilai Akhir Matematika Dasar : %.2f", nlAkhirMatDas);
-                break;
-            case 7:
-                System.out.println("Pancasila");
-                System.out.print("Masukkan nilai rata-rata Pancasila : ");
-                tgPancasila = scflt.nextFloat();
-                System.out.print("Masukkan nilai QUIZ Pancasila : ");
-                qzPancasila = scflt.nextFloat();
-                System.out.print("Masukkan nilai UTS Pancasila : ");
-                utsPancasila = scflt.nextFloat();
-                System.out.print("Masukkan nilai UAS pancasila : ");
-                uasPancasila = scflt.nextFloat();
-
-                nlAkhirPancasila = (tgPancasila * t) + (qzPancasila * qz) + (utsPancasila * ut)
-                        + (uasPancasila * ua);
-
-                System.out.printf("Nilai Akhir Pancasila : %.2f", nlAkhirPancasila);
-                break;
-            case 8:
-                System.out.print("Praktikum Dasar Pemrograman");
-                System.out.print("Masukkan nilai rata-rata PrakDaspro : ");
-                tgPrakDaspro = scflt.nextFloat();
-                System.out.print("Masukkan nilai QUIZ PrakDaspro : ");
-                qzPrakDaspro = scflt.nextFloat();
-                System.out.print("Masukkan nilai UTS PrakDaspro : ");
-                utsPrakDaspro = scflt.nextFloat();
-                System.out.print("Masukkan nilai UAS PrakDaspro : ");
-                uasPrakDaspro = scflt.nextFloat();
-
-                nlAkhirPrakDaspro = (tgPrakDaspro * t) + (qzPrakDaspro * qz)
-                        + (utsPrakDaspro * ut)
-                        + (uasPrakDaspro * ua);
-
-                System.out.printf("Nilai Akhir Praktikum Dasar Pemrograman : %.2f",
-                        nlAkhirPrakDaspro);
-                break;
-            case 9:
-                System.out.println("Indeks Prestasi Semester");
-                ips = (nlAkhirBing1 + nlAkhirCtps + nlAkhirDaspro + nlAkhirK3 + nlAkhirKti
-                        + nlAkhirMatDas
-                        + nlAkhirPancasila + nlAkhirPrakDaspro) / 20;
-                System.out.printf("Indek Prestasi Semester : %.2f", ips);
-            default:
-                break;
-        }
     }
+
 }
