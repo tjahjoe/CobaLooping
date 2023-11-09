@@ -9,38 +9,13 @@ public class array1 {
         // String a = "wahyu";
         // String b = "Rizky";
         // String c = "Cahyana";
-
-        String yha = sc.nextLine();
-        boolean oo = true;
-        String herry[] = { "Wahyu", "Rizky", "Cahyana" };
-        String ac = "Wahyu Rizky Cahyana";
-        String ad = "";
-        int i = yha.length();
-        int o = 0;
-        int z = 0;
-        int k = 0;
-
-        do {
-            if (yha.equalsIgnoreCase(String.valueOf(ac.substring(o, i)))) {
-                System.out.println("hoho");
-                // z = ac.indexOf(yha);
-                k = i;
-
-                System.out.println(k);
-            } else {
-            }
-            i++;
-            o++;
-
-        } while (i < ac.length());
-        System.out.println();
-
-        // for (int i = 0; i < herry.length; i++) {
-        // if(yha.equals(herry[i])){
-        // o = i;
-        // }
-        // }
-        // System.out.println(herry[o]);
+        String matkul[][] = { { "pancasila", "D4se2813", "2" }, { "bahasa", "Eda312Rs", "3" },
+                { "matematika", "Sda23rT4", "2" } };
+                int total = 0;
+                for (int i = 0; i < matkul.length; i++) {
+                    total += Integer.valueOf(matkul[i][2]);
+                }
+                System.out.println(total);
     }
 
 }
