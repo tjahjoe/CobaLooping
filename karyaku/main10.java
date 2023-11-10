@@ -32,6 +32,7 @@ public class main10 {
     public static String dataDosen[] = { "Nama", "Password" };
     // public static String tamMaSis[][] = new String[100][3];
     public static int penguranganInput = 0;
+
     public static double totalSks = 0;
 
     public static int tampilanData[] = new int[2];
@@ -46,19 +47,21 @@ public class main10 {
     };
     public static String bagianMatkul[] = { "Mata Kuliah", "Kode Mata Kuliah", "Persentase Nilai Tugas",
             "Persentase Nilai Kuis", "Persentase Nilai UTS", "Persentase Nilai UAS", "SKS" };
+    public static double totalIndeks[] = new double[masMaSis.length];
 
     public static double total = 0;
     // tambah nilai
     public static int i4 = 0;
     public static int i3 = 0;
     public static String bagian[] = { "Tugas", "Kuis", "UTS", "UAS", "Akhir" };
+    public static double totaRata[][][] = new double[masMaSis.length][masMatKul.length][bagian.length];
     public static double masPresentase[][] = { { 0.1, 0.2, 0.3, 0.4, 2 }, { 0.2, 0.2, 0.3, 0.3, 3 },
             { 0.2, 0.1, 0.3, 0.4, 2 },
             { 0.3, 0.4, 0.1, 0.2, 2 }, { 0.1, 0.1, 0.4, 0.4, 2 }, { 0.2, 0.2, 0.3, 0.3, 2 }, { 0.1, 0.1, 0.3, 0.5, 3 },
             { 0.2, 0.3, 0.2, 0.3, 2 } };
     public static double masNil[][][] = {
             { { 100, 98, 100, 89, 0 }, { 85, 83, 89, 81, 0 }, { 100, 98, 100, 89, 0 }, { 100, 98, 100, 89, 0 },
-                    { 100, 98, 100, 89, 0 }, { 100, 98, 100, 89, 0 }, { 100, 98, 100, 89, 0 },
+                    { 60, 60, 60, 60, 0 }, { 100, 98, 100, 89, 0 }, { 100, 98, 100, 89, 0 },
                     { 100, 98, 100, 89, 0 } },
             { { 88, 87, 89, 82, 0 }, { 90, 82, 84, 88, 0 }, { 90, 82, 84, 88, 0 }, { 90, 82, 84, 88, 0 },
                     { 90, 82, 84, 88, 0 },
@@ -1228,16 +1231,19 @@ public class main10 {
             }
         }
         getSortingMhs();
+        for (int i = 0; i < masPresentase.length; i++) {
+            totalSks += masPresentase[i][4];
+        }
         for (int i = 0; i < masMaSis.length; i++) {
             for (int zz = 0; zz < masMatKul.length; zz++) {
                 for (int z = 0; z < bagian.length - 1; z++) {
-                    tamNil[i][zz][z] *= tamPersentase[zz][z];
-                    tamNil[i][zz][4] += tamNil[i][zz][z];
+                    totaRata[i][zz][z] = tamNil[i][zz][z] * tamPersentase[zz][z];
+                    tamNil[i][zz][4] += totaRata[i][zz][z];
                 }
-                tamNil[i][masMatKul.length][0] += (tamNil[i][zz][4]);
+                coba(tamNil[i][zz][4]);
+                totalIndeks[i] += indeks * (masPresentase[zz][4] / totalSks);
             }
-            coba(tamNil[i][masMatKul.length][0]);
-            tamNil[i][masMatKul.length][0] /= (masMatKul.length * 25);
+            tamNil[i][masMatKul.length][0] = totalIndeks[i];
         }
         for (int a = 0; a < masMaSis.length; a++) {
             for (int b = a; b < masMaSis.length; b++) {
@@ -1266,6 +1272,15 @@ public class main10 {
 
         for (int i = 0; i < masMaSis.length; i++) {
             System.out.printf(i + 1 + ". %s : %.2f\n", tamMaSis[i][0], tamNil[i][masMatKul.length][0]);
+        }
+        totalSks = 0;
+        for (int i = 0; i < masMaSis.length; i++) {
+            totalIndeks[i] = 0;
+            for (int zz = 0; zz < masMatKul.length; zz++) {
+                for (int z = 0; z < bagian.length - 1; z++) {
+                    totaRata[i][zz][z] = 0;
+                }
+            }
         }
         valid = true;
         while (valid) {
@@ -1365,7 +1380,7 @@ public class main10 {
         } else if (iniBisa > 39
                 && iniBisa <= 50) {
             indeks = 1;
-        } else if (iniBisa > 0
+        } else if (iniBisa >= 0
                 && iniBisa <= 39) {
             indeks = 0;
         }
