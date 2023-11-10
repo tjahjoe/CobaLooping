@@ -29,6 +29,7 @@ public class main10 {
             { "Cahyana", "1234466", "1C" },
             { "Dizky", "1177334", "1C" } };
     public static String bio[] = { "Nama", "NIM", "kelas" };
+    public static String dataDosen[] = { "Nama", "Password" };
     // public static String tamMaSis[][] = new String[100][3];
     public static int penguranganInput = 0;
     public static double totalSks = 0;
@@ -41,7 +42,7 @@ public class main10 {
             { "Dasar Pemrograman", "Mt3o17j8" }, { "Keselamtan Kesehatan Kerja", "Ps4q52b9" },
             { "Konsep Teknologi Informasi", "Kk6r73z8" },
             { "Matematika Dasar", "Jh5l92y7" }, { "Pancasila", "Ig4q52x9" },
-            { "Praktikum Dasar Pemrograman", "Ff6r73w8", }
+            { "Praktikum Dasar Pemrograman", "Ff6r73w8" }
     };
     public static String bagianMatkul[] = { "Mata Kuliah", "Kode Mata Kuliah", "Persentase Nilai Tugas",
             "Persentase Nilai Kuis", "Persentase Nilai UTS", "Persentase Nilai UAS", "SKS" };
@@ -110,7 +111,7 @@ public class main10 {
         } else if (choice[1].equalsIgnoreCase("3")) {
             getUbahDosen();
         } else if (choice[1].equalsIgnoreCase("4")) {
-            getLihatMatkul();
+            getLihatDosen();
         } else if (choice[1].equalsIgnoreCase("5")) {
             getRangkaDosen();
         } else if (choice[1].equalsIgnoreCase("6")) {
@@ -184,16 +185,16 @@ public class main10 {
         }
         getSortingDosen();
         for (int q = 0; q < masDos.length; q++) {
-            System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, bio[0], masDos[q][0]);
+            System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, dataDosen[0], masDos[q][0]);
         }
         for (int j = 0; j < masDos[0].length; j++) {
-            System.out.printf("Masukkan %s : ", bio[j]);
+            System.out.printf("Masukkan %s : ", dataDosen[j]);
             tamDosen[masDos.length][j] = scStr.nextLine();
         }
         masDos = tamDosen;
         getSortingDosen();
         for (int q = 0; q < masDos.length; q++) {
-            System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, bio[0], masDos[q][0]);
+            System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, dataDosen[0], masDos[q][0]);
         }
         valid = true;
         while (valid) {
@@ -201,10 +202,10 @@ public class main10 {
             repeat[0] = scStr.nextLine();
             if (repeat[0].equalsIgnoreCase("t")) {
                 valid = false;
-                getBiodata();
+                getDosen();
             } else if (repeat[0].equalsIgnoreCase("r")) {
                 valid = false;
-                getTambahMhs();
+                getTambahDosen();
             }
         }
     }
@@ -225,7 +226,7 @@ public class main10 {
             String tamDosen[][] = new String[masDos.length - 1][masDos[0].length];
             getSortingDosen();
             for (int q = 0; q < masDos.length; q++) {
-                System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, bio[0], masDos[q][0]);
+                System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, dataDosen[0], masDos[q][0]);
             }
             System.out.print("pilih angka atau nama\n(T) jika ingin keluar\nMasukkan : ");
             choice[3] = scStr.nextLine();
@@ -241,7 +242,7 @@ public class main10 {
                     intToStr[0] = String.valueOf(ambilAngka[0] + 1))) {
 
                 for (int xo = 0; xo < masDos[0].length; xo++) {
-                    masDos[ambilAngka[0]][xo] = "~";
+                    masDos[ambilAngka[0]][xo] = "�";
                 }
                 getSortingDosen();
                 for (int r = 0; r < tamDosen.length; r++) {
@@ -253,7 +254,7 @@ public class main10 {
                 for (int q = 0; q < masDos.length; q++) {
                     System.out.printf("%-3d|.\t|", q + 1);
                     for (int t = 0; t < masDos[q].length; t++) {
-                        System.out.printf(" %-6s|%-10s|", bio[t], masDos[q][t]);
+                        System.out.printf(" %-6s|%-10s|", dataDosen[t], masDos[q][t]);
                     }
                     System.out.println("");
                 }
@@ -263,10 +264,10 @@ public class main10 {
                     repeat[0] = scStr.nextLine();
                     if (repeat[0].equalsIgnoreCase("t")) {
                         valid = false;
-                        getBiodata();
+                        getDosen();
                     } else if (repeat[0].equalsIgnoreCase("r")) {
                         valid = false;
-                        getKurangiMhs();
+                        getKurangiDosen();
                     }
                 }
             } else if (choice[3].equalsIgnoreCase("t")) {
@@ -292,9 +293,9 @@ public class main10 {
                 }
             }
         } else {
-            getSortingMhs();
+            getSortingDosen();
             for (int q = 0; q < masDos.length; q++) {
-                System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, bio[0], masDos[q][0]);
+                System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, dataDosen[0], masDos[q][0]);
             }
             System.out.print("pilih angka atau nama\n(T) jika ingin keluar\nMasukkan : ");
             choice[3] = scStr.nextLine();
@@ -324,25 +325,25 @@ public class main10 {
                 masNil[ambilAngka[0]][vv][z] = 0;
             }
         }
-        for (int t = 0; t < bio.length; t++) {
-            System.out.printf("| %-5d| %-10s| %-10s|\n", t + 1, bio[t], masMaSis[ambilAngka[0]][t]);
+        for (int t = 0; t < dataDosen.length; t++) {
+            System.out.printf("| %-5d| %-10s| %-10s|\n", t + 1, dataDosen[t], masDos[ambilAngka[0]][t]);
         }
         System.out.print("pilih angka atau nama\n(T) jika ingin keluar\nMasukkan : ");
         choice[4] = scStr.nextLine();
-        for (i4 = 0; i4 < bio.length; i4++) {
-            if (choice[4].equalsIgnoreCase(bio[i4])) {
+        for (i4 = 0; i4 < dataDosen.length; i4++) {
+            if (choice[4].equalsIgnoreCase(dataDosen[i4])) {
                 ambilAngka[1] = i4;
             } else if (choice[4]
                     .equalsIgnoreCase(intToStr[0] = String.valueOf(i4 + 1))) {
                 ambilAngka[1] = i4;
             }
         }
-        if (choice[4].equalsIgnoreCase(bio[ambilAngka[1]]) || choice[4].equalsIgnoreCase(
+        if (choice[4].equalsIgnoreCase(dataDosen[ambilAngka[1]]) || choice[4].equalsIgnoreCase(
                 intToStr[0] = String.valueOf(ambilAngka[1] + 1))) {
-            System.out.printf("Masukkan %s : ", bio[ambilAngka[1]]);
-            masMaSis[ambilAngka[0]][ambilAngka[1]] = scStr.nextLine();
-            for (int t = 0; t < bio.length; t++) {
-                System.out.printf("| %-5d| %-10s| %-10s|\n", t + 1, bio[t], masMaSis[ambilAngka[0]][t]);
+            System.out.printf("Masukkan %s : ", dataDosen[ambilAngka[1]]);
+            masDos[ambilAngka[0]][ambilAngka[1]] = scStr.nextLine();
+            for (int t = 0; t < dataDosen.length; t++) {
+                System.out.printf("| %-5d| %-10s| %-10s|\n", t + 1, dataDosen[t], masDos[ambilAngka[0]][t]);
             }
             valid = true;// solusi pindah ke if
             while (valid) {
@@ -350,17 +351,67 @@ public class main10 {
                 repeat[0] = scStr.nextLine();
                 if (repeat[0].equalsIgnoreCase("t")) {
                     valid = false;
-                    getUbahMhs();
+                    getUbahDosen();
                 } else if (repeat[0].equalsIgnoreCase("r")) {
                     valid = false;
-                    getUbahMhs1();
+                    getUbahDosen1();
                 }
             }
         } else if (choice[4].equalsIgnoreCase("t")) {
-            getUbahMhs();
+            getUbahDosen();
         } else {
             System.out.println("tidak valid");
-            getUbahMhs1();
+            getUbahDosen1();
+        }
+    }
+
+    public static void getLihatDosen() {
+        if (masMaSis.length == 0) {
+            System.out.println("Biodata tidak tersedia");
+            valid = true;
+            while (valid) {
+                System.out.println("ketik\n(T) jika ingin keluar");
+                repeat[0] = scStr.nextLine();
+                if (repeat[0].equalsIgnoreCase("t")) {
+                    valid = false;
+                    getDosen();
+                }
+            }
+        } else {
+            getSortingDosen();
+            for (int q = 0; q < masDos.length; q++) {
+                System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, dataDosen[0], masDos[q][0]);
+            }
+            System.out.print("pilih angka atau nama\n(T) jika ingin keluar\nMasukkan : ");
+            choice[3] = scStr.nextLine();
+            for (i4 = 0; i4 < masDos.length; i4++) {
+                if (choice[3].equalsIgnoreCase(masDos[i4][0])) {
+                    ambilAngka[0] = i4;
+                } else if (choice[3]
+                        .equalsIgnoreCase(intToStr[0] = String.valueOf(i4 + 1))) {
+                    ambilAngka[0] = i4;
+                }
+            }
+            if (choice[3].equalsIgnoreCase(masDos[ambilAngka[0]][0]) || choice[3].equalsIgnoreCase(
+                    intToStr[0] = String.valueOf(ambilAngka[0] + 1))) {
+                for (int t = 0; t < dataDosen.length; t++) {
+                    System.out.printf("| %-5d| %-10s| %-10s|\n", t + 1, dataDosen[t], masDos[ambilAngka[0]][t]);
+                }
+            } else if (choice[3].equalsIgnoreCase("t")) {
+                getDosen();
+            }
+            valid = true;
+            while (valid) {
+                System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
+                repeat[0] = scStr.nextLine();
+                if (repeat[0].equalsIgnoreCase("t")) {
+                    valid = false;
+                    getDosen();
+                } else if (repeat[0].equalsIgnoreCase("r")) {
+                    valid = false;
+                    getLihatDosen();
+                }
+            }
         }
     }
 
@@ -447,7 +498,7 @@ public class main10 {
                     }
                 }
                 for (int xo = 0; xo < bio.length; xo++) {
-                    masMaSis[ambilAngka[0]][xo] = "~";
+                    masMaSis[ambilAngka[0]][xo] = "�";
                 }
                 getSortingMhs();
                 for (int r = 0; r < tamMaSis.length; r++) {
@@ -729,7 +780,7 @@ public class main10 {
                     masPresentase[ambilAngka[0]][i] = 0;
                 }
                 for (int z = 0; z < 3; z++) {
-                    masMatKul[ambilAngka[0]][z] = "~";
+                    masMatKul[ambilAngka[0]][z] = "�";
                 }
                 getSortingMatkul();
 
@@ -1079,15 +1130,15 @@ public class main10 {
                 }
                 coba(masNil[ambilAngka[0]][ambilAngka[1]][4]); // grade
                 for (int i = 0; i < masPresentase.length; i++) {
-                            totalSks += masPresentase[i][4];
-                        }
-                indeks *= (masPresentase[ambilAngka[1]][4]/totalSks);
+                    totalSks += masPresentase[i][4];
+                }
+                indeks *= (masPresentase[ambilAngka[1]][4] / totalSks);
                 System.out.printf("Nilai %s %s: %f\n", bagian[4],
                         masMatKul[ambilAngka[1]][0],
-                        indeks);//perlu dicek lagi
+                        indeks);// perlu dicek lagi
                 System.out.println(indeks);
                 indeks = 0;
-                totalSks =0;
+                totalSks = 0;
                 masNil[ambilAngka[0]][ambilAngka[1]][4] = 0;
                 total = 0;
                 valid = true;
