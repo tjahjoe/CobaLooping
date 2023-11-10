@@ -31,6 +31,7 @@ public class main10 {
     public static String bio[] = { "Nama", "NIM", "kelas" };
     // public static String tamMaSis[][] = new String[100][3];
     public static int penguranganInput = 0;
+    public static double totalSks = 0;
 
     public static int tampilanData[] = new int[2];
 
@@ -1077,10 +1078,16 @@ public class main10 {
                     masNil[ambilAngka[0]][ambilAngka[1]][4] += total; // masNil[ambilAngka[0]][ambilAngka[1]][z];
                 }
                 coba(masNil[ambilAngka[0]][ambilAngka[1]][4]); // grade
+                for (int i = 0; i < masPresentase.length; i++) {
+                            totalSks += masPresentase[i][4];
+                        }
+                indeks *= (masPresentase[ambilAngka[1]][4]/totalSks);
                 System.out.printf("Nilai %s %s: %f\n", bagian[4],
                         masMatKul[ambilAngka[1]][0],
-                        masNil[ambilAngka[0]][ambilAngka[1]][4]);
+                        indeks);//perlu dicek lagi
                 System.out.println(indeks);
+                indeks = 0;
+                totalSks =0;
                 masNil[ambilAngka[0]][ambilAngka[1]][4] = 0;
                 total = 0;
                 valid = true;
