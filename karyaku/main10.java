@@ -1,9 +1,10 @@
 
 import java.util.Scanner;
 
-public class main9 {
+public class main10 {
     public static Scanner scStr = new Scanner(System.in);
     public static Scanner scInt = new Scanner(System.in);
+    public static Scanner scDbl = new Scanner(System.in);
     // login
 
     public static String choice[] = new String[6];
@@ -16,6 +17,7 @@ public class main9 {
     public static String tempDosen = "";
     public static double tempPersentase = 0;
     public static double tempNilai = 0;
+    public static double indeks = 0;
 
     public static boolean valid = true;
 
@@ -33,23 +35,25 @@ public class main9 {
     public static int tampilanData[] = new int[2];
 
     // tambah mata kuliah
-    public static String masMatKul[][] = { { "Bahasa Inggris 1", "Qb2n873y", "2" },
-            { "Critical Thinking and Problem Solving", "Xe5l964a", "2" },
-            { "Dasar Pemrograman", "Mt3o17j8", "2" }, { "Keselamtan Kesehatan Kerja", "Ps4q52b9", "3" },
-            { "Konsep Teknologi Informasi", "Kk6r73z8", "3" },
-            { "Matematika Dasar", "Jh5l92y7", "2" }, { "Pancasila", "Ig4q52x9", "3" },
-            { "Praktikum Dasar Pemrograman", "Ff6r73w8", "3" }
+    public static String masMatKul[][] = { { "Bahasa Inggris 1", "Qb2n873y" },
+            { "Critical Thinking and Problem Solving", "Xe5l964a" },
+            { "Dasar Pemrograman", "Mt3o17j8" }, { "Keselamtan Kesehatan Kerja", "Ps4q52b9" },
+            { "Konsep Teknologi Informasi", "Kk6r73z8" },
+            { "Matematika Dasar", "Jh5l92y7" }, { "Pancasila", "Ig4q52x9" },
+            { "Praktikum Dasar Pemrograman", "Ff6r73w8", }
     };
-    public static String bagianMatkul[] = { "Mata Kuliah", "Kode Mata Kuliah", "SKS" };
+    public static String bagianMatkul[] = { "Mata Kuliah", "Kode Mata Kuliah", "Persentase Nilai Tugas",
+            "Persentase Nilai Kuis", "Persentase Nilai UTS", "Persentase Nilai UAS", "SKS" };
 
     public static double total = 0;
     // tambah nilai
     public static int i4 = 0;
     public static int i3 = 0;
     public static String bagian[] = { "Tugas", "Kuis", "UTS", "UAS", "Akhir" };
-    public static double masPresentase[][] = { { 0.1, 0.2, 0.3, 0.4 }, { 0.2, 0.2, 0.3, 0.3 }, { 0.2, 0.1, 0.3, 0.4 },
-            { 0.3, 0.4, 0.1, 0.2 }, { 0.1, 0.1, 0.4, 0.4 }, { 0.2, 0.2, 0.3, 0.3 }, { 0.1, 0.1, 0.3, 0.5 },
-            { 0.2, 0.3, 0.2, 0.3 } };
+    public static double masPresentase[][] = { { 0.1, 0.2, 0.3, 0.4, 2 }, { 0.2, 0.2, 0.3, 0.3, 3 },
+            { 0.2, 0.1, 0.3, 0.4, 2 },
+            { 0.3, 0.4, 0.1, 0.2, 2 }, { 0.1, 0.1, 0.4, 0.4, 2 }, { 0.2, 0.2, 0.3, 0.3, 2 }, { 0.1, 0.1, 0.3, 0.5, 3 },
+            { 0.2, 0.3, 0.2, 0.3, 2 } };
     public static double masNil[][][] = {
             { { 100, 98, 100, 89, 0 }, { 85, 83, 89, 81, 0 }, { 100, 98, 100, 89, 0 }, { 100, 98, 100, 89, 0 },
                     { 100, 98, 100, 89, 0 }, { 100, 98, 100, 89, 0 }, { 100, 98, 100, 89, 0 },
@@ -63,7 +67,11 @@ public class main9 {
             { { 99, 86, 98, 85, 0 }, { 88, 86, 86, 83, 0 }, { 99, 86, 98, 85, 0 }, { 99, 86, 98, 85, 0 },
                     { 99, 86, 98, 85, 0 },
                     { 99, 86, 98, 85, 0 }, { 99, 86, 98, 85, 0 }, { 99, 86, 98, 85, 0 } } };
-// jika membuat fungsi sks akan lebih mudah untuk memperbaiki tetapi tidak evisien karena akan menambah banyak fungsi dan array. jika dijadikan 1 dengan presentase akan lebih simple akan tetapi jika ada tambahan persentasi seperti tambahan nilai akan lebih ribet untuk memperbaiki
+
+    // jika membuat fungsi sks akan lebih mudah untuk memperbaiki tetapi tidak
+    // evisien karena akan menambah banyak fungsi dan array. jika dijadikan 1 dengan
+    // presentase akan lebih simple akan tetapi jika ada tambahan persentasi seperti
+    // tambahan nilai akan lebih ribet untuk memperbaiki
     public static void main(String[] args) {
         getRangkaDosen();
     }
@@ -616,15 +624,20 @@ public class main9 {
                 }
             }
         }
-
     }
 
     public static void getTambahRuangMatkul() {
-        String tamMatKul[][] = new String[masMatKul.length + 1][3];
+        String tamMatKul[][] = new String[masMatKul.length + 1][2];
         double tamNil[][][] = new double[masMaSis.length][masMatKul.length + 1][bagian.length];
+        double tamPersentase[][] = new double[masPresentase.length + 1][bagian.length];
         for (int k = 0; k < masMatKul.length; k++) {
-            for (int i = 0; i < 3; i++) {// 3 diubah ke masmatkul[].lenght
+            for (int i = 0; i < masMatKul[k].length; i++) {// 3 diubah ke masmatkul[].lenght
                 tamMatKul[k][i] = masMatKul[k][i];
+            }
+        }
+        for (int i = 0; i < masPresentase.length; i++) {
+            for (int j = 0; j < masPresentase[0].length; j++) {
+                tamPersentase[i][j] = masPresentase[i][j];
             }
         }
         for (int vv = 0; vv < masMaSis.length; vv++) {
@@ -641,13 +654,19 @@ public class main9 {
 
         for (int i = 0; i < bagianMatkul.length; i++) {
             System.out.printf("Masukkan %s : ", bagianMatkul[i]);
-            tamMatKul[masMatKul.length][i] = scStr.nextLine();
-            if (tamMatKul[masMatKul.length][i].equalsIgnoreCase(tamMatKul[masMatKul.length][1])
-                    && tamMatKul[masMatKul.length][1].length() != 8) {
-                i--;
-            }
-        }
+            if (i < masMatKul[0].length) {
+                tamMatKul[masMatKul.length][i] = scStr.nextLine();
+                if (tamMatKul[masMatKul.length][i].equalsIgnoreCase(tamMatKul[masMatKul.length][1])
+                        && tamMatKul[masMatKul.length][1].length() != 8) {
+                    i--;
+                }
+            } else {
+                int j = i - masMatKul[0].length;
+                tamPersentase[masPresentase.length][j] = scDbl.nextDouble();
 
+            }
+        } // logika eror
+        masPresentase = tamPersentase;
         masMatKul = tamMatKul;
         masNil = tamNil;
         getSortingMatkul();
@@ -681,9 +700,9 @@ public class main9 {
                 }
             }
         } else {
-            String tamMatKul[][] = new String[masMatKul.length - 1][3];
+            String tamMatKul[][] = new String[masMatKul.length - 1][2];
             double tamNil[][][] = new double[masMaSis.length][masMatKul.length - 1][bagian.length];
-            double tamPersentase[][] = new double[masPresentase.length - 1][masPresentase[0].length];
+            double tamPersentase[][] = new double[masPresentase.length - 1][bagian.length];
             getSortingMatkul();
             for (int t = 0; t < masMatKul.length; t++) {
                 System.out.printf("%d.\t: %s\n", t + 1, masMatKul[t][0]);
@@ -721,7 +740,6 @@ public class main9 {
                         tamPersentase[i][j] = masPresentase[i][j];
                     }
                 }
-
                 for (int vv = 0; vv < masMaSis.length; vv++) {
                     for (int z = 0; z < tamMatKul.length; z++) {
                         for (int i = 0; i < bagian.length; i++) {
@@ -938,13 +956,14 @@ public class main9 {
                         }
                     }
                 }
-                    for (int z = 0; z < bagian.length - 1; z++) {
-                        System.out.printf("Masukkan Nilai %s : ", bagian[z]);
-                        tamNil[ambilAngka[0]][ambilAngka[1]][z] = scInt.nextInt();
-                        total = tamNil[ambilAngka[0]][ambilAngka[1]][z] * masPresentase[ambilAngka[1]][z];
-                        tamNil[ambilAngka[0]][ambilAngka[1]][4] += total;// tamNil[ambilAngka[0]][ambilAngka[1]][z];
-                    }
-
+                for (int z = 0; z < bagian.length - 1; z++) {
+                    System.out.printf("Masukkan Nilai %s : ", bagian[z]);
+                    tamNil[ambilAngka[0]][ambilAngka[1]][z] = scInt.nextInt();
+                    total = tamNil[ambilAngka[0]][ambilAngka[1]][z] * masPresentase[ambilAngka[1]][z];
+                    tamNil[ambilAngka[0]][ambilAngka[1]][4] += total;// tamNil[ambilAngka[0]][ambilAngka[1]][z];
+                }
+                coba(tamNil[ambilAngka[0]][ambilAngka[1]][4]);
+                System.out.println(indeks);
                 System.out.printf("Nilai %s : %f\n", bagian[4], tamNil[ambilAngka[0]][ambilAngka[1]][4]);
                 tamNil[ambilAngka[0]][ambilAngka[1]][4] = 0;
                 total = 0;
@@ -1055,11 +1074,13 @@ public class main9 {
                     // disinin troublenya, masNil[ambilAngka[0]][ambilAngka[1]][z] *=
                     // masPresentase[ambilAngka[1]][z] ini harus di ubah total = masnil[][] +
                     // maspresentase
-                    masNil[ambilAngka[0]][ambilAngka[1]][4] += total; //masNil[ambilAngka[0]][ambilAngka[1]][z];
+                    masNil[ambilAngka[0]][ambilAngka[1]][4] += total; // masNil[ambilAngka[0]][ambilAngka[1]][z];
                 }
+                coba(masNil[ambilAngka[0]][ambilAngka[1]][4]); // grade
                 System.out.printf("Nilai %s %s: %f\n", bagian[4],
                         masMatKul[ambilAngka[1]][0],
                         masNil[ambilAngka[0]][ambilAngka[1]][4]);
+                System.out.println(indeks);
                 masNil[ambilAngka[0]][ambilAngka[1]][4] = 0;
                 total = 0;
                 valid = true;
@@ -1088,8 +1109,9 @@ public class main9 {
                 for (int zz = 0; zz < masMatKul.length; zz++) {
                     for (int z = 0; z < bagian.length - 1; z++) {
                         total = tamNil[ambilAngka[0]][zz][z] * masPresentase[zz][z];
-                        tamNil[ambilAngka[0]][zz][4] += total; //tamNil[ambilAngka[0]][zz][z];
+                        tamNil[ambilAngka[0]][zz][4] += total; // tamNil[ambilAngka[0]][zz][z];
                     }
+                    coba(tamNil[ambilAngka[0]][zz][4]);
                     System.out.printf("Nilai %s %s: %.2f\n", bagian[4],
                             masMatKul[zz][0],
                             tamNil[ambilAngka[0]][zz][4]);
@@ -1100,6 +1122,7 @@ public class main9 {
                 for (int i = 0; i < masMatKul.length; i++) {
                     tamNil[ambilAngka[0]][i][4] = 0;
                 }
+                // apakah bisa menggunakan fungsi??
                 tamNil[ambilAngka[0]][masMatKul.length][0] = 0;
                 total = 0;
                 masNil = tamNil;
@@ -1155,6 +1178,7 @@ public class main9 {
                 }
                 tamNil[i][masMatKul.length][0] += (tamNil[i][zz][4]);
             }
+            coba(tamNil[i][masMatKul.length][0]);
             tamNil[i][masMatKul.length][0] /= (masMatKul.length * 25);
         }
         for (int a = 0; a < masMaSis.length; a++) {
@@ -1241,7 +1265,7 @@ public class main9 {
         for (int a = 0; a < masMatKul.length; a++) {
             for (int b = a; b < masMatKul.length; b++) {
                 if (masMatKul[a][0].compareTo(masMatKul[b][0]) > 0) {
-                    for (int i = 0; i < 3; i++) {
+                    for (int i = 0; i < 2; i++) {
                         tempMatkul = masMatKul[a][i];
                         masMatKul[a][i] = masMatKul[b][i];
                         masMatKul[b][i] = tempMatkul;
@@ -1261,6 +1285,31 @@ public class main9 {
                     }
                 }
             }
+        }
+    }
+
+    public static void coba(double iniBisa) {
+        if (iniBisa > 80
+                && iniBisa <= 100) {
+            indeks = 4;
+        } else if (iniBisa > 73
+                && iniBisa <= 80) {
+            indeks = 3.5;
+        } else if (iniBisa > 65
+                && iniBisa <= 73) {
+            indeks = 3;
+        } else if (iniBisa > 60
+                && iniBisa <= 65) {
+            indeks = 2.5;
+        } else if (iniBisa > 50
+                && iniBisa <= 60) {
+            indeks = 2;
+        } else if (iniBisa > 39
+                && iniBisa <= 50) {
+            indeks = 1;
+        } else if (iniBisa > 0
+                && iniBisa <= 39) {
+            indeks = 0;
         }
     }
 
