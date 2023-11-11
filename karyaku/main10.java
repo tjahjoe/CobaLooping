@@ -989,7 +989,7 @@ public class main10 {
         } else {
             getSortingMatkul();
             for (int t = 0; t < masMatKul.length; t++) {
-                System.out.printf("%d.\t: %s\n", t + 1, masMatKul[t]);
+                System.out.printf("%d.\t: %s\n", t + 1, masMatKul[t][0]);
             }
             System.out.print("pilih angka atau nama\n(T) jika ingin keluar\nMasukkan : ");
             choice[4] = scStr.nextLine();
@@ -1011,6 +1011,9 @@ public class main10 {
                         }
                     }
                 }
+                for (int i = 0; i < masPresentase.length; i++) {
+                    totalSks += masPresentase[i][4];
+                }
                 for (int z = 0; z < bagian.length - 1; z++) {
                     System.out.printf("Masukkan Nilai %s : ", bagian[z]);
                     tamNil[ambilAngka[0]][ambilAngka[1]][z] = scInt.nextInt();
@@ -1018,9 +1021,10 @@ public class main10 {
                     tamNil[ambilAngka[0]][ambilAngka[1]][4] += total;// tamNil[ambilAngka[0]][ambilAngka[1]][z];
                 }
                 coba(tamNil[ambilAngka[0]][ambilAngka[1]][4]);
-                System.out.println(indeks);
+                System.out.println(indeks * masPresentase[ambilAngka[0]][ambilAngka[1]] / totalSks);
                 System.out.printf("Nilai %s : %f\n", bagian[4], tamNil[ambilAngka[0]][ambilAngka[1]][4]);
                 tamNil[ambilAngka[0]][ambilAngka[1]][4] = 0;
+                totalSks = 0;
                 total = 0;
                 masNil = tamNil;
                 valid = true;
@@ -1167,6 +1171,9 @@ public class main10 {
                     }
                 }
                 getSortingMhs();
+                for (int i = 0; i < masPresentase.length; i++) {
+                    totalSks += masPresentase[i][4];
+                }
                 for (int zz = 0; zz < masMatKul.length; zz++) {
                     for (int z = 0; z < bagian.length - 1; z++) {
                         total = tamNil[ambilAngka[0]][zz][z] * masPresentase[zz][z];
@@ -1176,15 +1183,18 @@ public class main10 {
                     System.out.printf("Nilai %s %s: %.2f\n", bagian[4],
                             masMatKul[zz][0],
                             tamNil[ambilAngka[0]][zz][4]);
-                    tamNil[ambilAngka[0]][masMatKul.length][0] += tamNil[ambilAngka[0]][zz][4];
+                            totalIndeks[ambilAngka[0]] += indeks * (masPresentase[zz][4] / totalSks);
+                    //tamNil[ambilAngka[0]][masMatKul.length][0] += tamNil[ambilAngka[0]][zz][4];
                 }
                 System.out.printf("IPS : %.2f\n",
-                        tamNil[ambilAngka[0]][masMatKul.length][0] / (masMatKul.length * 25));
+                        tamNil[ambilAngka[0]][masMatKul.length][0] = totalIndeks[ambilAngka[0]]);
                 for (int i = 0; i < masMatKul.length; i++) {
                     tamNil[ambilAngka[0]][i][4] = 0;
                 }
                 // apakah bisa menggunakan fungsi??
                 tamNil[ambilAngka[0]][masMatKul.length][0] = 0;
+                totalIndeks[ambilAngka[0]] = 0;
+                totalSks = 0;
                 total = 0;
                 masNil = tamNil;
                 valid = true;
