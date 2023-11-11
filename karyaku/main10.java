@@ -1021,7 +1021,7 @@ public class main10 {
                     tamNil[ambilAngka[0]][ambilAngka[1]][4] += total;// tamNil[ambilAngka[0]][ambilAngka[1]][z];
                 }
                 coba(tamNil[ambilAngka[0]][ambilAngka[1]][4]);
-                System.out.println(indeks * masPresentase[ambilAngka[0]][ambilAngka[1]] / totalSks);
+                System.out.println(indeks * masPresentase[ambilAngka[0]][4] / totalSks);
                 System.out.printf("Nilai %s : %f\n", bagian[4], tamNil[ambilAngka[0]][ambilAngka[1]][4]);
                 tamNil[ambilAngka[0]][ambilAngka[1]][4] = 0;
                 totalSks = 0;
@@ -1139,7 +1139,8 @@ public class main10 {
                 for (int i = 0; i < masPresentase.length; i++) {
                     totalSks += masPresentase[i][4];
                 }
-                indeks *= (masPresentase[ambilAngka[1]][4] / totalSks);
+                System.out.println(totalSks);
+                indeks *= (masPresentase[ambilAngka[0]][4] / totalSks);
                 System.out.printf("Nilai %s %s: %f\n", bagian[4],
                         masMatKul[ambilAngka[1]][0],
                         indeks);// perlu dicek lagi
@@ -1222,6 +1223,7 @@ public class main10 {
         String tamMaSis[][] = new String[masMaSis.length][bio.length];
         double tamNil[][][] = new double[masMaSis.length][masMatKul.length + 1][bagian.length];
         double tamPersentase[][] = new double[masMatKul.length][masPresentase[0].length];
+        double totaRata[][][] = new double[masMaSis.length][masMatKul.length][bagian.length];
         getSortingMatkul();
         for (int r = 0; r < masMaSis.length; r++) {
             for (int l = 0; l < bio.length; l++) {
