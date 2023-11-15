@@ -17,12 +17,15 @@ public class main10 {
     public static String tempDosen = "";
     public static double tempPersentase = 0;
     public static double tempNilai = 0;
+    public static String tempPengajar[] = new String[1];
     public static double indeks = 0;
+    public static String kondisi = "";
 
     public static boolean valid = true;
 
     // tambah dosen
-    public static String masDos[][] = { { "Zanuar", "12" }, { "Zaki", "23" } };
+    public static String masDos[][] = { { "Zanuar", "12" }, { "Sxaia", "11" }, { "Agung", "42" }, { "Galih", "33" },
+            { "Xania", "54" }, { "Lala", "64" }, { "Ciko", "22" }, { "Boi", "45" }, { "Kam", "53" } };
     // public static String tamDos[][] = new String[100][2];
     // tambah mahasiswa
     public static String masMaSis[][] = { { "Wahyu", "1234455", "1C" }, { "Rizky", "1122334", "1C" },
@@ -45,6 +48,8 @@ public class main10 {
             { "Matematika Dasar", "Jh5l92y7" }, { "Pancasila", "Ig4q52x9" },
             { "Praktikum Dasar Pemrograman", "Ff6r73w8" }
     };
+    public static String masPengajar[][] = { { "Zanuar", "Sxaia" }, { "Agung" }, { "Galih" }, { "Xania" }, { "Lala" },
+            { "Ciko" }, { "Boi" }, { "Kam" } };
     public static String bagianMatkul[] = { "Mata Kuliah", "Kode Mata Kuliah", "Persentase Nilai Tugas",
             "Persentase Nilai Kuis", "Persentase Nilai UTS", "Persentase Nilai UAS", "SKS" };
     public static double totalIndeks[] = new double[masMaSis.length];
@@ -456,32 +461,145 @@ public class main10 {
             }
         }
     }
-    public static void getKerangkaPengajar(){
-    System.out.println(
-                        "1. Tambah pengajar\n2. Kurangi Pengajar\n3. Ubah Pengajar\n4. Lihat Pengajar\n5. Keluar");
-                choice[4] = scStr.nextLine();
-                if (choice[4].equalsIgnoreCase("1")) {
-                getTambahPengajar();
-                } else if (choice[4].equalsIgnoreCase("2")) {
-                getKurangiPengajar();
-                } else if (choice[4].equalsIgnoreCase("3")) {
-                getUbahPengajar();
-                } else if (choice[4].equalsIgnoreCase("4")) {
-                getLihatPengajar();
-                } else if (choice[4].equalsIgnoreCase("5")) {
-                getPililhMatkulDosen();
-                } else {
-                getPililhMatkulDosen();
-                }
+
+    public static void getKerangkaPengajar() {
+        System.out.println(
+                "1. Tambah pengajar\n2. Kurangi Pengajar\n3. Ubah Pengajar\n4. Lihat Pengajar\n5. Keluar");
+        choice[4] = scStr.nextLine();
+        if (choice[4].equalsIgnoreCase("1")) {
+            getTambahPengajar();
+        } else if (choice[4].equalsIgnoreCase("2")) {
+            getKurangiPengajar();
+        } else if (choice[4].equalsIgnoreCase("3")) {
+            getUbahPengajar();
+        } else if (choice[4].equalsIgnoreCase("4")) {
+            getLihatPengajar();
+        } else if (choice[4].equalsIgnoreCase("5")) {
+            getPililhMatkulDosen();
+        } else {
+            getPililhMatkulDosen();
+        }
+
     }
 
-    public static void getTambahPengajar(){
+    public static void getTambahPengajar() {
+        String tamPengajar[][] = new String[masMatKul.length][masPengajar[ambilAngka[0]].length + 1];
+        for (int r = 0; r < masMatKul.length; r++) {
+            for (int l = 0; l < masPengajar[r].length; l++) {
+                tamPengajar[r][l] = masPengajar[r][l];
+            }
+        } // pr
+        getSortingMatkul();
+        getSortingPengajar();
+        for (int q = 0; q < masPengajar[ambilAngka[0]].length; q++) {
+            System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, dataDosen[0], masPengajar[ambilAngka[0]][q]);
+        }
+        System.out.print("Masukkan nama : ");
+        tamPengajar[ambilAngka[0]][masPengajar[ambilAngka[0]].length] = scStr.nextLine();
+        for (int i = 0; i < masDos.length; i++) {
+            if (tamPengajar[ambilAngka[0]][masPengajar[ambilAngka[0]].length].equalsIgnoreCase(masDos[i][0])) {
+                kondisi = "";
+                break;
+            } else {
+                kondisi = "Dosen Tidak Tersedia";
+            }
+        }
+        System.out.println(kondisi);
+        if (kondisi.equalsIgnoreCase("Dosen Tidak Tersedia")) {
+            tamPengajar = masPengajar;
+        }
+        masPengajar = tamPengajar;
+        getSortingMatkul();
+        getSortingPengajar();
+        for (int q = 0; q < masPengajar[ambilAngka[0]].length; q++) {
+            System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, dataDosen[0], masPengajar[ambilAngka[0]][q]);
+        }
+        valid = true;
+        while (valid) {
+            System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
+            repeat[0] = scStr.nextLine();
+            if (repeat[0].equalsIgnoreCase("t")) {
+                valid = false;
+                getDosen();
+            } else if (repeat[0].equalsIgnoreCase("r")) {
+                valid = false;
+                getTambahDosen();
+            }
+        }
     }
-    public static void getKurangiPengajar(){
+
+    public static void getKurangiPengajar() {
+        if (masPengajar[ambilAngka[0]].length == 0) {
+            System.out.println("Dosen tidak tersedia");
+            valid = true;
+            while (valid) {
+                System.out.println("ketik\n(T) jika ingin keluar");
+                repeat[0] = scStr.nextLine();
+                if (repeat[0].equalsIgnoreCase("t")) {
+                    valid = false;
+                    getDosen();
+                }
+            }
+        } else {
+            String tamPengajar[][] = new String[masMatKul.length][masPengajar[ambilAngka[0]].length - 1];
+            getSortingMatkul();
+            for (int q = 0; q < masPengajar[ambilAngka[0]].length; q++) {
+                System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, dataDosen[0], masPengajar[ambilAngka[0]][q]);
+            }
+            System.out.print("pilih angka atau nama\n(T) jika ingin keluar\nMasukkan : ");
+            choice[3] = scStr.nextLine();
+            for (i4 = 0; i4 < masPengajar[ambilAngka[0]].length; i4++) {
+                if (choice[3].equalsIgnoreCase(masPengajar[ambilAngka[0]][i4])) {
+                    ambilAngka[1] = i4;
+                } else if (choice[3]
+                        .equalsIgnoreCase(intToStr[0] = String.valueOf(i4 + 1))) {
+                    ambilAngka[1] = i4;
+                }
+            }
+            if (choice[3].equalsIgnoreCase(masDos[ambilAngka[1]][0]) || choice[3].equalsIgnoreCase(
+                    intToStr[0] = String.valueOf(ambilAngka[1] + 1))) {
+
+                masPengajar[ambilAngka[0]][ambilAngka[1]] = "�";
+                System.out.println(masPengajar[0][0]);
+                getSortingMatkul();
+                System.out.println(masPengajar[0][0]);
+                getSortingPengajar();
+                System.out.println(masPengajar[0][0]);
+                for (int r = 0; r < masPengajar.length; r++) {
+                    for (int l = 0; l < tamPengajar[r].length; l++) {
+                        tamPengajar[r][l] = masPengajar[r][l];
+                    }
+                }
+                masPengajar = tamPengajar;
+                for (int q = 0; q < masPengajar[ambilAngka[0]].length; q++) {
+                    System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, dataDosen[0], masPengajar[ambilAngka[0]][q]);
+                }
+                valid = true;
+                while (valid) {
+                    System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
+                    repeat[0] = scStr.nextLine();
+                    if (repeat[0].equalsIgnoreCase("t")) {
+                        valid = false;
+                        getDosen();
+                    } else if (repeat[0].equalsIgnoreCase("r")) {
+                        valid = false;
+                        getKurangiDosen();
+                    }
+                }
+            } else if (choice[3].equalsIgnoreCase("t")) {
+                getDosen();
+            } else {
+                System.out.println("tidak valid");
+                getKurangiDosen();
+            }
+
+        }
     }
-    public static void getUbahPengajar(){
+
+    public static void getUbahPengajar() {
     }
-    public static void getLihatPengajar(){
+
+    public static void getLihatPengajar() {
     }
 
     public static void getTambahMhs() {
@@ -751,6 +869,17 @@ public class main10 {
         String tamMatKul[][] = new String[masMatKul.length + 1][2];
         double tamNil[][][] = new double[masMaSis.length][masMatKul.length + 1][bagian.length];
         double tamPersentase[][] = new double[masPresentase.length + 1][bagian.length];
+        String tamPengajar[][] = new String[masMatKul.length + 1][];
+        for (int i = 0; i < masMatKul.length; i++) {
+            tamPengajar[i] = new String[masPengajar[i].length];
+        }
+        tamPengajar[masMatKul.length] = new String[1];
+        for (int i = 0; i < masMatKul.length; i++) {
+            for (int j = 0; j < masPengajar[i].length; j++) {
+                tamPengajar[i][j] = masPengajar[i][j];
+            }
+        }
+
         for (int k = 0; k < masMatKul.length; k++) {
             for (int i = 0; i < masMatKul[k].length; i++) {// 3 diubah ke masmatkul[].lenght
                 tamMatKul[k][i] = masMatKul[k][i];
@@ -768,6 +897,7 @@ public class main10 {
                 }
             }
         }
+
         getSortingMatkul();
         for (int t = 0; t < masMatKul.length; t++) {
             System.out.printf("%d.\t: %s\n", t + 1, masMatKul[t][0]);
@@ -786,11 +916,28 @@ public class main10 {
                 tamPersentase[masPresentase.length][j] = scDbl.nextDouble();
 
             }
-        } // logika eror
-        masPresentase = tamPersentase;
+        }
+        tamPengajar[masMatKul.length][0] = "";
+        System.out.println(tamPengajar[masMatKul.length][0]);
+        for (int k = 0; k < masMatKul.length; k++) {
+            for (int i = 0; i < masPengajar[k].length; i++) {// 3 diubah ke masmatkul[].lenght
+                System.out.print(tamPengajar[k][i] + " ");
+            }System.out.println();
+        }
+
+        
+        //System.out.println(masPengajar[masMatKul.length][0]);
+        
         masMatKul = tamMatKul;
+        masPengajar = tamPengajar;
+        
+        masPresentase = tamPersentase;
         masNil = tamNil;
-        getSortingMatkul();
+        getSortingMatkul();for (int k = 0; k < masMatKul.length; k++) {
+            for (int i = 0; i < masPengajar[k].length; i++) {// 3 diubah ke masmatkul[].lenght
+                System.out.print(masPengajar[k][i] + " ");
+            }System.out.println();
+        }
         for (int t = 0; t < masMatKul.length; t++) {
             System.out.printf("%d.\t: %s\n", t + 1, masMatKul[t][0]);
         }
@@ -848,7 +995,7 @@ public class main10 {
                 for (int i = 0; i < masPresentase[0].length; i++) {
                     masPresentase[ambilAngka[0]][i] = 0;
                 }
-                for (int z = 0; z < 3; z++) {
+                for (int z = 0; z < 2; z++) {
                     masMatKul[ambilAngka[0]][z] = "�";
                 }
                 getSortingMatkul();
@@ -874,6 +1021,7 @@ public class main10 {
                 for (int t = 0; t < masMatKul.length; t++) {
                     System.out.printf("%d.\t: %s\n", t + 1, masMatKul[t][0]);
                 }
+                System.out.println(masPengajar[0]);
                 valid = true;
                 while (valid) {
                     System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
@@ -1412,6 +1560,18 @@ public class main10 {
         }
     }
 
+    public static void getSortingPengajar() {
+        for (int i = 0; i < masPengajar[ambilAngka[0]].length; i++) {
+            for (int j = i; j < masPengajar[ambilAngka[0]].length; j++) {
+                if (masPengajar[ambilAngka[0]][i].compareTo(masPengajar[ambilAngka[0]][j]) > 0) {
+                    tempPengajar[0] = masPengajar[ambilAngka[0]][i];
+                    masPengajar[ambilAngka[0]][i] = masPengajar[ambilAngka[0]][j];
+                    masPengajar[ambilAngka[0]][j] = tempPengajar[0];
+                }
+            }
+        }
+    }
+
     public static void getSortingMatkul() {
         for (int a = 0; a < masMatKul.length; a++) {
             for (int b = a; b < masMatKul.length; b++) {
@@ -1426,6 +1586,10 @@ public class main10 {
                         masPresentase[a][i] = masPresentase[b][i];
                         masPresentase[b][i] = tempPersentase;
                     }
+                            tempPengajar = masPengajar[a];
+                            masPengajar[a] = masPengajar[b];
+                            masPengajar[b] = tempPengajar;
+
                     for (int vv = 0; vv < masMaSis.length; vv++) {
                         for (int z = 0; z < bagian.length; z++) {
                             tempNilai = masNil[vv][a][z];

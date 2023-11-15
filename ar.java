@@ -46,16 +46,16 @@ public class ar {
         // for (int j = 0; j < togomas.length; j++) {
         // total[i] += togomas[j][i];
         // }
-        // if (i == 0){
+        // if (i == 0) {
         // total[i] *= 40000;
         // System.out.println(total[i]);
-        // } else if (i == 1){
+        // } else if (i == 1) {
         // total[i] *= 28000;
         // System.out.println(total[i]);
-        // } else if (i == 2){
+        // } else if (i == 2) {
         // total[i] *= 60000;
         // System.out.println(total[i]);
-        // } else if (i == 3){
+        // } else if (i == 3) {
         // total[i] *= 75000;
         // System.out.println(total[i]);
         // }
@@ -88,6 +88,8 @@ public class ar {
         String cabang[] = { "Dieng", "Soehat", "Sengkaling" };
         int total[][] = new int[togomas.length][togomas[0].length];
         int keseluruhan[] = new int[togomas.length];
+        int tertinggi;
+        String toko = "";
         for (int i = 0; i < togomas.length; i++) {
             for (int j = 0; j < togomas[i].length; j++) {
                 if (j == 0) {
@@ -102,14 +104,21 @@ public class ar {
                 } else if (j == 3) {
                     togomas[i][j] *= 75000;
                     System.out.println(togomas[i][j]);
-                }keseluruhan[i] += togomas[i][j];
+                }
+                keseluruhan[i] += togomas[i][j];
             }
 
-            
         }
         for (int i = 0; i < togomas.length; i++) {
             System.out.printf("Cabang %s menghasilkan %d\n", cabang[i], keseluruhan[i]);
         }
+        tertinggi = keseluruhan[0];
+        for (int i = 0; i < keseluruhan.length; i++) {
+            if(tertinggi < keseluruhan[i]){
+                tertinggi = keseluruhan[i];
+                toko = cabang[i];
+            }
+        }System.out.printf("Cabang : %s total : %d",toko, tertinggi);
     }
 
 }
