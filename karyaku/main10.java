@@ -483,34 +483,39 @@ public class main10 {
     }
 
     public static void getTambahPengajar() {
-        String tamPengajar[][] = new String[masMatKul.length][masPengajar[ambilAngka[0]].length + 1];
-        for (int r = 0; r < masMatKul.length; r++) {
-            for (int l = 0; l < masPengajar[r].length; l++) {
-                tamPengajar[r][l] = masPengajar[r][l];
+        if (masPengajar[ambilAngka[0]][0].equalsIgnoreCase("")) {
+            masPengajar[ambilAngka[0]][0] = scStr.nextLine();
+        } else {
+            String tamPengajar[][] = new String[masMatKul.length][masPengajar[ambilAngka[0]].length + 1];
+                for (int l = 0; l < masPengajar[ambilAngka[0]].length; l++) {
+                    tamPengajar[ambilAngka[0]][l] = masPengajar[ambilAngka[0]][l];
+            } // pr
+            getSortingMatkul();
+            getSortingPengajar();
+            for (int q = 0; q < masPengajar[ambilAngka[0]].length; q++) {
+                System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, dataDosen[0], masPengajar[ambilAngka[0]][q]);
             }
-        } // pr
-        getSortingMatkul();
-        getSortingPengajar();
-        for (int q = 0; q < masPengajar[ambilAngka[0]].length; q++) {
-            System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, dataDosen[0], masPengajar[ambilAngka[0]][q]);
-        }
-        System.out.print("Masukkan nama : ");
-        tamPengajar[ambilAngka[0]][masPengajar[ambilAngka[0]].length] = scStr.nextLine();
-        for (int i = 0; i < masDos.length; i++) {
-            if (tamPengajar[ambilAngka[0]][masPengajar[ambilAngka[0]].length].equalsIgnoreCase(masDos[i][0])) {
-                kondisi = "";
-                break;
-            } else {
-                kondisi = "Dosen Tidak Tersedia";
+
+            System.out.print("Masukkan nama : ");
+            tamPengajar[ambilAngka[0]][masPengajar[ambilAngka[0]].length] = scStr.nextLine();
+
+            for (int i = 0; i < masDos.length; i++) {
+                if (tamPengajar[ambilAngka[0]][masPengajar[ambilAngka[0]].length].equalsIgnoreCase(masDos[i][0])) {
+                    kondisi = "";
+                    break;
+                } else {
+                    kondisi = "Dosen Tidak Tersedia";
+                }
             }
+            System.out.println(kondisi);
+            if (kondisi.equalsIgnoreCase("Dosen Tidak Tersedia")) {
+                tamPengajar = masPengajar;
+            }
+            masPengajar = tamPengajar;
+            getSortingMatkul();
+            getSortingPengajar();
         }
-        System.out.println(kondisi);
-        if (kondisi.equalsIgnoreCase("Dosen Tidak Tersedia")) {
-            tamPengajar = masPengajar;
-        }
-        masPengajar = tamPengajar;
-        getSortingMatkul();
-        getSortingPengajar();
+
         for (int q = 0; q < masPengajar[ambilAngka[0]].length; q++) {
             System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, dataDosen[0], masPengajar[ambilAngka[0]][q]);
         }
@@ -922,21 +927,23 @@ public class main10 {
         for (int k = 0; k < masMatKul.length; k++) {
             for (int i = 0; i < masPengajar[k].length; i++) {// 3 diubah ke masmatkul[].lenght
                 System.out.print(tamPengajar[k][i] + " ");
-            }System.out.println();
+            }
+            System.out.println();
         }
 
-        
-        //System.out.println(masPengajar[masMatKul.length][0]);
-        
+        // System.out.println(masPengajar[masMatKul.length][0]);
+
         masMatKul = tamMatKul;
         masPengajar = tamPengajar;
-        
+
         masPresentase = tamPersentase;
         masNil = tamNil;
-        getSortingMatkul();for (int k = 0; k < masMatKul.length; k++) {
+        getSortingMatkul();
+        for (int k = 0; k < masMatKul.length; k++) {
             for (int i = 0; i < masPengajar[k].length; i++) {// 3 diubah ke masmatkul[].lenght
                 System.out.print(masPengajar[k][i] + " ");
-            }System.out.println();
+            }
+            System.out.println();
         }
         for (int t = 0; t < masMatKul.length; t++) {
             System.out.printf("%d.\t: %s\n", t + 1, masMatKul[t][0]);
@@ -1586,9 +1593,9 @@ public class main10 {
                         masPresentase[a][i] = masPresentase[b][i];
                         masPresentase[b][i] = tempPersentase;
                     }
-                            tempPengajar = masPengajar[a];
-                            masPengajar[a] = masPengajar[b];
-                            masPengajar[b] = tempPengajar;
+                    tempPengajar = masPengajar[a];
+                    masPengajar[a] = masPengajar[b];
+                    masPengajar[b] = tempPengajar;
 
                     for (int vv = 0; vv < masMaSis.length; vv++) {
                         for (int z = 0; z < bagian.length; z++) {
