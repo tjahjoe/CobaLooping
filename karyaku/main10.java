@@ -483,38 +483,34 @@ public class main10 {
     }
 
     public static void getTambahPengajar() {
-        if (masPengajar[ambilAngka[0]][0].equalsIgnoreCase("")) {
-            masPengajar[ambilAngka[0]][0] = scStr.nextLine();
-        } else {
-            String tamPengajar[][] = new String[masMatKul.length][masPengajar[ambilAngka[0]].length + 1];
-                for (int l = 0; l < masPengajar[ambilAngka[0]].length; l++) {
-                    tamPengajar[ambilAngka[0]][l] = masPengajar[ambilAngka[0]][l];
-            } // pr
-            getSortingMatkul();
-            getSortingPengajar();
-            for (int q = 0; q < masPengajar[ambilAngka[0]].length; q++) {
-                System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, dataDosen[0], masPengajar[ambilAngka[0]][q]);
-            }
-
-            System.out.print("Masukkan nama : ");
-            tamPengajar[ambilAngka[0]][masPengajar[ambilAngka[0]].length] = scStr.nextLine();
-
-            for (int i = 0; i < masDos.length; i++) {
-                if (tamPengajar[ambilAngka[0]][masPengajar[ambilAngka[0]].length].equalsIgnoreCase(masDos[i][0])) {
-                    kondisi = "";
-                    break;
-                } else {
-                    kondisi = "Dosen Tidak Tersedia";
-                }
-            }
-            System.out.println(kondisi);
-            if (kondisi.equalsIgnoreCase("Dosen Tidak Tersedia")) {
-                tamPengajar = masPengajar;
-            }
-            masPengajar = tamPengajar;
-            getSortingMatkul();
-            getSortingPengajar();
+        String tamPengajar[][] = new String[masMatKul.length][masPengajar[ambilAngka[0]].length + 1];
+        for (int l = 0; l < masPengajar[ambilAngka[0]].length; l++) {
+            tamPengajar[ambilAngka[0]][l] = masPengajar[ambilAngka[0]][l];
+        } // pr
+        getSortingMatkul();
+        getSortingPengajar();
+        for (int q = 0; q < masPengajar[ambilAngka[0]].length; q++) {
+            System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, dataDosen[0], masPengajar[ambilAngka[0]][q]);
         }
+
+        System.out.print("Masukkan nama : ");
+        tamPengajar[ambilAngka[0]][masPengajar[ambilAngka[0]].length] = scStr.nextLine();
+
+        for (int i = 0; i < masDos.length; i++) {
+            if (tamPengajar[ambilAngka[0]][masPengajar[ambilAngka[0]].length].equalsIgnoreCase(masDos[i][0])) {
+                kondisi = "";
+                break;
+            } else {
+                kondisi = "Dosen Tidak Tersedia";
+            }
+        }
+        System.out.println(kondisi);
+        if (kondisi.equalsIgnoreCase("Dosen Tidak Tersedia")) {
+            tamPengajar = masPengajar;
+        }
+        masPengajar = tamPengajar;
+        getSortingMatkul();
+        getSortingPengajar();
 
         for (int q = 0; q < masPengajar[ambilAngka[0]].length; q++) {
             System.out.printf("| %-5d| %-10s| %-10s|\n", q + 1, dataDosen[0], masPengajar[ambilAngka[0]][q]);
@@ -597,7 +593,6 @@ public class main10 {
                 System.out.println("tidak valid");
                 getKurangiDosen();
             }
-
         }
     }
 
@@ -932,12 +927,12 @@ public class main10 {
         }
 
         // System.out.println(masPengajar[masMatKul.length][0]);
-
-        masMatKul = tamMatKul;
         masPengajar = tamPengajar;
-
+        masPengajar[masMatKul.length] = new String[0];
+        masMatKul = tamMatKul;
         masPresentase = tamPersentase;
         masNil = tamNil;
+
         getSortingMatkul();
         for (int k = 0; k < masMatKul.length; k++) {
             for (int i = 0; i < masPengajar[k].length; i++) {// 3 diubah ke masmatkul[].lenght
@@ -948,6 +943,7 @@ public class main10 {
         for (int t = 0; t < masMatKul.length; t++) {
             System.out.printf("%d.\t: %s\n", t + 1, masMatKul[t][0]);
         }
+
         valid = true;
         while (valid) {
             System.out.println("ketik\n(T) jika ingin keluar\n(R) jika ingin mengulang");
@@ -1531,7 +1527,7 @@ public class main10 {
     public static void getSortingMhs() {
         for (int a = 0; a < masMaSis.length; a++) {
             for (int b = a; b < masMaSis.length; b++)
-                if (masMaSis[a][0].compareTo(masMaSis[b][0]) > 0) {
+                if (masMaSis[a][0].compareToIgnoreCase(masMaSis[b][0]) > 0) {
                     for (int v = 0; v < bio.length; v++) {
                         tempMhs = masMaSis[a][v];
                         masMaSis[a][v] = masMaSis[b][v];
