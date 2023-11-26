@@ -197,12 +197,7 @@ public class aaa {
         tabelDosenMahasiswa(masterDosen, bioDosen[1]);
         System.out.print("Masukkan : \n[NIP] untuk memilih dosen\n[T]   untuk keluar\npilih -->  : ");
         pilih[3] = scStr.nextLine();
-        for (int i = 0; i < masterDosen.length; i++) {
-            if (pilih[3].equalsIgnoreCase(masterDosen[i][1])) {
-                ambilAngka[0] = i;
-                break;
-            }
-        }
+        searchingTanpaAngka(masterDosen.length, 3, 0, masterDosen);
         if (pilih[3].equalsIgnoreCase(masterDosen[ambilAngka[0]][1])) {
             String kurangdosen[][] = new String[masterDosen.length - 1][bioDosen.length];
             String kurangPengajar[][][] = new String[masterMatkul.length][2][];
@@ -251,7 +246,6 @@ public class aaa {
             }
             masterDosen = kurangdosen;
             masterMatkul = kurangPengajar;
-            ambilAngka[0] = 0;
             fKurangDosen();
         } else if (pilih[3].equalsIgnoreCase("t")) {
             fBioDosen();
@@ -277,12 +271,7 @@ public class aaa {
         tabelDosenMahasiswa(masterDosen, bioDosen[1]);
         System.out.print("Masukkan : \n[NIP] untuk memilih dosen\n[T]   untuk keluar\npilih -->  : ");
         pilih[3] = scStr.nextLine();
-        for (int i = 0; i < masterDosen.length; i++) {
-            if (pilih[3].equalsIgnoreCase(masterDosen[i][1])) {
-                ambilAngka[0] = i;
-                break;
-            }
-        }
+        searchingTanpaAngka(masterDosen.length, 3, 0, masterDosen);
         if (pilih[3].equalsIgnoreCase(masterDosen[ambilAngka[0]][1])) {
             cfUbahDosen1();
         } else if (pilih[3].equalsIgnoreCase("t")) {
@@ -352,12 +341,7 @@ public class aaa {
         tabelDosenMahasiswa(masterDosen, bioDosen[1]);
         System.out.print("Masukkan : \n[NIP] untuk memilih dosen\n[T]   untuk keluar\npilih -->  : ");
         pilih[3] = scStr.nextLine();
-        for (int i = 0; i < masterDosen.length; i++) {
-            if (pilih[3].equalsIgnoreCase(masterDosen[i][1])) {
-                ambilAngka[0] = i;
-                break;
-            }
-        }
+        searchingTanpaAngka(masterDosen.length, 3, 0, masterDosen);
         if (pilih[3].equalsIgnoreCase(masterDosen[ambilAngka[0]][1])) {
             int tampungInt = 0;
             for (int i = 0; i < masterMatkul.length; i++) {
@@ -425,6 +409,7 @@ public class aaa {
             tabelMatkul();
             System.out.print("Masukkan : \n[ANGKA] untuk memilih Mata Kuliah\n[T]     untuk keluar\npilih -->  : ");
             pilih[3] = scStr.nextLine();
+            searchingDenganAngka(3, 0);
             // System.out.println("\033[H\033[2J");
             for (int i = 0; i < masterMatkul.length; i++) {
                 if (pilih[3].equalsIgnoreCase(masterMatkul[i][0][0])
@@ -809,15 +794,10 @@ public class aaa {
         tabelDosenMahasiswa(masterMahasiswa, biodataMahasiswa[1]);
         System.out.print("Masukkan : \n[NIM] untuk memilih Mahasiswa\n[T]   untuk keluar\npilih -->  : ");
         pilih[3] = scStr.nextLine();
-        for (int i = 0; i < masterMahasiswa.length; i++) {
-            if (pilih[3].equalsIgnoreCase(masterMahasiswa[i][1])) {
-                ambilAngka[0] = i;
-                break;
-            }
-        }
+        searchingTanpaAngka(masterMahasiswa.length, 3, 0, masterMahasiswa);
         if (pilih[3].equalsIgnoreCase(masterMahasiswa[ambilAngka[0]][1])) {
             tempPengurangan = 0;
-            String tampungan = masterMahasiswa[ambilAngka[0]][4];
+            String tampungan = masterMahasiswa[ambilAngka[0]][1];
             for (int i = 0; i < masterMahasiswa.length; i++) {
                 for (int j = 0; j < masterMatkul.length; j++) {
                     for (int j2 = 0; j2 < score.length; j2++) {
@@ -827,7 +807,7 @@ public class aaa {
                 for (int j = 0; j < biodataMahasiswa.length; j++) {
                     masterMahasiswa[tempPengurangan][j] = masterMahasiswa[i][j];
                 }
-                if (!tampungan.equalsIgnoreCase(masterMahasiswa[i][4])) {
+                if (!tampungan.equalsIgnoreCase(masterMahasiswa[i][1])) {
                     tempPengurangan++;
                 }
             }
@@ -837,7 +817,7 @@ public class aaa {
             }
             masterMahasiswa = kurangMahasiswa;
             masterNilai = kurangNilai;
-            ambilAngka[0] = 0;
+            sortingMahasiswa();
             fKurangMahasiswa();
         } else if (pilih[3].equalsIgnoreCase("t")) {
             fBioMahasiswa();
@@ -863,12 +843,7 @@ public class aaa {
         tabelDosenMahasiswa(masterMahasiswa, biodataMahasiswa[1]);
         System.out.print("Masukkan : \n[NIM] untuk memilih Mahasiswa\n[T]   untuk keluar\npilih -->  : ");
         pilih[3] = scStr.nextLine();
-        for (int i = 0; i < masterMahasiswa.length; i++) {
-            if (pilih[3].equalsIgnoreCase(masterMahasiswa[i][1])) {
-                ambilAngka[0] = i;
-                break;
-            }
-        }
+        searchingTanpaAngka(masterMahasiswa.length, 3, 0, masterMahasiswa);
         if (pilih[3].equalsIgnoreCase(masterMahasiswa[ambilAngka[0]][1])) {
             cfUbahMahasiswa1();
         } else if (pilih[3].equalsIgnoreCase("t")) {
@@ -942,12 +917,7 @@ public class aaa {
         tabelDosenMahasiswa(masterMahasiswa, biodataMahasiswa[1]);
         System.out.print("Masukkan : \n[NIM] untuk memilih Mahasiswa\n[T]   untuk keluar\npilih -->  : ");
         pilih[3] = scStr.nextLine();
-        for (int i = 0; i < masterMahasiswa.length; i++) {
-            if (pilih[3].equalsIgnoreCase(masterMahasiswa[i][1])) {
-                ambilAngka[0] = i;
-                break;
-            }
-        }
+        searchingTanpaAngka(masterMahasiswa.length, 3, 0, masterMahasiswa);
         if (pilih[3].equalsIgnoreCase(masterMahasiswa[ambilAngka[0]][1])) {
             cfLihatMahasiswa11();
         } else if (pilih[3].equalsIgnoreCase("t")) {
@@ -1077,13 +1047,7 @@ public class aaa {
         tabelMatkul();
         System.out.print("Masukkan : \n[ANGKA] untuk memilih Mata Kuliah\n[T]     untuk keluar\npilih -->  : ");
         pilih[3] = scStr.nextLine();
-        for (int i = 0; i < masterMatkul.length; i++) {
-            if (pilih[3].equalsIgnoreCase(masterMatkul[i][0][0])
-                    || pilih[3].equalsIgnoreCase(intToStr = String.valueOf(i + 1))) {
-                ambilAngka[0] = i;
-                break;
-            }
-        }
+        searchingDenganAngka(3, 0);
         if (pilih[3].equalsIgnoreCase(masterMatkul[ambilAngka[0]][0][0])
                 || pilih[3].equalsIgnoreCase(intToStr = String.valueOf(ambilAngka[0] + 1))) {
             String tampung = masterMatkul[ambilAngka[0]][0][0];
@@ -1136,13 +1100,7 @@ public class aaa {
         tabelMatkul();
         System.out.print("Masukkan : \n[ANGKA] untuk memilih Mata Kuliah\n[T]     untuk keluar\npilih -->  : ");
         pilih[3] = scStr.nextLine();
-        for (int i = 0; i < masterMatkul.length; i++) {
-            if (pilih[3].equalsIgnoreCase(masterMatkul[i][0][0])
-                    || pilih[3].equalsIgnoreCase(intToStr = String.valueOf(i + 1))) {
-                ambilAngka[0] = i;
-                break;
-            }
-        }
+        searchingDenganAngka(3, 0);
         if (pilih[3].equalsIgnoreCase(masterMatkul[ambilAngka[0]][0][0])
                 || pilih[3].equalsIgnoreCase(intToStr = String.valueOf(ambilAngka[0] + 1))) {
             cfUbahMatkul1();
@@ -1221,13 +1179,7 @@ public class aaa {
         tabelMatkul();
         System.out.print("Masukkan : \n[ANGKA] untuk memilih Mata Kuliah\n[T]     untuk keluar\npilih -->  : ");
         pilih[3] = scStr.nextLine();
-        for (int i = 0; i < masterMatkul.length; i++) {
-            if (pilih[3].equalsIgnoreCase(masterMatkul[i][0][0])
-                    || pilih[3].equalsIgnoreCase(intToStr = String.valueOf(i + 1))) {
-                ambilAngka[0] = i;
-                break;
-            }
-        }
+        searchingDenganAngka(3, 0);
         if (pilih[3].equalsIgnoreCase(masterMatkul[ambilAngka[0]][0][0])
                 || pilih[3].equalsIgnoreCase(intToStr = String.valueOf(ambilAngka[0] + 1))) {
             System.out.printf("%-40s\n",
@@ -1270,12 +1222,7 @@ public class aaa {
         tabelDosenMahasiswa(masterMahasiswa, biodataMahasiswa[1]);
         System.out.print("Masukkan : \n[NIM] untuk memilih Mahasiswa\n[T]   untuk keluar\npilih -->  : ");
         pilih[3] = scStr.nextLine();
-        for (int i = 0; i < masterMahasiswa.length; i++) {
-            if (pilih[3].equalsIgnoreCase(masterMahasiswa[i][1])) {
-                ambilAngka[0] = i;
-                break;
-            }
-        }
+        searchingTanpaAngka(masterMahasiswa.length, 3, 0, masterMahasiswa);
         if (pilih[3].equalsIgnoreCase(masterMahasiswa[ambilAngka[0]][1])) {
             cfInputNilai1();
         } else if (pilih[3].equalsIgnoreCase("t")) {
@@ -1302,13 +1249,7 @@ public class aaa {
         tabelMatkul();
         System.out.print("Masukkan : \n[ANGKA] untuk memilih Mata Kuliah\n[T]     untuk keluar\npilih -->  : ");
         pilih[4] = scStr.nextLine();
-        for (int i = 0; i < masterMatkul.length; i++) {
-            if (pilih[4].equalsIgnoreCase(masterMatkul[i][0][0])
-                    || pilih[4].equalsIgnoreCase(intToStr = String.valueOf(i + 1))) {
-                ambilAngka[1] = i;
-                break;
-            }
-        }
+        searchingDenganAngka(4, 1);
         if (pilih[4].equalsIgnoreCase(masterMatkul[ambilAngka[1]][0][0])
                 || pilih[4].equalsIgnoreCase(intToStr = String.valueOf(ambilAngka[1] + 1))) {
             System.out.println("Nilai 0 sampai 100");
@@ -1352,12 +1293,7 @@ public class aaa {
         tabelDosenMahasiswa(masterMahasiswa, biodataMahasiswa[1]);
         System.out.print("Masukkan : \n[NIM] untuk memilih Mahasiswa\n[T]   untuk keluar\npilih -->  : ");
         pilih[3] = scStr.nextLine();
-        for (int i = 0; i < masterMahasiswa.length; i++) {
-            if (pilih[3].equalsIgnoreCase(masterMahasiswa[i][1])) {
-                ambilAngka[0] = i;
-                break;
-            }
-        }
+        searchingTanpaAngka(masterMahasiswa.length, 3, 0, masterMahasiswa);
         if (pilih[3].equalsIgnoreCase(masterMahasiswa[ambilAngka[0]][1])) {
             cfLihatNilai1();
         } else if (pilih[3].equalsIgnoreCase("t")) {
@@ -1401,13 +1337,7 @@ public class aaa {
                 "============================================================");
         System.out.print("Masukkan : \n[ANGKA] untuk memilih Mata Kuliah\n[T]     untuk keluar\npilih -->  : ");
         pilih[4] = scStr.nextLine();
-        for (int i = 0; i < masterMatkul.length; i++) {
-            if (pilih[4].equalsIgnoreCase(masterMatkul[i][0][0])
-                    || pilih[4].equalsIgnoreCase(intToStr = String.valueOf(i + 1))) {
-                ambilAngka[1] = i;
-                break;
-            }
-        }
+        searchingDenganAngka(4, 1);
         if (pilih[4].equalsIgnoreCase(masterMatkul[ambilAngka[1]][0][0])
                 || pilih[4].equalsIgnoreCase(intToStr = String.valueOf(ambilAngka[1] + 1))) {
             for (int i = 0; i < score.length - 1; i++) {
@@ -1535,6 +1465,7 @@ public class aaa {
         }
         return totalSks;
     }
+
     public static void fKetentuanInputDosen(String tampung[], int a, int b, String tampungDosen[][]) {
         for (int j = 0; j < masterDosen.length; j++) {
             if ((tampung[a].equalsIgnoreCase(tampung[0])
@@ -2013,7 +1944,28 @@ public class aaa {
             }
         }
     }
+
+    public static void searchingTanpaAngka(int a, int b, int c, String tampung[][]) {
+        ambilAngka[c] = 0;
+        for (int i = 0; i < a; i++) {
+            if (pilih[b].equalsIgnoreCase(tampung[i][1])) {
+                ambilAngka[c] = i;
+                break;
+            }
+        }
+    }
+    public static void searchingDenganAngka( int a, int b){
+        ambilAngka[b] = 0;
+        for (int i = 0; i < masterMatkul.length; i++) {
+            if (pilih[a].equalsIgnoreCase(masterMatkul[i][0][0])
+                    || pilih[a].equalsIgnoreCase(intToStr = String.valueOf(i + 1))) {
+                ambilAngka[b] = i;
+                break;
+            }
+        }
+    }
 }
+
 // validasi lihat mahasiswa
 // validasi jika panjang mahasiswa = 0
 // validasi jika panjang mata kuliah = 0
