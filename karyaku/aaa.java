@@ -52,18 +52,12 @@ public class aaa {
             "Telepon ibu", "Pass" };// penambahan username dan password, apakah akun dibuat di array
                                     // yang berbeda
     public static String[] biodataMahasiswaInput = { "Nama                  (MAX 30 digit)",
-            "NIM                   (10 digit angka)",
-            "Jenis kelamin ([Laki-laki] atau [Perempuan])",
-            "Tempat tanggal lahir  (MAX 70 digit)",
-            "Agama                 (MAX 70 digit)",
-            "Alamat                (MAX 70 digit)",
-            "Nama ayah             (MAX 30 digit)",
-            "Nama ibu              (MAX 30 digit)",
-            "Pekejaan ayah         (MAX 70 digit)",
-            "Pekerjaan ibu         (MAX 70 digit)",
-            "Telepon ayah          (MAX 20 digit)",
-            "Telepon ibu           (MAX 20 digit)",
-            "Password              (MAX 20 digit)" };
+            "NIM                   (10 digit angka)", "Jenis kelamin ([Laki-laki] atau [Perempuan])",
+            "Tempat tanggal lahir  (MAX 70 digit)", "Agama                 (MAX 70 digit)",
+            "Alamat                (MAX 70 digit)", "Nama ayah             (MAX 30 digit)",
+            "Nama ibu              (MAX 30 digit)", "Pekejaan ayah         (MAX 70 digit)",
+            "Pekerjaan ibu         (MAX 70 digit)", "Telepon ayah          (MAX 20 digit)",
+            "Telepon ibu           (MAX 20 digit)", "Password              (MAX 20 digit)" };
     // nilai/ matakuliah
     public static String[] score = { "Tugas", "Kuis", "UTS", "UAS", "Akhir" };
     public static String scorePersentase[] = { "Tugas", "Kuis", "UTS", "UAS", "SKS" };
@@ -121,20 +115,24 @@ public class aaa {
     }
 
     public static void berandaAdmin() {
-        System.out.println("1. Dosen\n2. Mahasiswa\n3. Mata Kuliah\n4. Nilai\n5. Keluar");
-        System.out.print("Pilih: ");
+        System.out.println("===================================");
+        System.out.println("|             BERANDA             |");
+        System.out.println("===================================");
+        System.out.println(
+                "| [1] Dosen                       |\n| [2] Mahasiswa                   |\n| [3] Mata Kuliah                 |\n| [4] Nilai                       |\n| [T] Keluar                      |");
+        System.out.print("===================================\npilih -->  : ");
         pilih[1] = scStr.nextLine();
         System.out.println("\033[H\033[2J");
         System.out.println();
-        if (pilih[1].equalsIgnoreCase("1")) {
+        if (pilih[1].equalsIgnoreCase("1") || pilih[1].equalsIgnoreCase("dosen")) {
             fBioDosen();
-        } else if (pilih[1].equalsIgnoreCase("2")) {
+        } else if (pilih[1].equalsIgnoreCase("2") || pilih[1].equalsIgnoreCase("mahasiswa")) {
             fBioMahasiswa();
-        } else if (pilih[1].equalsIgnoreCase("3")) {
+        } else if (pilih[1].equalsIgnoreCase("3") || pilih[1].equalsIgnoreCase("mata kuliah")) {
             fMatkul();
-        } else if (pilih[1].equalsIgnoreCase("4")) {
+        } else if (pilih[1].equalsIgnoreCase("4") || pilih[1].equalsIgnoreCase("nilai")) {
             fNilai();
-        } else if (pilih[1].equalsIgnoreCase("5")) {
+        } else if (pilih[1].equalsIgnoreCase("t")) {
 
         } else {
 
@@ -142,21 +140,25 @@ public class aaa {
     }
 
     public static void fBioDosen() {
+        System.out.println("===================================");
+        System.out.println("|              DOSEN              |");
+        System.out.println("===================================");
         System.out.println(
-                "1. Tambah Dosen\n2. Kurangi Dosen\n3. Ubah Dosen\n4. Lihat Dosen\n5. Pengajar\n6. Keluar");
+                "| [1] Tambah Dosen                |\n| [2] Kurangi Dosen               |\n| [3] Ubah Dosen                  |\n| [4] Lihat Dosen                 |\n| [5] Pengajar                    |\n| [T] Keluar                      |");
+        System.out.print("===================================\npilih -->  : ");
         pilih[2] = scStr.nextLine();
         System.out.println("\033[H\033[2J");
-        if (pilih[2].equalsIgnoreCase("1")) {
+        if (pilih[2].equalsIgnoreCase("1") || pilih[2].equalsIgnoreCase("tambah dosen")) {
             fTambahDosen();
-        } else if (pilih[2].equalsIgnoreCase("2")) {
+        } else if (pilih[2].equalsIgnoreCase("2") || pilih[2].equalsIgnoreCase("kurangi dosen")) {
             fKurangDosen();
-        } else if (pilih[2].equalsIgnoreCase("3")) {
+        } else if (pilih[2].equalsIgnoreCase("3") || pilih[2].equalsIgnoreCase("ubah dosen")) {
             fUbahDosen();
-        } else if (pilih[2].equalsIgnoreCase("4")) {
+        } else if (pilih[2].equalsIgnoreCase("4") || pilih[2].equalsIgnoreCase("lihat dosen")) {
             fLihatDosen();
-        } else if (pilih[2].equalsIgnoreCase("5")) {
+        } else if (pilih[2].equalsIgnoreCase("5") || pilih[2].equalsIgnoreCase("pengajar")) {
             fPengajar();
-        } else if (pilih[2].equalsIgnoreCase("6")) {
+        } else if (pilih[2].equalsIgnoreCase("t")) {
             berandaAdmin();
         } else {
             fBioDosen();
@@ -294,6 +296,7 @@ public class aaa {
             while (kondisi) {
                 System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
                 kembali[0] = scStr.nextLine();
+                System.out.println("\033[H\033[2J");
                 if (kembali[0].equalsIgnoreCase("t")) {
                     fBioDosen();
                     kondisi = false;
@@ -460,19 +463,23 @@ public class aaa {
     }
 
     public static void fBioPengajar() {
+        System.out.println("===================================");
+        System.out.println("|             PENGAJAR            |");
+        System.out.println("===================================");
         System.out.println(
-                "1. Tambah Pengajar\n2. Kurangi Pengajar\n3. Ubah Pengajar\n4. Lihat Pengajar\n5. Keluar");
+                "| [1] Tambah Pengajar             |\n| [2] Kurangi Pengajar            |\n| [3] Ubah Pengajar               |\n| [4] Lihat Pengajar              |\n| [T] Keluar                      |");
+        System.out.print("===================================\npilih -->  : ");
         pilih[4] = scStr.nextLine();
         System.out.println("\033[H\033[2J");
-        if (pilih[4].equalsIgnoreCase("1")) {
+        if (pilih[4].equalsIgnoreCase("1") || pilih[4].equalsIgnoreCase("tambah pengajar")) {
             fTambahPengajar();
-        } else if (pilih[4].equalsIgnoreCase("2")) {
+        } else if (pilih[4].equalsIgnoreCase("2") || pilih[4].equalsIgnoreCase("kurangi pengajar")) {
             fKurangPengajar();
-        } else if (pilih[4].equalsIgnoreCase("3")) {
+        } else if (pilih[4].equalsIgnoreCase("3") || pilih[4].equalsIgnoreCase("ubah pengajar")) {
             fUbahPengajar();
-        } else if (pilih[4].equalsIgnoreCase("4")) {
+        } else if (pilih[4].equalsIgnoreCase("4") || pilih[4].equalsIgnoreCase("lihat pengajar")) {
             fLihatPengajar();
-        } else if (pilih[4].equalsIgnoreCase("5")) {
+        } else if (pilih[4].equalsIgnoreCase("t")) {
             fPengajar();
         } else {
             fBioPengajar();
@@ -719,19 +726,23 @@ public class aaa {
     }
 
     public static void fBioMahasiswa() {
+        System.out.println("===================================");
+        System.out.println("|            MAHASISWA            |");
+        System.out.println("===================================");
         System.out.println(
-                "1. Tambah Mahasiswa\n2. Kurangi Mahasiswa\n3. Ubah Mahasiswa\n4. Lihat Mahasiswa\n5. Keluar");
+                "| [1] Tambah Mahasiswa            |\n| [2] Kurangi Mahasiswa           |\n| [3] Ubah    Mahasiswa           |\n| [4] Lihat   Mahasiswa           |\n| [T] Keluar                      |");
+        System.out.print("===================================\npilih -->  : ");
         pilih[2] = scStr.nextLine();
         System.out.println("\033[H\033[2J");
-        if (pilih[2].equalsIgnoreCase("1")) {
+        if (pilih[2].equalsIgnoreCase("1") || pilih[2].equalsIgnoreCase("tambah mahasiswa")) {
             fTambahMahasiswa();
-        } else if (pilih[2].equalsIgnoreCase("2")) {
+        } else if (pilih[2].equalsIgnoreCase("2") || pilih[2].equalsIgnoreCase("kurangi mahasiswa")) {
             fKurangMahasiswa();
-        } else if (pilih[2].equalsIgnoreCase("3")) {
+        } else if (pilih[2].equalsIgnoreCase("3") || pilih[2].equalsIgnoreCase("ubah mahasiswa")) {
             fUbahMahasiswa();
-        } else if (pilih[2].equalsIgnoreCase("4")) {
+        } else if (pilih[2].equalsIgnoreCase("4") || pilih[2].equalsIgnoreCase("lihat mahasiswa")) {
             fLihatMahasiswa();
-        } else if (pilih[2].equalsIgnoreCase("5")) {
+        } else if (pilih[2].equalsIgnoreCase("t")) {
             berandaAdmin();
         } else {
             fBioMahasiswa();
@@ -1000,19 +1011,23 @@ public class aaa {
     }
 
     public static void fMatkul() {
+        System.out.println("===================================");
+        System.out.println("|           MATA KULIAH           |");
+        System.out.println("===================================");
         System.out.println(
-                "1. Tambah Mata Kuliah\n2. Kurangi Mata Kuliah\n3. Ubah Mata Kuliah\n4. Lihat Mata Kuliah\n5. Keluar");
+                "| [1] Tambah Mata Kuliah          |\n| [2] Kurangi Mata Kuliah         |\n| [3] Ubah Mata Kuliah            |\n| [4] Lihat Mata Kuliah           |\n| [T] Keluar                      |");
+        System.out.print("===================================\npilih -->  : ");
         pilih[2] = scStr.nextLine();
         System.out.println("\033[H\033[2J");
-        if (pilih[2].equalsIgnoreCase("1")) {
+        if (pilih[2].equalsIgnoreCase("1") || pilih[2].equalsIgnoreCase("tambah mata kuliah")) {
             fTambahMatkul();
-        } else if (pilih[2].equalsIgnoreCase("2")) {
+        } else if (pilih[2].equalsIgnoreCase("2") || pilih[2].equalsIgnoreCase("kurangi mata kuliah")) {
             fKurangMatkul();
-        } else if (pilih[2].equalsIgnoreCase("3")) {
+        } else if (pilih[2].equalsIgnoreCase("3") || pilih[2].equalsIgnoreCase("ubah mata kuliah")) {
             fUbahMatkul();
-        } else if (pilih[2].equalsIgnoreCase("4")) {
+        } else if (pilih[2].equalsIgnoreCase("4") || pilih[2].equalsIgnoreCase("lihat mata kuliah")) {
             fLihatMatkul();
-        } else if (pilih[2].equalsIgnoreCase("5")) {
+        } else if (pilih[2].equalsIgnoreCase("t")) {
             berandaAdmin();
         } else {
             fMatkul();
@@ -1244,8 +1259,12 @@ public class aaa {
     }
 
     public static void fNilai() {
+        System.out.println("===================================");
+        System.out.println("|              NILAI              |");
+        System.out.println("===================================");
         System.out.println(
-                "1. Input Nilai\n2. Lihat Nilai\n3. Laporan\n4. Ranking\n5. Keluar");
+                "| [1] Input Nilai                 |\n| [2] Lihat Nilai                 |\n| [3] Laporan                     |\n| [4] Ranking                     |\n| [T] Keluar                      |");
+        System.out.print("===================================\npilih -->  : ");
         pilih[2] = scStr.nextLine();
         System.out.println("\033[H\033[2J");
         if (pilih[2].equalsIgnoreCase("1")) {
@@ -1256,7 +1275,7 @@ public class aaa {
             fLaporan();
         } else if (pilih[2].equalsIgnoreCase("4")) {
             fRanking();
-        } else if (pilih[2].equalsIgnoreCase("5")) {
+        } else if (pilih[2].equalsIgnoreCase("t")) {
             berandaAdmin();
         } else {
             fNilai();
@@ -1367,24 +1386,24 @@ public class aaa {
 
     public static void cfLihatNilai1() {
         validasiMatkul();
-            System.out.println(
-                    "============================================================");
-            System.out.printf("| %s  |%-19s%s%-19s|\n", atribut[7], atribut[4], atribut[0],
-                    atribut[4]);
-            System.out.println(
-                    "============================================================");
-            for (int i = 0; i < masterMatkul.length; i++) {
-                System.out.printf("|   %-5s|%-2s%-45s%-2s|\n", i + 1, atribut[4],
-                        masterMatkul[i][0][0], atribut[4]);
-                if (i < masterMatkul.length) {
-                    System.out.println(
-                            "------------------------------------------------------------");
-                }
+        System.out.println(
+                "============================================================");
+        System.out.printf("| %s  |%-19s%s%-19s|\n", atribut[7], atribut[4], atribut[0],
+                atribut[4]);
+        System.out.println(
+                "============================================================");
+        for (int i = 0; i < masterMatkul.length; i++) {
+            System.out.printf("|   %-5s|%-2s%-45s%-2s|\n", i + 1, atribut[4],
+                    masterMatkul[i][0][0], atribut[4]);
+            if (i < masterMatkul.length) {
+                System.out.println(
+                        "------------------------------------------------------------");
             }
-            System.out.printf("|   %-5s|  IPS%-44s|\n", masterMatkul.length + 1, atribut[4]);
-            System.out.println(
-                    "============================================================");
-            System.out.print("Masukkan : \n[ANGKA] untuk memilih Mata Kuliah\n[T]     untuk keluar\npilih -->  : ");
+        }
+        System.out.printf("|   %-5s|  IPS%-44s|\n", masterMatkul.length + 1, atribut[4]);
+        System.out.println(
+                "============================================================");
+        System.out.print("Masukkan : \n[ANGKA] untuk memilih Mata Kuliah\n[T]     untuk keluar\npilih -->  : ");
         pilih[4] = scStr.nextLine();
         System.out.println("\033[H\033[2J");
         searchingDenganAngka(4, 1);
