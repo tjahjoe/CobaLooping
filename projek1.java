@@ -15,7 +15,6 @@ public class projek1 {
     public static int tempPengurangan = 0;
     public static int tempint[][] = new int[1][];
     public static int angkaSementara[][] = new int[1][1];
-    public static int angkaSemu = 0;
     public static String atribut[] = { "MATA KULIAH", "NILAI ANGKA", "NILAI HURUF", "NILAI SETARA", " ", "IPS", "NAMA",
             "NOMOR", "NIP" };
 
@@ -57,7 +56,7 @@ public class projek1 {
             "Pekerjaan ibu         (MAX 70 digit)", "Telepon ayah          (MAX 20 digit)",
             "Telepon ibu           (MAX 20 digit)", "Password              (MAX 20 digit)" };
     // nilai/ matakuliah
-    public static String[] score = { "Tugas", "Kuis", "UTS", "UAS", "Akhir" };
+    public static String[] score = { "Tugas", "Kuis", "Ulangan Tengah Semester", "Ulangan Akhir Semester", "Nilai Akhir" };
     public static String scorePersentase[] = { "Tugas", "Kuis", "UTS", "UAS", "SKS" };
     public static String namaMatkul[] = { "Mata Kuliah", "Singkatan (max 4 digit)" };
     public static boolean kondisi = true;
@@ -69,7 +68,7 @@ public class projek1 {
             { { "Keselamtan Kesehatan Kerja", "K3" }, { "1231231222" } },
             { { "Konsep Teknologi Informasi", "KTI" }, { "1235322321" } },
             { { "Matematika Dasar", "MATD" }, { "1235322321" } }, { { "Pancasila", "PANC" }, { "1231231222" } },
-            { { "Praktikum Dasar Pemrograman", "PDAP" }, { "1235322321" } } };
+            { { "Praktikum Dasar Pemrograman", "PDAP" }, { "1235322321", "1235322321"} } };
     public static double masterNilai[][][] = {
             { { 100, 98, 100, 89, 0, 0 }, { 85, 83, 89, 81, 0, 0 }, { 100, 98, 100, 89, 0, 0, },
                     { 100, 98, 100, 89, 0, 0 },
@@ -536,8 +535,6 @@ public class projek1 {
             System.out.println("Dosen tidak tersedia");
             fKembaliFBioDosen();
         } else {
-            sortingDosen();
-            sortingMatkul();
             tabelDosenMahasiswa(masterDosen, bioDosen[1]);
             System.out.print("Masukkan : \n[NIP] untuk memilih dosen\n[T]   untuk keluar\npilih -->  : ");
             pilih[3] = scStr.nextLine();
@@ -591,6 +588,7 @@ public class projek1 {
             }
             cfUbahDosen1();
         } else if (pilih[4].equalsIgnoreCase("t")) {
+            sortingDosen();
             fUbahDosen();
         } else {
             System.out.println("Tidak valid");
@@ -1337,11 +1335,14 @@ public class projek1 {
         }
         System.out.println("Masukkan : ");
         for (int i = 0; i < tambahMatkul[ambilAngka[0]][0].length; i++) {
-            System.out.printf("%-57s : ", namaMatkul[i]);
+            System.out.printf("%-62s : ", namaMatkul[i]);
             tambahMatkul[masterMatkul.length][0][i] = scStr.nextLine();
-            if (tambahMatkul[masterMatkul.length][0][i]
-                    .equalsIgnoreCase(tambahMatkul[masterMatkul.length][0][1])
-                    && tambahMatkul[masterMatkul.length][0][1].length() > 4) {
+            if ((tambahMatkul[masterMatkul.length][0][i]
+                    .equalsIgnoreCase(tambahMatkul[masterMatkul.length][0][0])
+                    && tambahMatkul[masterMatkul.length][0][0].length() > 45)
+                    || (tambahMatkul[masterMatkul.length][0][i]
+                            .equalsIgnoreCase(tambahMatkul[masterMatkul.length][0][1])
+                            && tambahMatkul[masterMatkul.length][0][1].length() > 4)) {
                 i--;
             }
         }
@@ -1350,7 +1351,7 @@ public class projek1 {
             System.out.println("!Total persentase = 1!");
             tampung = 0;
             for (int j = 0; j < scorePersentase.length - 1; j++) {
-                System.out.printf("Persentase %-5s %-40s : ", scorePersentase[j],
+                System.out.printf("Persentase %-5s %-45s : ", scorePersentase[j],
                         tambahMatkul[masterMatkul.length][0][0]);
                 tambahPersentase[masterMatkul.length][j] = scDbl.nextDouble();
                 tampung += tambahPersentase[masterMatkul.length][j];
@@ -1359,7 +1360,7 @@ public class projek1 {
                 i--;
             }
         }
-        System.out.printf("%-5s %-40s             : ", scorePersentase[scorePersentase.length - 1],
+        System.out.printf("%-16s %-45s : ", scorePersentase[scorePersentase.length - 1],
                 tambahMatkul[masterMatkul.length][0][0]);
         tambahPersentase[masterMatkul.length][scorePersentase.length - 1] = scDbl.nextDouble();
         masterMatkul = tambahMatkul;
@@ -1629,9 +1630,10 @@ public class projek1 {
     }
 
     public static void finputNilaiFinal(int a, int b) {
-        System.out.println("Nilai 0 sampai 100");
+        System.out.printf("Masukkan Nilai %s\n(Nilai 0 sampai 100)\n\n", masterMatkul[ambilAngka[b]][0][0]);
+        
         for (int i = 0; i < score.length - 1; i++) {
-            System.out.printf("Masukkan nilai %-5s %-15s : ", score[i],
+            System.out.printf("%-45s : ", score[i],
                     masterMatkul[ambilAngka[b]][0][0]);
             masterNilai[ambilAngka[a]][ambilAngka[b]][i] = scDbl.nextDouble();
             if ((masterNilai[ambilAngka[a]][ambilAngka[b]][i] == masterNilai[ambilAngka[a]][ambilAngka[b]][0]
@@ -1650,12 +1652,12 @@ public class projek1 {
             }
         }
         for (int i = 0; i < score.length - 1; i++) {
-            masterNilai[ambilAngka[0]][ambilAngka[1]][4] += masterNilai[ambilAngka[0]][ambilAngka[1]][i]
-                    * masterPersentase[ambilAngka[1]][i];
+            masterNilai[ambilAngka[a]][ambilAngka[b]][4] += masterNilai[ambilAngka[a]][ambilAngka[b]][i]
+                    * masterPersentase[ambilAngka[b]][i];
         }
-        System.out.printf("Nilai Akhir %-15s : %.2f\n", masterMatkul[ambilAngka[1]][0][0],
-                masterNilai[ambilAngka[0]][ambilAngka[1]][4]);
-        masterNilai[ambilAngka[0]][ambilAngka[1]][4] = 0;
+        System.out.printf("%-45s : %.2f\n\n", score[4],
+                masterNilai[ambilAngka[a]][ambilAngka[b]][4]);
+        masterNilai[ambilAngka[a]][ambilAngka[b]][4] = 0;
     }
 
     public static void fLihatNilai() {
@@ -1741,18 +1743,19 @@ public class projek1 {
                             * masterPersentase[ambilAngka[1]][i];
                 }
                 if (masterNilai[ambilAngka[0]][ambilAngka[1]][4] < 10) {
-                    System.out.printf("|  Akhir%-42s|  %.2f    |\n", atribut[4],
+                    System.out.printf("|  %-45s  |  %.2f    |\n", score[4],
                             masterNilai[ambilAngka[0]][ambilAngka[1]][4]);
                 } else if (masterNilai[ambilAngka[0]][ambilAngka[1]][4] == 100) {
-                    System.out.printf("|  Akhir%-42s|  %.2f  |\n", atribut[4],
+                    System.out.printf("|  %-45s  |  %.2f  |\n", score[4],
                             masterNilai[ambilAngka[0]][ambilAngka[1]][4]);
                 } else {
-                    System.out.printf("|  Akhir%-42s|  %.2f   |\n", atribut[4],
+                    System.out.printf("|  %-45s  |  %.2f   |\n", score[4],
                             masterNilai[ambilAngka[0]][ambilAngka[1]][4]);
                 }
                 System.out.println(
                         "==============================================================");
-                masterNilai[ambilAngka[0]][ambilAngka[1]][4] = 0;// bisa di impelmentasikan di input nilai oleh admin dan input nilai oleh dosen
+                masterNilai[ambilAngka[0]][ambilAngka[1]][4] = 0;// bisa di impelmentasikan di input nilai oleh admin
+                                                                 // dan input nilai oleh dosen
                 fKembaliFLihatNilai();
             } else if (pilih[4].equalsIgnoreCase("ips")
                     || pilih[4].equalsIgnoreCase(intToStr = String.valueOf(masterMatkul.length + 1))) {
@@ -2383,8 +2386,7 @@ public class projek1 {
         int tampungInt = 0;
         for (int i = 0; i < masterMatkul.length; i++) {
             for (int j = 0; j < masterMatkul[i][1].length; j++) {
-                if (masterDosen[ambilAngka[a]][1].equalsIgnoreCase(masterMatkul[i][1][j])
-                        && angkaSemu < 1) {
+                if (masterDosen[ambilAngka[a]][1].equalsIgnoreCase(masterMatkul[i][1][j])) {
                     tempint[0] = new int[tampungInt + 1];
                     for (int j2 = 0; j2 < tempint[0].length; j2++) {
                         tempint[0][j2] = angkaSementara[0][j2];
