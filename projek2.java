@@ -7,10 +7,12 @@ public class projek2 {
 
     // tambahan
     public static String tempString[] = new String[1];
+    public static String tempStr = "";
+    public static String tempStringMatkul = "";
     public static double tempDouble = 0;
     public static String pilih[] = new String[10];
     public static String kembali = "";
-    public static int ambilAngka[] = new int[4];
+    public static int ambilAngka[] = new int[5];
     public static String intToStr = "";
     public static int tempPengurangan = 0;
     public static int tempint[][] = new int[1][];
@@ -66,9 +68,10 @@ public class projek2 {
             { { "Bahasa Inggris 1", "BIG1" }, { "1231231222", "1235322321", "1231221231" } },
             { { "Critical Thinking and Problem Solving", "CTPS" }, { "1234231212" } },
             { { "Dasar Pemrograman", "DASP" }, { "1231221231" } },
-            { { "Keselamtan Kesehatan Kerja", "K3" }, { "1231231222" } },
+            { { "Keselamatan Kesehatan Kerja", "K3" }, { "1231231222" } },
             { { "Konsep Teknologi Informasi", "KTI" }, { "1235322321" } },
-            { { "Matematika Dasar", "MATD" }, { "1235322321" } }, { { "Pancasila", "PANC" }, { "1231231222" } },
+            { { "Matematika Dasar", "MATD" }, { "1235322321" } },
+            { { "Pancasila", "PANC" }, { "1231231222" } },
             { { "Praktikum Dasar Pemrograman", "PDAP" }, { "1235322321", "1235322321" } } };
     public static double masterNilai[][][] = {
             { { 100, 98, 100, 89, 0, 0 }, { 85, 83, 89, 81, 0, 0 }, { 100, 98, 100, 89, 0, 0, },
@@ -132,11 +135,14 @@ public class projek2 {
     }
 
     public static void fLoginAwal() {
-        System.out.print("Masukkan username: ");
+        System.out.println("===================================");
+        System.out.println("|              Login              |");
+        System.out.println("===================================");
+        System.out.print("| Masukkan username: ");
         pilih[0] = scStr.nextLine();
         searchingTanpaAngka(masterMahasiswa.length, 0, 0, 1, masterMahasiswa);
         searchingTanpaAngka(masterDosen.length, 0, 1, 1, masterDosen);
-        System.out.print("Masukkan password: ");
+        System.out.print("| Masukkan password: ");
         pilih[1] = scStr.nextLine();
         searchingTanpaAngka(masterMahasiswa.length, 1, 2, 12, masterMahasiswa);
         searchingTanpaAngka(masterDosen.length, 1, 3, 2, masterDosen);
@@ -149,22 +155,22 @@ public class projek2 {
                     && pilih[1].equalsIgnoreCase(masterDosen[ambilAngka[3]][2])) {
                 berandaDosen();
             } else {
-                fKembaliFLoginAwal();
+                fKembali1("login", "ulangLogin");
             }
         } else if (masterDosen.length == 0) {
             if (pilih[0].equals("Admin") && pilih[1].equals("Admin")) {
                 berandaAdmin();
             } else if (pilih[0].equals(masterMahasiswa[ambilAngka[0]][1])
                     && pilih[1].equalsIgnoreCase(masterMahasiswa[ambilAngka[2]][12])) {
-                System.out.println("mahasiswa");
+                berandaMahasiswa();
             } else {
-                fKembaliFLoginAwal();
+                fKembali1("login", "ulangLogin");
             }
         } else if (masterDosen.length == 0 && masterMahasiswa.length == 0) {
             if (pilih[0].equals("Admin") && pilih[1].equals("Admin")) {
                 berandaAdmin();
             } else {
-                fKembaliFLoginAwal();
+                fKembali1("login", "ulangLogin");
             }
         } else {
             if (pilih[0].equals("Admin") && pilih[1].equals("Admin")) {
@@ -174,171 +180,183 @@ public class projek2 {
                 berandaDosen();
             } else if (pilih[0].equals(masterMahasiswa[ambilAngka[0]][1])
                     && pilih[1].equalsIgnoreCase(masterMahasiswa[ambilAngka[2]][12])) {
-                System.out.println("mahasiswa");
+                berandaMahasiswa();
             } else {
-                fKembaliFLoginAwal();
+                fKembali1("login", "ulangLogin");
             }
         }
     }
 
-    public static void fKembaliFLoginAwal() {
-        System.out.println("Akun tidak terdaftar");
-        kondisi = true;
-        while (kondisi) {
-            System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-            kembali = scStr.nextLine();
-            System.out.println("\033[H\033[2J");
-            if (kembali.equalsIgnoreCase("t")) {
-                berandaLogin();
-                kondisi = false;
-            } else if (kembali.equalsIgnoreCase("r")) {
-                fLoginAwal();
-                kondisi = false;
+    // program untuk mahasiswa
+    public static void berandaMahasiswa() {
+        String item[] = { "Biodata", "Mata Kuliah", "Nilai", "Kartu Hasil Studi" };
+        tabelTampilan("MAHASISWA", item);
+        pilih[0] = scStr.nextLine();
+        System.out.println("\033[H\033[2J");
+        if (pilih[0].equals("1")) {
+            fBiodataMahasiswa();
+        } else if (pilih[0].equals("2")) {
+            if (masterMatkul.length == 0) {
+                System.out.println("Mata Kuliah tidak tersedia");
+                fKembali("berandaMahasiswa");
+            } else {
+                tabelMatkul();
+                fKembali("berandaMahasiswa");
             }
+        } else if (pilih[0].equals("3")) {
+            nilaiMahasiswa();
+        } else if (pilih[0].equals("4")) {
+            if (masterMatkul.length == 0) {
+                System.out.println("Mata Kuliah tidak tersedia");
+                fKembali("berandaMahasiswa");
+            } else {
+                lihatKHS();
+                fKembali("berandaMahasiswa");
+            }
+        } else if (pilih[0].equalsIgnoreCase("t")) {
+            berandaLogin();
+        } else {
+            berandaMahasiswa();
         }
     }
 
-    // dosen
-    public static void berandaDosen() {
+    public static void fBiodataMahasiswa() {
         System.out.println("===================================");
-        System.out.println("|             BERANDA             |");
+        System.out.print(
+                "| [1] Tampilkan biodata           |\n| [2] Lengkapi atau ubah biodata  |\n| [T] Keluar                      |\n");
+        System.out.print("===================================\npilih -->  : ");
+        pilih[0] = scStr.nextLine();
+        System.out.println("\033[H\033[2J");
+        if (pilih[0].equals("1")) {
+            fCetakBiodataMahasiswa(1);
+            fKembali("biodataMahasiswa");
+        } else if (pilih[0].equals("2")) {
+            ubahBiodataMahasiswa();
+        } else if (pilih[0].equalsIgnoreCase("t")) {
+            berandaMahasiswa();
+        } else {
+            System.out.println("\033[H\033[2J");
+            fBiodataMahasiswa();
+        }
+    }
+
+    public static void ubahBiodataMahasiswa() {
+        System.out.print(
+                "\nBiodata yang dapat diubah\n[1] Alamat\n[2] Nomor Telepon ayah\n[3] Nomor Telepon ibu\n[T] Keluar\npilih --> : ");
+        pilih[0] = scStr.nextLine();
+        System.out.println("\033[H\033[2J");
+        if (pilih[0].equals("1")) {
+            System.out.print("Alamat baru : ");
+            masterMahasiswa[ambilAngka[0]][5] = scStr.nextLine();
+            ubahBiodataMahasiswa();
+        } else if (pilih[0].equals("2")) {
+            System.out.print("Nomor Telepon baru ayah : ");
+            masterMahasiswa[ambilAngka[0]][10] = scStr.nextLine();
+            ubahBiodataMahasiswa();
+        } else if (pilih[0].equals("3")) {
+            System.out.print("Nomor Telepon baru ibu : ");
+            masterMahasiswa[ambilAngka[0]][11] = scStr.nextLine();
+            ubahBiodataMahasiswa();
+        } else if (pilih[0].equalsIgnoreCase("t")) {
+            System.out.println("\033[H\033[2J");
+            fBiodataMahasiswa();
+        } else {
+            System.out.println("\033[H\033[2J");
+            ubahBiodataMahasiswa();
+
+        }
+    }
+
+    public static void nilaiMahasiswa() {
         System.out.println("===================================");
         System.out.println(
-                "| [1] Lihat Mata Kuliah           |\n| [2] Input Nilai                 |\n| [3] Ubah Akun                   |\n| [T] Keluar                      |");
+                "| [1] Lihat nilai                 |\n| [2] Ranking                     |\n| [T] Keluar                      |");
         System.out.print("===================================\npilih -->  : ");
-        pilih[1] = scStr.nextLine();
+        pilih[0] = scStr.nextLine();
         System.out.println("\033[H\033[2J");
-        if (pilih[1].equalsIgnoreCase("1")) {
-            fTabelMakulPengajar();
-            kondisi = true;
-            while (kondisi) {
-                System.out.print("Masukkan :\n[T]   untuk keluar\npilih -->  : ");
-                kembali = scStr.nextLine();
-                System.out.println("\033[H\033[2J");
-                if (kembali.equalsIgnoreCase("t")) {
-                    berandaDosen();
-                    kondisi = false;
-                }
+        if (pilih[0].equals("1")) {
+            lihatNilaiMahasiswa();
+        } else if (pilih[0].equals("2")) {
+            ranking();
+        } else if (pilih[0].equalsIgnoreCase("t")) {
+            berandaMahasiswa();
+        } else {
+            System.out.println("\033[H\033[2J");
+            nilaiMahasiswa();
+        }
+    }
+
+    public static void lihatNilaiMahasiswa() {
+        if (masterMatkul.length == 0) {
+            System.out.println("Mata Kuliah tidak tersedia");
+            fKembali("nilaiMahasiswa");
+        } else {
+            tabelMatkul();
+            System.out.print("Masukkan : \n[ANGKA] untuk memilih Mata Kuliah\n[T]     untuk keluar\npilih -->  : ");
+            pilih[0] = scStr.nextLine();
+            System.out.println("\033[H\033[2J");
+            searchingDenganAngka(0, 4);
+            if (pilih[0].equalsIgnoreCase(masterMatkul[ambilAngka[4]][0][0])
+                    || pilih[0].equalsIgnoreCase(intToStr = String.valueOf(ambilAngka[4] + 1))) {
+                tabelNilaiPerMatkul(0, 4);
+                fKembali1("nilaiMahasiswa", "ulangNilaiMahasiswa");
+            } else if (pilih[0].equalsIgnoreCase("t")) {
+                nilaiMahasiswa();
+            } else {
+                lihatNilaiMahasiswa();
             }
-        } else if (pilih[1].equalsIgnoreCase("2")) {
-            finputNilaiDosen();
-        } else if (pilih[1].equalsIgnoreCase("3")) {
-            fMatkul();
-        } else if (pilih[1].equalsIgnoreCase("t")) {
+        }
+
+    }
+
+    public static void ranking() {
+        if (masterMatkul.length == 0) {
+            System.out.println("Mata Kuliah tidak tersedia");
+            fKembali("nilaiMahasiswa");
+        } else {
+            pilih[1] = masterMahasiswa[ambilAngka[0]][1];
+            double ips[] = new double[masterMahasiswa.length];
+            String grade[][] = new String[masterMahasiswa.length][masterMatkul.length];
+            fTotalSKS();
+            fIps(ips, grade);
+            sortingRanking(ips, grade);
+            searchingTanpaAngka(masterMahasiswa.length, 1, 2, 1, masterMahasiswa);
+            System.out.println(ambilAngka[2] + 1);
+            fReset();
+            sortingMahasiswa();
+            fKembali("nilaiMahasiswa");
+        }
+    }
+
+    // program untuk dosen
+    public static void berandaDosen() {
+        String item[] = { "Biodata", "Input Nilai", "Mata Kuliah" };
+        tabelTampilan("DOSEN", item);
+        pilih[0] = scStr.nextLine();
+        System.out.println("\033[H\033[2J");
+        if (pilih[0].equals("1")) {
+            tabelBioDosen(1, 2);
+            if (tempint[0] == null) {
+                System.out.println("Belum ada Mata Kuliah yang diajar");
+                fKembali("berandaDosen");
+            } else {
+                matkulPengajar();
+                fKembali("berandaDosen");
+            }
+        } else if (pilih[0].equals("2")) {
+            inputNilaiDosen();
+        } else if (pilih[0].equals("3")) {
+            fLihatMatkul("dosen");
+        } else if (pilih[0].equalsIgnoreCase("t")) {
             berandaLogin();
         } else {
             berandaDosen();
         }
     }
 
-    public static void finputNilaiDosen() {
-        if (masterMatkul.length == 0) {
-            System.out.println("Mata Kuliah tidak teredia");
-            kondisi = true;
-            while (kondisi) {
-                System.out.print("Masukkan :\n[T]   untuk keluar\npilih -->  : ");
-                kembali = scStr.nextLine();
-                System.out.println("\033[H\033[2J");
-                if (kembali.equalsIgnoreCase("t")) {
-                    berandaDosen();
-                    kondisi = false;
-                }
-            }
-        } else {
-            fTabelMakulPengajar();
-            System.out.print("Masukkan : \n[ANGKA] untuk memilih Mata Kuliah\n[T]     untuk keluar\npilih -->  : ");
-            pilih[2] = scStr.nextLine();
-            for (int i = 0; i < tempint[0].length; i++) {
-                if (pilih[2].equalsIgnoreCase(masterMatkul[tempint[0][i]][0][0])
-                        || pilih[2].equalsIgnoreCase(intToStr = String.valueOf(i + 1))) {
-                    ambilAngka[0] = i;
-                    break;
-                }
-            }
-            for (int i = 0; i < masterMatkul.length; i++) {
-                if (masterMatkul[tempint[0][ambilAngka[0]]][0][0].equalsIgnoreCase(masterMatkul[i][0][0])) {
-                    ambilAngka[1] = i;
-                    break;
-                }
-            }
-            if (pilih[2].equalsIgnoreCase(masterMatkul[ambilAngka[0]][0][0]) || pilih[2].equalsIgnoreCase(
-                    intToStr = String.valueOf(ambilAngka[0] + 1))) {
-                cfInputNilaiDosen1();
-            } else if (pilih[2].equalsIgnoreCase("t")) {
-                berandaDosen();
-            } else {
-                kondisi = true;
-                while (kondisi) {
-                    System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-                    kembali = scStr.nextLine();
-                    System.out.println("\033[H\033[2J");
-                    if (kembali.equalsIgnoreCase("t")) {
-                        berandaDosen();
-                        kondisi = false;
-                    } else if (kembali.equalsIgnoreCase("r")) {
-                        finputNilaiDosen();
-                        kondisi = false;
-                    }
-                }
-            }
-        }
-    }
-
-    public static void cfInputNilaiDosen1() {
-        if (masterMahasiswa.length == 0) {
-            System.out.println("Mahasiswa tidak teredia");
-            kondisi = true;
-            while (kondisi) {
-                System.out.print("Masukkan :\n[T]   untuk keluar\npilih -->  : ");
-                kembali = scStr.nextLine();
-                System.out.println("\033[H\033[2J");
-                if (kembali.equalsIgnoreCase("t")) {
-                    finputNilaiDosen();
-                    kondisi = false;
-                }
-            }
-        } else {
-            tabelDosenMahasiswa(masterMahasiswa, biodataMahasiswa[1]);
-            System.out.print("Masukkan : \n[NIM] untuk memilih Mahasiswa\n[T]   untuk keluar\npilih -->  : ");
-            pilih[3] = scStr.nextLine();
-            searchingTanpaAngka(masterMahasiswa.length, 3, 2, 1, masterMahasiswa);
-            if (pilih[3].equalsIgnoreCase(masterMahasiswa[ambilAngka[2]][1])) {
-                finputNilaiFinal(2, 1);
-                fKembaliFInputNilaiDosen();
-            } else if (pilih[3].equalsIgnoreCase("t")) {
-                finputNilaiDosen();
-            } else {
-                System.out.println("Mahasiswa tidak terdaftar");
-                fKembaliFInputNilaiDosen();
-            }
-        }
-    }
-
-    public static void fKembaliFInputNilaiDosen() {
-        kondisi = true;
-        while (kondisi) {
-            System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-            kembali = scStr.nextLine();
-            System.out.println("\033[H\033[2J");
-            if (kembali.equalsIgnoreCase("t")) {
-                finputNilaiDosen();
-                kondisi = false;
-            } else if (kembali.equalsIgnoreCase("r")) {
-                cfInputNilaiDosen1();
-                kondisi = false;
-            }
-        }
-    }
-
-    public static void fTabelMakulPengajar() {
-        System.out.println(
-                "============================================================");
-        System.out.printf("| %s  |%-19s%s%-19s|\n", atribut[7], atribut[4], atribut[0],
-                atribut[4]);
-        System.out.println(
-                "============================================================");
+    public static void matkulPengajar() {
         for (int i = 0; i < tempint[0].length; i++) {
-            System.out.printf("|   %-5s|  %-45s  |\n", i + 1, masterMatkul[tempint[0][i]][0][0]);
+            System.out.printf("|  %-5s|  %-46s  |\n", i + 1, masterMatkul[tempint[0][i]][0][0]);
             if (i < tempint[0].length - 1) {
                 System.out.println(
                         "------------------------------------------------------------");
@@ -348,14 +366,72 @@ public class projek2 {
                 "============================================================");
     }
 
-    // admin
+    public static void inputNilaiDosen() {
+        if (tempint[0] == null) {
+            System.out.println("Belum ada Mata Kuliah yang diajar");
+            fKembali("kembaliKeLihatNilaiAwal");
+        } else {
+            System.out.println(
+                    "============================================================");
+            System.out.printf("| NOMOR  |%-19sMATA KULIAH%-19s|\n", " ", " ");
+            System.out.println(
+                    "============================================================");
+            matkulPengajar();
+            System.out.print("Masukkan : \n[ANGKA] untuk memilih Mata Kuliah\n[T]     untuk keluar\npilih -->  : ");
+            pilih[1] = scStr.nextLine();
+            System.out.println("\033[H\033[2J");
+            ambilAngka[2] = 0;
+            for (int i = 0; i < tempint[0].length; i++) {
+                if (pilih[1].equalsIgnoreCase(masterMatkul[i][0][0])
+                        || pilih[1].equalsIgnoreCase(intToStr = String.valueOf(i + 1))) {
+                    ambilAngka[2] = i;
+                    break;
+                }
+            }
+            if (pilih[1].equalsIgnoreCase(masterMatkul[ambilAngka[2]][0][0])
+                    || pilih[1].equalsIgnoreCase(intToStr = String.valueOf(ambilAngka[2] + 1))) {
+                ambilAngka[3] = 0;
+                for (int i = 0; i < masterMatkul.length; i++) {
+                    if (masterMatkul[tempint[0][ambilAngka[2]]][0][0].equalsIgnoreCase(masterMatkul[i][0][0])
+                            || masterMatkul[tempint[0][ambilAngka[2]]][0][0]
+                                    .equalsIgnoreCase(intToStr = String.valueOf(i + 1))) {
+                        ambilAngka[3] = i;
+                        break;
+                    }
+                }
+                nilaiMahasiswaPengajar();
+            } else if (pilih[1].equalsIgnoreCase("t")) {
+                berandaDosen();
+            } else {
+                inputNilaiDosen();
+            }
+        }
+    }
+
+    public static void nilaiMahasiswaPengajar() {
+        if (masterMahasiswa.length == 0) {
+            System.out.println("Mahasiswa tidak tersedia");
+            fKembali("kembaliKeLihatNilaiAwal");
+        } else {
+            tabelDosenMahasiswa(masterMahasiswa, "NIM");
+            System.out.print("Masukkan : \n[NIM] untuk memilih Mahasiswa\n[T]   untuk kembali\npilih -->  : ");
+            pilih[2] = scStr.nextLine();
+            System.out.println("\033[H\033[2J");
+            searchingTanpaAngka(masterMahasiswa.length, 2, 2, 1, masterMahasiswa);
+            if (pilih[2].equals(masterMahasiswa[ambilAngka[2]][1])) {
+                fInputLihatNilai("dosen");
+            } else if (pilih[2].equalsIgnoreCase("t")) {
+                inputNilaiDosen();
+            } else {
+                nilaiMahasiswaPengajar();
+            }
+        }
+    }
+    // program untuk admin
+
     public static void berandaAdmin() {
-        System.out.println("===================================");
-        System.out.println("|             BERANDA             |");
-        System.out.println("===================================");
-        System.out.println(
-                "| [1] Dosen                       |\n| [2] Mahasiswa                   |\n| [3] Mata Kuliah                 |\n| [4] Nilai                       |\n| [T] Keluar                      |");
-        System.out.print("===================================\npilih -->  : ");
+        String item[] = { "Dosen", "Mahasiswa", "Mata Kuliah", "Nilai" };
+        tabelTampilan("BERANDA", item);
         pilih[1] = scStr.nextLine();
         System.out.println();
         System.out.println("\033[H\033[2J");
@@ -376,12 +452,8 @@ public class projek2 {
     }
 
     public static void fBioDosen() {
-        System.out.println("===================================");
-        System.out.println("|              DOSEN              |");
-        System.out.println("===================================");
-        System.out.println(
-                "| [1] Tambah Dosen                |\n| [2] Kurangi Dosen               |\n| [3] Ubah Dosen                  |\n| [4] Lihat Dosen                 |\n| [5] Pengajar                    |\n| [T] Keluar                      |");
-        System.out.print("===================================\npilih -->  : ");
+        String item[] = { "Tambah Dosen", "Kurangi Dosen", "Ubah Dosen", "Lihat Dosen", "Pengajar" };
+        tabelTampilan("DOSEN", item);
         pilih[2] = scStr.nextLine();
         System.out.println("\033[H\033[2J");
         if (pilih[2].equalsIgnoreCase("1")) {
@@ -436,13 +508,13 @@ public class projek2 {
         masterDosen = tambahDosen;
         sortingDosen();
         tabelDosenMahasiswa(masterDosen, bioDosen[1]);
-        fKembaliFBioDosen();
+        fKembali("dosen");
     }
 
     public static void fKurangDosen() {
         if (masterDosen.length == 0) {
             System.out.println("Dosen tidak tersedia");
-            fKembaliFBioDosen();
+            fKembali("dosen");
         } else {
             tabelDosenMahasiswa(masterDosen, bioDosen[1]);
             System.out.print("Masukkan : \n[NIP] untuk memilih dosen\n[T]   untuk keluar\npilih -->  : ");
@@ -502,19 +574,7 @@ public class projek2 {
                 fBioDosen();
             } else {
                 System.out.println("Dosen tidak terdaftar");
-                kondisi = true;
-                while (kondisi) {
-                    System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-                    kembali = scStr.nextLine();
-                    System.out.println("\033[H\033[2J");
-                    if (kembali.equalsIgnoreCase("t")) {
-                        fBioDosen();
-                        kondisi = false;
-                    } else if (kembali.equalsIgnoreCase("r")) {
-                        fKurangDosen();
-                        kondisi = false;
-                    }
-                }
+                fKembali1("dosen", "ulangKurangiDosen");
             }
         }
     }
@@ -522,7 +582,7 @@ public class projek2 {
     public static void fUbahDosen() {
         if (masterDosen.length == 0) {
             System.out.println("Dosen tidak tersedia");
-            fKembaliFBioDosen();
+            fKembali("dosen");
         } else {
             tabelDosenMahasiswa(masterDosen, bioDosen[1]);
             System.out.print("Masukkan : \n[NIP] untuk memilih dosen\n[T]   untuk keluar\npilih -->  : ");
@@ -535,25 +595,24 @@ public class projek2 {
                 fBioDosen();
             } else {
                 System.out.println("Dosen tidak terdaftar");
-                kondisi = true;
-                while (kondisi) {
-                    System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-                    kembali = scStr.nextLine();
-                    System.out.println("\033[H\033[2J");
-                    if (kembali.equalsIgnoreCase("t")) {
-                        fBioDosen();
-                        kondisi = false;
-                    } else if (kembali.equalsIgnoreCase("r")) {
-                        fUbahDosen();
-                        kondisi = false;
-                    }
-                }
+                fKembali1("dosen", "ulangUbahDosen");
             }
         }
     }
 
     public static void cfUbahDosen1() {
-        tabelBioDosen();
+        System.out.println(
+                "=====================================================================");
+        for (int i = 0; i < bioDosen.length; i++) {
+            System.out.printf("|  %-5s | %-5s |  %-30s%-18s|\n", i + 1, bioDosen[i],
+                    masterDosen[ambilAngka[0]][i], " ");
+            if (i < bioDosen.length - 1) {
+                System.out.println(
+                        "---------------------------------------------------------------------");
+            }
+        }
+        System.out.println(
+                "=====================================================================");
         System.out.print("Masukkan : \n[Angka]   untuk mengubah\n[T]       untuk keluar\npilih -->  : ");
         pilih[4] = scStr.nextLine();
         System.out.println("\033[H\033[2J");
@@ -581,26 +640,14 @@ public class projek2 {
             fUbahDosen();
         } else {
             System.out.println("Tidak valid");
-            kondisi = true;
-            while (kondisi) {
-                System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-                kembali = scStr.nextLine();
-                System.out.println("\033[H\033[2J");
-                if (kembali.equalsIgnoreCase("t")) {
-                    fBioDosen();
-                    kondisi = false;
-                } else if (kembali.equalsIgnoreCase("r")) {
-                    cfUbahDosen1();
-                    kondisi = false;
-                }
-            }
+            fKembali1("dosen", "ulangCabangUbahDosen");
         }
     }
 
     public static void fLihatDosen() {
         if (masterDosen.length == 0) {
             System.out.println("Dosen tidak tersedia");
-            fKembaliFBioDosen();
+            fKembali("dosen");
         } else {
             tabelDosenMahasiswa(masterDosen, bioDosen[1]);
             System.out.print("Masukkan : \n[NIP] untuk memilih dosen\n[T]   untuk keluar\npilih -->  : ");
@@ -609,10 +656,10 @@ public class projek2 {
             searchingTanpaAngka(masterDosen.length, 3, 0, 1, masterDosen);
             if (pilih[3].equalsIgnoreCase(masterDosen[ambilAngka[0]][1])) {
                 searchingPengajar(0);
-                tabelBioDosen();
+                tabelBioDosen(0, 3);
                 if (tempint[0] == null) {
                     System.out.println("Belum ada Mata Kuliah yang diajar");
-                    fUlangLihatDosen();
+                    fKembali1("dosen", "ulangLihatDosen");
                 } else {
                     for (int i = 0; i < tempint[0].length; i++) {
                         System.out.printf("|  %-5s|  %-46s  |\n", i + 1, masterMatkul[tempint[0][i]][0][0]);
@@ -623,29 +670,13 @@ public class projek2 {
                     }
                     System.out.println(
                             "============================================================");
-                    fUlangLihatDosen();
+                    fKembali1("dosen", "ulangLihatDosen");
                 }
             } else if (pilih[3].equalsIgnoreCase("t")) {
                 fBioDosen();
             } else {
                 System.out.println("Dosen tidak terdaftar");
-                fUlangLihatDosen();
-            }
-        }
-    }
-
-    public static void fUlangLihatDosen() {
-        kondisi = true;
-        while (kondisi) {
-            System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-            kembali = scStr.nextLine();
-            System.out.println("\033[H\033[2J");
-            if (kembali.equalsIgnoreCase("t")) {
-                fBioDosen();
-                kondisi = false;
-            } else if (kembali.equalsIgnoreCase("r")) {
-                fLihatDosen();
-                kondisi = false;
+                fKembali1("dosen", "ulangLihatDosen");
             }
         }
     }
@@ -653,7 +684,7 @@ public class projek2 {
     public static void fPengajar() {
         if (masterMatkul.length == 0) {
             System.out.println("Mata Kuliah tidak tersedia");
-            fKembaliFBioDosen();
+            fKembali("dosen");
         } else {
             tabelMatkul();
             System.out.print("Masukkan : \n[ANGKA] untuk memilih Mata Kuliah\n[T]     untuk keluar\npilih -->  : ");
@@ -674,30 +705,14 @@ public class projek2 {
                 fBioDosen();
             } else {
                 System.out.println("Mata Kuliah tidak terdaftar");
-                kondisi = true;
-                while (kondisi) {
-                    System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-                    kembali = scStr.nextLine();
-                    System.out.println("\033[H\033[2J");
-                    if (kembali.equalsIgnoreCase("t")) {
-                        fBioDosen();
-                        kondisi = false;
-                    } else if (kembali.equalsIgnoreCase("r")) {
-                        fPengajar();
-                        kondisi = false;
-                    }
-                }
+                fKembali1("dosen", "ulangPengajar");
             }
         }
     }
 
     public static void fBioPengajar() {
-        System.out.println("===================================");
-        System.out.println("|             PENGAJAR            |");
-        System.out.println("===================================");
-        System.out.println(
-                "| [1] Tambah Pengajar             |\n| [2] Kurangi Pengajar            |\n| [3] Ubah Pengajar               |\n| [4] Lihat Pengajar              |\n| [T] Keluar                      |");
-        System.out.print("===================================\npilih -->  : ");
+        String item[] = { "Tambah Pengajar", "Kurangi Pengajar", "Ubah Pengajar", "Lihat Pengajar" };
+        tabelTampilan("PENGAJAR", item);
         pilih[4] = scStr.nextLine();
         System.out.println("\033[H\033[2J");
         if (pilih[4].equalsIgnoreCase("1")) {
@@ -718,7 +733,7 @@ public class projek2 {
     public static void fTambahPengajar() {
         if (masterDosen.length == 0) {
             System.out.println("Dosen tidak tersedia");
-            fKembaliFBioDosen();
+            fKembali("dosen");
         } else {
             String tambahPengajar[][][] = new String[masterMatkul.length][2][];
             for (int i = 0; i < masterMatkul.length; i++) {
@@ -734,7 +749,7 @@ public class projek2 {
                     }
                 }
             }
-            tabelPengajar();
+            tabelPengajar(0);
             for (int i = 0; i < 1; i++) {
                 System.out.printf("%-22s: ", bioDosenInput[1]);
                 tambahPengajar[ambilAngka[0]][1][masterMatkul[ambilAngka[0]][1].length] = scStr.nextLine();
@@ -762,23 +777,11 @@ public class projek2 {
                 if (tambahPengajar[ambilAngka[0]][1][masterMatkul[ambilAngka[0]][1].length]
                         .equalsIgnoreCase(masterDosen[ambilAngka[1]][1])) {
                     masterMatkul = tambahPengajar;
-                    tabelPengajar();
-                    fKembaliFBioPengajar();
+                    tabelPengajar(0);
+                    fKembali("pengajar");
                 } else {
                     System.out.println("Dosen tidak terdaftar");
-                    kondisi = true;
-                    while (kondisi) {
-                        System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-                        kembali = scStr.nextLine();
-                        System.out.println("\033[H\033[2J");
-                        if (kembali.equalsIgnoreCase("t")) {
-                            fBioPengajar();
-                            kondisi = false;
-                        } else if (kembali.equalsIgnoreCase("r")) {
-                            fTambahPengajar();
-                            kondisi = false;
-                        }
-                    }
+                    fKembali1("pengajar", "ulangTambahPengajar");
                 }
             } else {
                 if (tambahPengajar[ambilAngka[0]][1][masterMatkul[ambilAngka[0]][1].length]
@@ -786,27 +789,15 @@ public class projek2 {
                         && !tambahPengajar[ambilAngka[0]][1][masterMatkul[ambilAngka[0]][1].length]
                                 .equalsIgnoreCase(masterMatkul[ambilAngka[0]][1][ambilAngka[2]])) {
                     masterMatkul = tambahPengajar;
-                    tabelPengajar();
-                    fKembaliFBioPengajar();
+                    tabelPengajar(0);
+                    fKembali("pengajar");
                 } else if (tambahPengajar[ambilAngka[0]][1][masterMatkul[ambilAngka[0]][1].length]
                         .equalsIgnoreCase(masterMatkul[ambilAngka[0]][1][ambilAngka[2]])) {
                     System.out.println("Dosen sudah masuk ke pengajar");
-                    fKembaliFBioPengajar();
+                    fKembali("pengajar");
                 } else {
                     System.out.println("Dosen tidak terdaftar");
-                    kondisi = true;
-                    while (kondisi) {
-                        System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-                        kembali = scStr.nextLine();
-                        System.out.println("\033[H\033[2J");
-                        if (kembali.equalsIgnoreCase("t")) {
-                            fBioPengajar();
-                            kondisi = false;
-                        } else if (kembali.equalsIgnoreCase("r")) {
-                            fTambahPengajar();
-                            kondisi = false;
-                        }
-                    }
+                    fKembali1("pengajar", "ulangTambahPengajar");
                 }
             }
         }
@@ -815,11 +806,11 @@ public class projek2 {
     public static void fKurangPengajar() {
         if (masterDosen.length == 0) {
             System.out.println("Dosen tidak tersedia");
-            fKembaliFBioPengajar();
+            fKembali("pengajar");
         } else {
             if (masterMatkul[ambilAngka[0]][1].length == 0) {
                 System.out.println("Pengajar tidak tersedia");
-                fKembaliFBioPengajar();
+                fKembali("pengajar");
             } else {
                 String kurangPengajar[][][] = new String[masterMatkul.length][2][];
                 for (int i = 0; i < masterMatkul.length; i++) {
@@ -829,7 +820,7 @@ public class projek2 {
                 }
                 kurangPengajar[ambilAngka[0]][1] = new String[masterMatkul[ambilAngka[0]][1].length
                         - 1];
-                tabelPengajar();
+                tabelPengajar(0);
                 System.out.print("Masukkan : \n[NIP] untuk memilih dosen\n[T]   untuk keluar\npilih -->  : ");
                 pilih[5] = scStr.nextLine();
                 System.out.println("\033[H\033[2J");
@@ -862,18 +853,7 @@ public class projek2 {
                     fBioPengajar();
                 } else {
                     System.out.println("Dosen tidak terdaftar");
-                    kondisi = true;
-                    while (kondisi) {
-                        System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-                        kembali = scStr.nextLine();
-                        if (kembali.equalsIgnoreCase("t")) {
-                            fBioPengajar();
-                            kondisi = false;
-                        } else if (kembali.equalsIgnoreCase("r")) {
-                            fKurangPengajar();
-                            kondisi = false;
-                        }
-                    }
+                    fKembali1("pengajar", "ulangKurangiPengajar");
                 }
             }
         }
@@ -882,13 +862,13 @@ public class projek2 {
     public static void fUbahPengajar() {
         if (masterDosen.length == 0) {
             System.out.println("Dosen tidak tersedia");
-            fKembaliFBioPengajar();
+            fKembali("pengajar");
         } else {
             if (masterMatkul[ambilAngka[0]][1].length == 0) {
                 System.out.println("Pengajar tidak tersedia");
-                fKembaliFBioPengajar();
+                fKembali("pengajar");
             } else {
-                tabelPengajar();
+                tabelPengajar(0);
                 System.out.print("Masukkan : \n[NIP] untuk memilih dosen\n[T]   untuk keluar\npilih -->  : ");
                 pilih[5] = scStr.nextLine();
                 System.out.println("\033[H\033[2J");
@@ -904,19 +884,7 @@ public class projek2 {
                 } else if (pilih[5].equalsIgnoreCase("t")) {
                     fBioPengajar();
                 } else {
-                    kondisi = true;
-                    while (kondisi) {
-                        System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-                        kembali = scStr.nextLine();
-                        System.out.println("\033[H\033[2J");
-                        if (kembali.equalsIgnoreCase("t")) {
-                            fBioPengajar();
-                            kondisi = false;
-                        } else if (kembali.equalsIgnoreCase("r")) {
-                            fUbahPengajar();
-                            kondisi = false;
-                        }
-                    }
+                    fKembali1("pengajar", "ulangUbahPengajar");
                 }
             }
         }
@@ -956,39 +924,35 @@ public class projek2 {
         if (tampung.equalsIgnoreCase(masterDosen[ambilAngka[3]][1])
                 && !tampung.equalsIgnoreCase(masterMatkul[ambilAngka[0]][1][ambilAngka[2]])) {
             masterMatkul[ambilAngka[0]][1][ambilAngka[1]] = tampung;
-            tabelPengajar();
-            fKembaliFBioPengajar();
+            tabelPengajar(0);
+            fKembali("pengajar");
         } else if (tampung.equalsIgnoreCase(masterMatkul[ambilAngka[0]][1][ambilAngka[2]])) {
             System.out.println("Dosen sudah masuk ke pengajar");
-            fKembaliFBioPengajarUlangCFUbahPengajar1();
+            fKembali1("ulangUbahPengajar", "ulangCabangUbahPengajar");
         } else {
             System.out.println("Dosen tidak terdaftar");
-            fKembaliFBioPengajarUlangCFUbahPengajar1();
+            fKembali1("ulangUbahPengajar", "ulangCabangUbahPengajar");
         }
     }
 
     public static void fLihatPengajar() {
         if (masterDosen.length == 0) {
             System.out.println("Dosen tidak tersedia");
-            fKembaliFBioPengajar();
+            fKembali("pengajar");
         } else {
             if (masterMatkul[ambilAngka[0]][1].length == 0) {
                 System.out.println("Pengajar tidak tersedia");
-                fKembaliFBioPengajar();
+                fKembali("pengajar");
             } else {
-                tabelPengajar();
-                fKembaliFBioPengajar();
+                tabelPengajar(0);
+                fKembali("pengajar");
             }
         }
     }
 
     public static void fBioMahasiswa() {
-        System.out.println("===================================");
-        System.out.println("|            MAHASISWA            |");
-        System.out.println("===================================");
-        System.out.println(
-                "| [1] Tambah Mahasiswa            |\n| [2] Kurangi Mahasiswa           |\n| [3] Ubah    Mahasiswa           |\n| [4] Lihat   Mahasiswa           |\n| [T] Keluar                      |");
-        System.out.print("===================================\npilih -->  : ");
+        String item[] = { "Tambah Mahasiswa", "Kurangi Mahasiswa", "Ubah Mahasiswa", "Lihat Mahsiswa" };
+        tabelTampilan("MAHASISWA", item);
         pilih[2] = scStr.nextLine();
         System.out.println("\033[H\033[2J");
         if (pilih[2].equalsIgnoreCase("1")) {
@@ -1077,13 +1041,13 @@ public class projek2 {
         masterNilai = tambahNilai;
         sortingMahasiswa();
         tabelDosenMahasiswa(masterMahasiswa, biodataMahasiswa[1]);
-        fKembaliFBioMahasiswa();
+        fKembali("mahasiswa");
     }
 
     public static void fKurangMahasiswa() {
         if (masterMahasiswa.length == 0) {
             System.out.println("Mahasiswa tidak tersedia");
-            fKembaliFBioMahasiswa();
+            fKembali("mahasiswa");
         } else {
             String kurangMahasiswa[][] = new String[masterMahasiswa.length - 1][biodataMahasiswa.length];
             double kurangNilai[][][] = new double[masterMahasiswa.length
@@ -1121,19 +1085,7 @@ public class projek2 {
                 fBioMahasiswa();
             } else {
                 System.out.println("Mahasiswa tidak terdaftar");
-                kondisi = true;
-                while (kondisi) {
-                    System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-                    kembali = scStr.nextLine();
-                    System.out.println("\033[H\033[2J");
-                    if (kembali.equalsIgnoreCase("t")) {
-                        fBioMahasiswa();
-                        kondisi = false;
-                    } else if (kembali.equalsIgnoreCase("r")) {
-                        fKurangMahasiswa();
-                        kondisi = false;
-                    }
-                }
+                fKembali1("mahasiswa", "ulangKurangiMahasiswa");
             }
         }
     }
@@ -1141,7 +1093,7 @@ public class projek2 {
     public static void fUbahMahasiswa() {
         if (masterMahasiswa.length == 0) {
             System.out.println("Mahasiswa tidak tersedia");
-            fKembaliFBioMahasiswa();
+            fKembali("mahasiswa");
         } else {
             tabelDosenMahasiswa(masterMahasiswa, biodataMahasiswa[1]);
             System.out.print("Masukkan : \n[NIM] untuk memilih Mahasiswa\n[T]   untuk keluar\npilih -->  : ");
@@ -1154,28 +1106,37 @@ public class projek2 {
                 fBioMahasiswa();
             } else {
                 System.out.println("Mahasiswa tidak terdaftar");
-                kondisi = true;
-                while (kondisi) {
-                    System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-                    kembali = scStr.nextLine();
-                    System.out.println("\033[H\033[2J");
-                    if (kembali.equalsIgnoreCase("t")) {
-                        fBioMahasiswa();
-                        kondisi = false;
-                    } else if (kembali.equalsIgnoreCase("r")) {
-                        fUbahMahasiswa();
-                        kondisi = false;
-                    }
-                }
+                fKembali1("mahasiswa", "ulangUbahMahasiswa");
             }
         }
     }
 
     public static void cfUbahMahasiswa1() {
-        for (int i = 0; i < biodataMahasiswa.length; i++) {
-            System.out.printf("|%-4s|%-21s|%-70s|\n", i + 1, biodataMahasiswa[i],
-                    masterMahasiswa[ambilAngka[0]][i]);
+        for (int i = 0; i < 109; i++) {
+            System.out.print("=");
         }
+        System.out.println();
+        System.out.printf("| NOMOR  |%-46sBIODATA%-45s|\n", " ", " ");
+        for (int i = 0; i < 109; i++) {
+            System.out.print("=");
+        }
+        System.out.println();
+        for (int k = 0; k < biodataMahasiswa.length; k++) {
+            System.out.printf("|  %-5s | %-20s  |  %-70s  |", k + 1, biodataMahasiswa[k],
+                    masterMahasiswa[ambilAngka[0]][k]);
+            System.out.println();
+            if (k < biodataMahasiswa.length - 1) {
+                for (int i = 0; i < 109; i++) {
+                    System.out.print("-");
+                }
+                System.out.println();
+            }
+
+        }
+        for (int i = 0; i < 109; i++) {
+            System.out.print("=");
+        }
+        System.out.println();
         System.out.print("Masukkan : \n[Angka]   untuk mengubah\n[T]       untuk keluar\npilih -->  : ");
         pilih[4] = scStr.nextLine();
         System.out.println("\033[H\033[2J");
@@ -1204,26 +1165,14 @@ public class projek2 {
             fUbahMahasiswa();
         } else {
             System.out.println("Tidak valid");
-            kondisi = true;
-            while (kondisi) {
-                System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-                kembali = scStr.nextLine();
-                System.out.println("\033[H\033[2J");
-                if (kembali.equalsIgnoreCase("t")) {
-                    fUbahMahasiswa();
-                    kondisi = false;
-                } else if (kembali.equalsIgnoreCase("r")) {
-                    cfUbahMahasiswa1();
-                    kondisi = false;
-                }
-            }
+            fKembali1("ulangUbahMahasiswa", "ulangCabangUbahMahasiswa");
         }
     }
 
     public static void fLihatMahasiswa() {
         if (masterMahasiswa.length == 0) {
             System.out.println("Mahasiswa tidak tersedia");
-            fKembaliFBioMahasiswa();
+            fKembali("mahasiswa");
         } else {
             tabelDosenMahasiswa(masterMahasiswa, biodataMahasiswa[1]);
             System.out.print("Masukkan : \n[NIM] untuk memilih Mahasiswa\n[T]   untuk keluar\npilih -->  : ");
@@ -1236,53 +1185,52 @@ public class projek2 {
                 fBioMahasiswa();
             } else {
                 System.out.println("Mahasiswa tidak terdaftar");
-                kondisi = true;
-                while (kondisi) {
-                    System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-                    kembali = scStr.nextLine();
-                    System.out.println("\033[H\033[2J");
-                    if (kembali.equalsIgnoreCase("t")) {
-                        fBioMahasiswa();
-                        kondisi = false;
-                    } else if (kembali.equalsIgnoreCase("r")) {
-                        fLihatMahasiswa();
-                        kondisi = false;
-                    }
-                }
+                fKembali1("mahasiswa", "ulangLihatMahasiswa");
             }
         }
     }
 
     public static void cfLihatMahasiswa11() {
-        System.out.println(
-                "1. Biodata\n2. Password\nMasukkan : \n[Angka]   untuk mengubah\n[T]       untuk keluar\npilih -->  : ");
+        String item[] = { "Biodata", "Akun" };
+        tabelTampilan("BIODATA", item);
         pilih[4] = scStr.nextLine();
         System.out.println("\033[H\033[2J");
         if (pilih[4].equalsIgnoreCase("1") || pilih[4].equalsIgnoreCase("biodata")) {
-            for (int i = 0; i < biodataMahasiswa.length - 1; i++) {
-                System.out.printf("|%-4s|%-21s|%-70s|\n", i + 1, biodataMahasiswa[i],
-                        masterMahasiswa[ambilAngka[0]][i]);
-            }
-            fUlangLihatMahasiswa();
+            fCetakBiodataMahasiswa(1);
+            fKembali1("ulangLihatMahasiswa", "ulangCabanglihatMahasiswa");
         } else if (pilih[4].equalsIgnoreCase("2") || pilih[4].equalsIgnoreCase("akun")) {
-            System.out.printf("|%-4s|%-21s|%-70s|\n|%-4s|%-21s|%-70s|\n", 1, biodataMahasiswa[1],
-                    masterMahasiswa[ambilAngka[0]][1], 2, biodataMahasiswa[12],
-                    masterMahasiswa[ambilAngka[0]][12]);// username dan password
-            fUlangLihatMahasiswa();
+            for (int i = 0; i < 101; i++) {
+                System.out.print("=");
+            }
+            System.out.println();
+            System.out.printf("|%-48sAKUN%-47s|\n", " ", " ");
+            for (int i = 0; i < 101; i++) {
+                System.out.print("=");
+            }
+            System.out.println();
+            System.out.printf("|  %-20s  |  %-70s  |\n", biodataMahasiswa[1],
+                    masterMahasiswa[ambilAngka[0]][1]);
+            for (int i = 0; i < 101; i++) {
+                System.out.print("-");
+            }
+            System.out.println();
+            System.out.printf("|  %-20s  |  %-70s  |\n", biodataMahasiswa[12],
+                    masterMahasiswa[ambilAngka[0]][12]);
+            for (int i = 0; i < 101; i++) {
+                System.out.print("=");
+            }
+            System.out.println();
+            fKembali1("ulangLihatMahasiswa", "ulangCabanglihatMahasiswa");
         } else if (pilih[4].equalsIgnoreCase("t")) {
             fLihatMahasiswa();
         } else {
-            fUlangLihatMahasiswa();
+            fKembali1("ulangLihatMahasiswa", "ulangCabanglihatMahasiswa");
         }
     }
 
     public static void fMatkul() {
-        System.out.println("===================================");
-        System.out.println("|           MATA KULIAH           |");
-        System.out.println("===================================");
-        System.out.println(
-                "| [1] Tambah Mata Kuliah          |\n| [2] Kurangi Mata Kuliah         |\n| [3] Ubah Mata Kuliah            |\n| [4] Lihat Mata Kuliah           |\n| [T] Keluar                      |");
-        System.out.print("===================================\npilih -->  : ");
+        String item[] = { "Tambah Mata Kuliah", "Kurangi Mata Kuliah", "Ubah Mata Kuliah", "Lihat Mata Kuliah" };
+        tabelTampilan("MATA KULIAH", item);
         pilih[2] = scStr.nextLine();
         System.out.println("\033[H\033[2J");
         if (pilih[2].equalsIgnoreCase("1")) {
@@ -1292,12 +1240,30 @@ public class projek2 {
         } else if (pilih[2].equalsIgnoreCase("3")) {
             fUbahMatkul();
         } else if (pilih[2].equalsIgnoreCase("4")) {
-            fLihatMatkul();
+            fLihatMatkul("admin");
         } else if (pilih[2].equalsIgnoreCase("t")) {
             berandaAdmin();
         } else {
             fMatkul();
         }
+    }
+
+    public static void fKetentuanMatkul(String tampung[], int a, int b, String tampungMatkul[][][]) {
+        for (int j = 0; j < masterMatkul.length; j++) {
+            if ((tampung[a].equals(tampung[0])
+                    && (tampung[0].length() > 45 || tampung[0].equals(masterMatkul[j][0][0])))
+                    || (tampung[a].equals(tampung[1]) && (tampung[1].length() > 4
+                            || tampung[1].equals(masterMatkul[j][0][1])))) {
+                kondisi = true;
+                break;
+            } else {
+                kondisi = false;
+            }
+        }
+        if (!kondisi) {
+            tampungMatkul[b][0][a] = tampung[a];
+        }
+
     }
 
     public static void fTambahMatkul() {
@@ -1311,7 +1277,6 @@ public class projek2 {
         tambahMatkul[masterMatkul.length][1] = new String[0];
         double tambahPersentase[][] = new double[masterMatkul.length + 1][scorePersentase.length];
         double tambahNilai[][][] = new double[masterMahasiswa.length][masterMatkul.length + 1][6];
-        // harus mempelajari sifat array
         for (int j = 0; j < masterMatkul.length; j++) {
             for (int i = 0; i < masterMahasiswa.length; i++) {
                 tambahNilai[i][j] = masterNilai[i][j];
@@ -1319,33 +1284,45 @@ public class projek2 {
             tambahMatkul[j] = masterMatkul[j];
             tambahPersentase[j] = masterPersentase[j];
         }
-        if (masterMatkul.length != 0) {
+        if (masterMatkul.length == 0) {
+            for (int i = 0; i < tambahMatkul[masterMatkul.length][0].length; i++) {
+                System.out.printf("%-62s : ", namaMatkul[i]);
+                tambahMatkul[masterMatkul.length][0][i] = scStr.nextLine();
+                if ((tambahMatkul[masterMatkul.length][0][i]
+                        .equalsIgnoreCase(tambahMatkul[masterMatkul.length][0][0])
+                        && tambahMatkul[masterMatkul.length][0][0].length() > 45)
+                        || (tambahMatkul[masterMatkul.length][0][i]
+                                .equalsIgnoreCase(tambahMatkul[masterMatkul.length][0][1])
+                                && tambahMatkul[masterMatkul.length][0][1].length() > 4)) {
+                    i--;
+                }
+            }
+        } else {
             tabelMatkul();
-        }
-        System.out.println("Masukkan : ");
-        for (int i = 0; i < tambahMatkul[ambilAngka[0]][0].length; i++) {
-            System.out.printf("%-62s : ", namaMatkul[i]);
-            tambahMatkul[masterMatkul.length][0][i] = scStr.nextLine();
-            if ((tambahMatkul[masterMatkul.length][0][i]
-                    .equalsIgnoreCase(tambahMatkul[masterMatkul.length][0][0])
-                    && tambahMatkul[masterMatkul.length][0][0].length() > 45)
-                    || (tambahMatkul[masterMatkul.length][0][i]
-                            .equalsIgnoreCase(tambahMatkul[masterMatkul.length][0][1])
-                            && tambahMatkul[masterMatkul.length][0][1].length() > 4)) {
-                i--;
+            String tampung[] = new String[namaMatkul.length];
+
+            System.out.println(
+                    "                          !Catatan!\nJika Mata Kuliah ada yang sama maka akan mengulang\n\nMasukkan :");
+            for (int i = 0; i < namaMatkul.length; i++) {
+                System.out.printf("%-62s : ", namaMatkul[i]);
+                tampung[i] = scStr.nextLine();
+                fKetentuanMatkul(tampung, i, masterMatkul.length, tambahMatkul);
+                if (!tampung[i].equalsIgnoreCase(tambahMatkul[masterMatkul.length][0][i])) {
+                    i--;
+                }
             }
         }
-        double tampung = 0;
+        double tamp = 0;
         for (int i = 0; i < 1; i++) {
             System.out.println("!Total persentase = 1!");
-            tampung = 0;
+            tamp = 0;
             for (int j = 0; j < scorePersentase.length - 1; j++) {
                 System.out.printf("Persentase %-5s %-45s : ", scorePersentase[j],
                         tambahMatkul[masterMatkul.length][0][0]);
                 tambahPersentase[masterMatkul.length][j] = scDbl.nextDouble();
-                tampung += tambahPersentase[masterMatkul.length][j];
+                tamp += tambahPersentase[masterMatkul.length][j];
             }
-            if (tampung != 1) {
+            if (tamp != 1) {
                 i--;
             }
         }
@@ -1357,13 +1334,13 @@ public class projek2 {
         masterNilai = tambahNilai;
         sortingMatkul();
         tabelMatkul();
-        fKembaliFMatkul();
+        fKembali("matkul");
     }
 
     public static void fKurangMatkul() {
         if (masterMatkul.length == 0) {
             System.out.println("Mata Kuliah tidak teredia");
-            fKembaliFMatkul();
+            fKembali("matkul");
         } else {
             String kurangMatkul[][][] = new String[masterMatkul.length - 1][2][];
             double kurangPersentase[][] = new double[masterMatkul.length -
@@ -1406,19 +1383,7 @@ public class projek2 {
                 fMatkul();
             } else {
                 System.out.println("Mata Kuliah tidak terdaftar");
-                kondisi = true;
-                while (kondisi) {
-                    System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-                    kembali = scStr.nextLine();
-                    System.out.println("\033[H\033[2J");
-                    if (kembali.equalsIgnoreCase("t")) {
-                        fMatkul();
-                        kondisi = false;
-                    } else if (kembali.equalsIgnoreCase("r")) {
-                        fKurangMatkul();
-                        kondisi = false;
-                    }
-                }
+                fKembali1("matkul", "ulangKurangiMatkul");
             }
         }
     }
@@ -1426,7 +1391,7 @@ public class projek2 {
     public static void fUbahMatkul() {
         if (masterMatkul.length == 0) {
             System.out.println("Mata Kuliah tidak tersedia");
-            fKembaliFMatkul();
+            fKembali("matkul");
         } else {
             tabelMatkul();
             System.out.print("Masukkan : \n[ANGKA] untuk memilih Mata Kuliah\n[T]     untuk keluar\npilih -->  : ");
@@ -1440,48 +1405,35 @@ public class projek2 {
                 fMatkul();
             } else {
                 System.out.println("Mata Kuliah tidak terdaftar");
-                kondisi = true;
-                while (kondisi) {
-                    System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-                    kembali = scStr.nextLine();
-                    System.out.println("\033[H\033[2J");
-                    if (kembali.equalsIgnoreCase("t")) {
-                        fMatkul();
-                        kondisi = false;
-                    } else if (kembali.equalsIgnoreCase("r")) {
-                        fUbahMatkul();
-                        kondisi = false;
-                    }
-                }
+                fKembali1("matkul", "ulangUbahMatkul");
             }
         }
     }
 
     public static void cfUbahMatkul1() {
-        System.out.printf("%-40s\n",
-                masterMatkul[ambilAngka[0]][0][0]);
-        for (int i = 0; i < scorePersentase.length; i++) {
-            System.out.printf("|%-4s|Persentase %-5s %-31s|%.1f|\n", i + 2,
-                    scorePersentase[i],
-                    masterMatkul[ambilAngka[0]][0][0], masterPersentase[ambilAngka[0]][i]);
-        }
-        System.out.println(
-                "1. Mata Kuliah\n2. Persentase\n3. SKS\nMasukkan : \n[Angka]   untuk mengubah\n[T]       untuk keluar\npilih -->  : ");
+        tabelPersentase();
+        System.out.printf(
+                "| [1] Mata Kuliah%-42s|\n| [2] Persentase%-43s|\n| [3] SKS%-50s|\n| [T] Keluar%-47s|\n", " ", " ",
+                " ", " ");
+        System.out.print(
+                "============================================================\npilih -->  :");
         pilih[4] = scStr.nextLine();
         System.out.println("\033[H\033[2J");
         if (pilih[4].equalsIgnoreCase("1") || pilih[4].equalsIgnoreCase("mata kuliah")) {
-            for (int i = 0; i < masterMatkul[ambilAngka[0]][0].length; i++) {
-                System.out.printf("%-57s : ", namaMatkul[i]);
-                masterMatkul[ambilAngka[0]][0][i] = scStr.nextLine();
-                if (masterMatkul[ambilAngka[0]][0][i]
-                        .equalsIgnoreCase(masterMatkul[ambilAngka[0]][0][1])
-                        && masterMatkul[ambilAngka[0]][0][1].length() > 4) {
+            String tampung[] = new String[namaMatkul.length];
+            for (int i = 0; i < namaMatkul.length; i++) {
+                System.out.printf("%-62s : ", namaMatkul[i]);
+                tampung[i] = scStr.nextLine();
+                fKetentuanMatkul(tampung, i, ambilAngka[0], masterMatkul);
+                if (!tampung[i].equalsIgnoreCase(masterMatkul[ambilAngka[0]][0][i])) {
                     i--;
+                } else {
+                    tampung[i] = "";
                 }
             }
             masterMatkul[ambilAngka[0]][1] = new String[0];
             sortingMatkul();
-            fUlangCfUbahMatkul1();
+            fKembali1("ulangUbahMatkul", "ulangCabangUbahMatkul");
         } else if (pilih[4].equalsIgnoreCase("2") || pilih[4].equalsIgnoreCase("persentase")) {
             double tampung = 0;
             for (int i = 0; i < 1; i++) {
@@ -1497,22 +1449,34 @@ public class projek2 {
                     i--;
                 }
             }
-            fUlangCfUbahMatkul1();
+            resetNilai();
+            fKembali1("ulangUbahMatkul", "ulangCabangUbahMatkul");
         } else if (pilih[4].equalsIgnoreCase("3") || pilih[4].equalsIgnoreCase("sks")) {
             System.out.printf("%-5s %-40s             : ", scorePersentase[scorePersentase.length - 1],
                     masterMatkul[ambilAngka[0]][0][0]);
             masterPersentase[ambilAngka[0]][scorePersentase.length - 1] = scDbl.nextDouble();
-            fUlangCfUbahMatkul1();
+            resetNilai();
+            fKembali1("ulangUbahMatkul", "ulangCabangUbahMatkul");
+        } else if (pilih[4].equalsIgnoreCase("t")) {
+            fUbahMatkul();
         } else {
             System.out.println("Tidak Valid");
-            fUlangCfUbahMatkul1();
+            fKembali1("ulangUbahMatkul", "ulangCabangUbahMatkul");
         }
     }
 
-    public static void fLihatMatkul() {
+    public static void resetNilai() {
+        for (int i = 0; i < masterMahasiswa.length; i++) {
+            for (int j = 0; j < scorePersentase.length - 1; j++) {
+                masterNilai[i][ambilAngka[0]][j] = 0;
+            }
+        }
+    }
+
+    public static void fLihatMatkul(String tampung) {
         if (masterMatkul.length == 0) {
             System.out.println("Mata Kuliah tidak tersedia");
-            fKembaliFMatkul();
+            fKembali("matkul");
         } else {
             tabelMatkul();
             System.out.print("Masukkan : \n[ANGKA] untuk memilih Mata Kuliah\n[T]     untuk keluar\npilih -->  : ");
@@ -1521,39 +1485,40 @@ public class projek2 {
             searchingDenganAngka(3, 0);
             if (pilih[3].equalsIgnoreCase(masterMatkul[ambilAngka[0]][0][0])
                     || pilih[3].equalsIgnoreCase(intToStr = String.valueOf(ambilAngka[0] + 1))) {
-                System.out.printf("%-40s\n",
-                        masterMatkul[ambilAngka[0]][0][0]);
-                for (int i = 0; i < scorePersentase.length; i++) {
-                    System.out.printf("|%-4s|Persentase %-5s %-31s|%.1f|\n", i + 2,
-                            scorePersentase[i],
-                            masterMatkul[ambilAngka[0]][0][0], masterPersentase[ambilAngka[0]][i]);
-                } // di perbaiki
-                fKembaliFLihatMatkul();
+                tabelPersentase();
+                if (tampung.equalsIgnoreCase("admin")) {
+                    fKembali1("matkul", "ulangLihatMatkul");
+                } else if (tampung.equalsIgnoreCase("dosen")) {
+                    fKembali1("berandaDosen", "ulangLihatMatkulDosen");
+                }
             } else if (pilih[3].equalsIgnoreCase("t")) {
-                fMatkul();
+                if (tampung.equalsIgnoreCase("admin")) {
+                    fMatkul();
+                } else if (tampung.equalsIgnoreCase("dosen")) {
+                    berandaDosen();
+                }
+
             } else {
                 System.out.println("Mata Kuliah tidak terdaftar");
-                fKembaliFLihatMatkul();
+                if (tampung.equalsIgnoreCase("admin")) {
+                    fKembali1("matkul", "ulangLihatMatkul");
+                } else if (tampung.equalsIgnoreCase("dosen")) {
+                    fKembali1("berandaDosen", "ulangLihatMatkulDosen");
+                }
             }
         }
     }
 
     public static void fNilai() {
-        System.out.println("===================================");
-        System.out.println("|              NILAI              |");
-        System.out.println("===================================");
-        System.out.println(
-                "| [1] Input Nilai                 |\n| [2] Lihat Nilai                 |\n| [3] Laporan                     |\n| [4] Ranking                     |\n| [T] Keluar                      |");
-        System.out.print("===================================\npilih -->  : ");
+        String item[] = { "Input Nilai", "Laporan", "Ranking" };
+        tabelTampilan("NILAI", item);
         pilih[2] = scStr.nextLine();
         System.out.println("\033[H\033[2J");
         if (pilih[2].equalsIgnoreCase("1")) {
             fInputNilai();
         } else if (pilih[2].equalsIgnoreCase("2")) {
-            fLihatNilai();
-        } else if (pilih[2].equalsIgnoreCase("3")) {
             fLaporan();
-        } else if (pilih[2].equalsIgnoreCase("4")) {
+        } else if (pilih[2].equalsIgnoreCase("3")) {
             fRanking();
         } else if (pilih[2].equalsIgnoreCase("t")) {
             berandaAdmin();
@@ -1565,7 +1530,7 @@ public class projek2 {
     public static void fInputNilai() {
         if (masterMahasiswa.length == 0) {
             System.out.println("Mahasiswa tidak tersedia");
-            fKembaliFBioMahasiswa();
+            fKembali("nilai");
         } else {
             tabelDosenMahasiswa(masterMahasiswa, biodataMahasiswa[1]);
             System.out.print("Masukkan : \n[NIM] untuk memilih Mahasiswa\n[T]   untuk keluar\npilih -->  : ");
@@ -1573,54 +1538,72 @@ public class projek2 {
             System.out.println("\033[H\033[2J");
             searchingTanpaAngka(masterMahasiswa.length, 3, 0, 1, masterMahasiswa);
             if (pilih[3].equalsIgnoreCase(masterMahasiswa[ambilAngka[0]][1])) {
-                cfInputNilai1();
+                fInputLihatNilai("admin");
             } else if (pilih[3].equalsIgnoreCase("t")) {
                 fNilai();
             } else {
                 System.out.println("Mahasiswa tidak terdaftar");
-                kondisi = true;
-                while (kondisi) {
-                    System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-                    kembali = scStr.nextLine();
-                    System.out.println("\033[H\033[2J");
-                    if (kembali.equalsIgnoreCase("t")) {
-                        fNilai();
-                        kondisi = false;
-                    } else if (kembali.equalsIgnoreCase("r")) {
-                        fInputNilai();
-                        kondisi = false;
-                    }
-                }
+                fKembali1("nilai", "ulangInputNilai");
             }
         }
     }
 
+    public static void fInputLihatNilai(String tampung) {
+        String item[] = { "Input Nilai", "Lihat Nilai" };
+        tabelTampilan("NILAI", item);
+        pilih[5] = scStr.nextLine();
+        System.out.println("\033[H\033[2J");
+        if (tampung.equalsIgnoreCase("admin")) {
+            if (pilih[5].equalsIgnoreCase("1")) {
+                cfInputNilai1();
+            } else if (pilih[5].equalsIgnoreCase("2")) {
+                cfLihatNilai1();
+            } else if (pilih[5].equalsIgnoreCase("t")) {
+                fInputNilai();
+            } else {
+                fInputLihatNilai("admin");
+            }
+        } else if (tampung.equalsIgnoreCase("dosen")) {
+            if (pilih[5].equalsIgnoreCase("1")) {
+                finputNilaiFinal(2, 3);
+                fKembali("kembaliKeLihatNilai");
+            } else if (pilih[5].equalsIgnoreCase("2")) {
+                tabelNilaiPerMatkul(2, 3);
+                fKembali("kembaliKeLihatNilai");
+            } else if (pilih[5].equalsIgnoreCase("t")) {
+                nilaiMahasiswaPengajar();
+            } else {
+                fInputLihatNilai("dosen");
+            }
+        }
+
+    }// dibuat satu fungsi
+
     public static void cfInputNilai1() {
         if (masterMatkul.length == 0) {
             System.out.println("Mata Kuliah tidak tersedia");
-            fKembaliFMatkul();
+            fKembali("nilai");
         } else {
             tabelMatkul();
             System.out.print("Masukkan : \n[ANGKA] untuk memilih Mata Kuliah\n[T]     untuk keluar\npilih -->  : ");
-            pilih[4] = scStr.nextLine();
+            pilih[5] = scStr.nextLine();
             System.out.println("\033[H\033[2J");
-            searchingDenganAngka(4, 1);
-            if (pilih[4].equalsIgnoreCase(masterMatkul[ambilAngka[1]][0][0])
-                    || pilih[4].equalsIgnoreCase(intToStr = String.valueOf(ambilAngka[1] + 1))) {
+            searchingDenganAngka(5, 1);
+            if (pilih[5].equalsIgnoreCase(masterMatkul[ambilAngka[1]][0][0])
+                    || pilih[5].equalsIgnoreCase(intToStr = String.valueOf(ambilAngka[1] + 1))) {
                 finputNilaiFinal(0, 1);
-                fKembaliFInputNilai();
-            } else if (pilih[4].equalsIgnoreCase("t")) {
-                fInputNilai();
+                fKembali1("ulangInputNilai", "ulangCabangInputNilai");
+            } else if (pilih[5].equalsIgnoreCase("t")) {
+                fInputLihatNilai("admin");
             } else {
                 System.out.println("Mata Kuliah tidak terdaftar");
-                fKembaliFInputNilai();
+                fKembali1("ulangInputNilai", "ulangCabangInputNilai");
             }
         }
     }
 
     public static void finputNilaiFinal(int a, int b) {
         System.out.printf("Masukkan Nilai %s\n(Nilai 0 sampai 100)\n\n", masterMatkul[ambilAngka[b]][0][0]);
-
         for (int i = 0; i < score.length - 1; i++) {
             System.out.printf("%-45s : ", score[i],
                     masterMatkul[ambilAngka[b]][0][0]);
@@ -1649,154 +1632,44 @@ public class projek2 {
         masterNilai[ambilAngka[a]][ambilAngka[b]][4] = 0;
     }
 
-    public static void fLihatNilai() {
-        if (masterMahasiswa.length == 0) {
-            System.out.println("Mahasiswa tidak tersedia");
-            fKembaliFBioMahasiswa();
-        } else {
-            tabelDosenMahasiswa(masterMahasiswa, biodataMahasiswa[1]);
-            System.out.print("Masukkan : \n[NIM] untuk memilih Mahasiswa\n[T]   untuk keluar\npilih -->  : ");
-            pilih[3] = scStr.nextLine();
-            System.out.println("\033[H\033[2J");
-            searchingTanpaAngka(masterMahasiswa.length, 3, 0, 1, masterMahasiswa);
-            if (pilih[3].equalsIgnoreCase(masterMahasiswa[ambilAngka[0]][1])) {
-                cfLihatNilai1();
-            } else if (pilih[3].equalsIgnoreCase("t")) {
-                fNilai();
-            } else {
-                System.out.println("Mahasiswa tidak terdaftar");
-                kondisi = true;
-                while (kondisi) {
-                    System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-                    kembali = scStr.nextLine();
-                    if (kembali.equalsIgnoreCase("t")) {
-                        fNilai();
-                        kondisi = false;
-                    } else if (kembali.equalsIgnoreCase("r")) {
-                        fLihatNilai();
-                        kondisi = false;
-                    }
-                }
-            }
-        }
-    }
-
     public static void cfLihatNilai1() {
         if (masterMatkul.length == 0) {
             System.out.println("Mata Kuliah tidak tersedia");
-            fKembaliFMatkul();
+            fKembali("nilai");
         } else {
             System.out.println(
                     "============================================================");
-            System.out.printf("| %s  |%-19s%s%-19s|\n", atribut[7], atribut[4], atribut[0],
-                    atribut[4]);
+            System.out.printf("| NOMOR  |%-19sMATA KULIAH%-19s|\n", " ", " ");
             System.out.println(
                     "============================================================");
             for (int i = 0; i < masterMatkul.length; i++) {
-                System.out.printf("|   %-5s|%-2s%-45s%-2s|\n", i + 1, atribut[4],
-                        masterMatkul[i][0][0], atribut[4]);
+                System.out.printf("|   %-5s|%-2s%-45s%-2s|\n", i + 1, " ",
+                        masterMatkul[i][0][0], " ");
                 if (i < masterMatkul.length) {
                     System.out.println(
                             "------------------------------------------------------------");
                 }
             }
-            System.out.printf("|   %-5s|  IPS%-44s|\n", masterMatkul.length + 1, atribut[4]);
+            System.out.printf("|   %-5s|  IPS%-44s|\n", masterMatkul.length + 1, " ");
             System.out.println(
                     "============================================================");
             System.out.print("Masukkan : \n[ANGKA] untuk memilih Mata Kuliah\n[T]     untuk keluar\npilih -->  : ");
-            pilih[4] = scStr.nextLine();
+            pilih[5] = scStr.nextLine();
             System.out.println("\033[H\033[2J");
-            searchingDenganAngka(4, 1);
-            if (pilih[4].equalsIgnoreCase(masterMatkul[ambilAngka[1]][0][0])
-                    || pilih[4].equalsIgnoreCase(intToStr = String.valueOf(ambilAngka[1] + 1))) {
-                System.out.println(
-                        "==============================================================");
-                System.out.printf("|  %-45s  |  NILAI   |\n", masterMatkul[ambilAngka[1]][0][0]);
-                System.out.println(
-                        "==============================================================");
-
-                for (int i = 0; i < score.length - 1; i++) {
-                    if (masterNilai[ambilAngka[0]][ambilAngka[1]][i] < 10) {
-                        System.out.printf("|  %-45s  |  %.2f    |\n", score[i],
-                                masterNilai[ambilAngka[0]][ambilAngka[1]][i]);
-                    } else if (masterNilai[ambilAngka[0]][ambilAngka[1]][i] == 100) {
-                        System.out.printf("|  %-45s  |  %.2f  |\n", score[i],
-                                masterNilai[ambilAngka[0]][ambilAngka[1]][i]);
-                    } else {
-                        System.out.printf("|  %-45s  |  %.2f   |\n", score[i],
-                                masterNilai[ambilAngka[0]][ambilAngka[1]][i]);
-                    }
-                    System.out.println(
-                            "--------------------------------------------------------------");
-                    masterNilai[ambilAngka[0]][ambilAngka[1]][4] += masterNilai[ambilAngka[0]][ambilAngka[1]][i]
-                            * masterPersentase[ambilAngka[1]][i];
-                }
-                if (masterNilai[ambilAngka[0]][ambilAngka[1]][4] < 10) {
-                    System.out.printf("|  %-45s  |  %.2f    |\n", score[4],
-                            masterNilai[ambilAngka[0]][ambilAngka[1]][4]);
-                } else if (masterNilai[ambilAngka[0]][ambilAngka[1]][4] == 100) {
-                    System.out.printf("|  %-45s  |  %.2f  |\n", score[4],
-                            masterNilai[ambilAngka[0]][ambilAngka[1]][4]);
-                } else {
-                    System.out.printf("|  %-45s  |  %.2f   |\n", score[4],
-                            masterNilai[ambilAngka[0]][ambilAngka[1]][4]);
-                }
-                System.out.println(
-                        "==============================================================");
-                masterNilai[ambilAngka[0]][ambilAngka[1]][4] = 0;// bisa di impelmentasikan di input nilai oleh admin
-                                                                 // dan input nilai oleh dosen
-                fKembaliFLihatNilai();
-            } else if (pilih[4].equalsIgnoreCase("ips")
-                    || pilih[4].equalsIgnoreCase(intToStr = String.valueOf(masterMatkul.length + 1))) {
-                String grade[][] = new String[masterMahasiswa.length][masterMatkul.length];
-                double ips = 0;
-                fTotalSKS();
-                System.out.println(
-                        "========================================================================================");
-                System.out.printf("|%-22s%s%-21s|  %s  |  %s  |\n", atribut[4], atribut[0], atribut[4], atribut[1],
-                        atribut[2]);
-                System.out.println(
-                        "========================================================================================");
-
-                for (int i = 0; i < masterMatkul.length; i++) {
-                    for (int j = 0; j < score.length - 1; j++) {
-                        masterNilai[ambilAngka[0]][i][4] += masterNilai[ambilAngka[0]][i][j]
-                                * masterPersentase[i][j];
-                    }
-                    fGrade(ambilAngka[0], i, grade);
-                    if (masterNilai[ambilAngka[0]][i][4] < 10) {
-                        System.out.printf("|  %-50s  |     %.2f      |       %s       |\n", masterMatkul[i][0][0],
-                                masterNilai[ambilAngka[0]][i][4], grade[ambilAngka[0]][i]);
-                    } else if (masterNilai[ambilAngka[0]][i][4] == 100) {
-                        System.out.printf("|  %-50s  |     %.2f    |       %s       |\n", masterMatkul[i][0][0],
-                                masterNilai[ambilAngka[0]][i][4], grade[ambilAngka[0]][i]);
-                    } else {
-                        System.out.printf("|  %-50s  |     %.2f     |       %s       |\n", masterMatkul[i][0][0],
-                                masterNilai[ambilAngka[0]][i][4], grade[ambilAngka[0]][i]);
-                    }
-                    System.out.println(
-                            "----------------------------------------------------------------------------------------");
-                    masterNilai[ambilAngka[0]][i][5] *= masterPersentase[i][4]
-                            / totalSks;
-                    ips += masterNilai[ambilAngka[0]][i][5];
-                    masterNilai[ambilAngka[0]][i][5] = 0;
-                    masterNilai[ambilAngka[0]][i][4] = 0;
-                }
-                System.out.printf("|  %-52s|%-14s%.2f%-13s|\n", atribut[5], atribut[4],
-                        ips, atribut[4]);
-                System.out.println(
-                        "========================================================================================");
-                for (int i = 0; i < masterMatkul.length; i++) {
-                    grade[ambilAngka[0]][i] = null;
-                }
-                totalSks = 0;
-                ips = 0;
-                fKembaliFLihatNilai();
-            } else if (pilih[4].equalsIgnoreCase("t")) {
-                fLihatNilai();
+            searchingDenganAngka(5, 1);
+            if (pilih[5].equalsIgnoreCase(masterMatkul[ambilAngka[1]][0][0])
+                    || pilih[5].equalsIgnoreCase(intToStr = String.valueOf(ambilAngka[1] + 1))) {
+                tabelNilaiPerMatkul(0, 1);
+                fKembali1("ulangLihatNilai", "ulangCabangLihatNilai");
+            } else if (pilih[5].equalsIgnoreCase("ips")
+                    || pilih[5].equalsIgnoreCase(intToStr = String.valueOf(masterMatkul.length + 1))) {
+                lihatKHS();// kembali harus sendiri-sendiri
+                fKembali1("ulangLihatNilai", "ulangCabangLihatNilai");
+            } else if (pilih[5].equalsIgnoreCase("t")) {
+                fInputLihatNilai("admin");
             } else {
                 System.out.println("Mata Kuliah tidak terdaftar");
-                fKembaliFLihatNilai();
+                fKembali1("ulangLihatNilai", "ulangCabangLihatNilai");
             }
         }
     }
@@ -1804,19 +1677,19 @@ public class projek2 {
     public static void fLaporan() {
         if (masterMahasiswa.length == 0) {
             System.out.println("Mahasiswa tidak tersedia");
-            fKembaliNilai();
+            fKembali("nilai");
         } else {
             if (masterMatkul.length == 0) {
                 System.out.println("Mata Kuliah tidak tersedia");
-                fKembaliNilai();
+                fKembali("nilai");
             } else {
                 double ips[] = new double[masterMahasiswa.length];
                 String grade[][] = new String[masterMahasiswa.length][masterMatkul.length];
                 fTotalSKS();
                 fIps(ips, grade);
                 tabelLaporan(ips, grade);
-                fReset(ips, grade);
-                fKembaliNilai();
+                fReset();
+                fKembali("nilai");
             }
         }
     }
@@ -1824,42 +1697,37 @@ public class projek2 {
     public static void fRanking() {
         if (masterMahasiswa.length == 0) {
             System.out.println("Mahasiswa tidak tersedia");
-            fKembaliNilai();
+            fKembali("nilai");
         } else {
             if (masterMatkul.length == 0) {
                 System.out.println("Mata Kuliah tidak tersedia");
-                fKembaliNilai();
+                fKembali("nilai");
             } else {
                 double ips[] = new double[masterMahasiswa.length];
+
                 String grade[][] = new String[masterMahasiswa.length][masterMatkul.length];
                 fTotalSKS();
                 fIps(ips, grade);
                 sortingRanking(ips, grade);
                 tabelLaporan(ips, grade);
-                fReset(ips, grade);
+                fReset();
                 sortingMahasiswa();
-                fKembaliNilai();
+                fKembali("nilai");
             }
         }
     }
 
-    public static void fReset(double ips[], String grade[][]) {
-        for (int i = 0; i < masterMahasiswa.length; i++) {
-            for (int j = 0; j < masterMatkul.length; j++) {
-                grade[i][j] = null;
-            }
-        }
+    public static void fReset() {
         for (int i = 0; i < masterMahasiswa.length; i++) {
             for (int j = 0; j < masterMatkul.length; j++) {
                 masterNilai[i][j][4] = 0;
                 masterNilai[i][j][5] = 0;
             }
-            ips[i] = 0;
         }
         totalSks = 0;
     }
 
-    public static void fIps(double ips[], String grade[][]) {
+    public static double[] fIps(double ips[], String grade[][]) {
         for (int i = 0; i < masterMahasiswa.length; i++) {
             for (int j = 0; j < masterMatkul.length; j++) {
                 for (int j2 = 0; j2 < score.length - 1; j2++) {
@@ -1870,9 +1738,9 @@ public class projek2 {
                 masterNilai[i][j][5] *= masterPersentase[j][4]
                         / totalSks;
                 ips[i] += masterNilai[i][j][5];
-
             }
         }
+        return ips;
     }
 
     public static double fTotalSKS() {
@@ -1884,46 +1752,62 @@ public class projek2 {
 
     public static void fKetentuanInputDosen(String tampung[], int a, int b, String tampungDosen[][]) {
         for (int j = 0; j < masterDosen.length; j++) {
-            if ((tampung[a].equalsIgnoreCase(tampung[0])
-                    && tampung[0].length() > 30)
-                    || (tampung[a].equalsIgnoreCase(tampung[1])
-                            && (tampung[1].equalsIgnoreCase(masterDosen[j][a]) || tampung[1].length() != 10))) {
-                kondisi = true;
+            for (int i = 0; i < masterMahasiswa.length; i++) {
+                if ((tampung[a].equalsIgnoreCase(tampung[0])
+                        && tampung[0].length() > 30)
+                        || (tampung[a].equalsIgnoreCase(tampung[1])
+                                && (tampung[1].equalsIgnoreCase(masterDosen[j][1]) || tampung[1].length() != 10
+                                        || tampung[1].equalsIgnoreCase(masterMahasiswa[i][1])))) {
+                    kondisi = true;
+                    break;
+                } else {
+                    kondisi = false;
+                }
+            }
+            if (kondisi) {
                 break;
-            } else {
-                kondisi = false;
             }
         }
         if (!kondisi) {
             tampungDosen[b][a] = tampung[a];
+        } else {
+            tampung[a] = "";
         }
     }
 
     public static void fKetentuanInputMahasiswa(String tampung[], int a, int b, String tampungMahasiswa[][]) {
-        for (int j = 0; j < masterMahasiswa.length; j++) {
-            if ((tampung[a].equalsIgnoreCase(tampung[0]) && tampung[0].length() > 30)
-                    || (tampung[a].equalsIgnoreCase(tampung[1]) && (tampung[1].length() != 10
-                            || tampung[1].equalsIgnoreCase(masterMahasiswa[j][1])))
-                    || (tampung[a].equalsIgnoreCase(tampung[2])
-                            && (!tampung[2].equalsIgnoreCase("laki-laki")
-                                    && !tampung[2].equalsIgnoreCase("perempuan")))
-                    || (tampung[a].equalsIgnoreCase(tampung[3]) && tampung[3].length() > 70)
-                    || (tampung[a].equalsIgnoreCase(tampung[4]) && tampung[4].length() > 70)
-                    || (tampung[a].equalsIgnoreCase(tampung[5]) && tampung[5].length() > 70)
-                    || (tampung[a].equalsIgnoreCase(tampung[6]) && tampung[6].length() > 30)
-                    || (tampung[a].equalsIgnoreCase(tampung[7]) && tampung[7].length() > 30)
-                    || (tampung[a].equalsIgnoreCase(tampung[8]) && tampung[8].length() > 70)
-                    || (tampung[a].equalsIgnoreCase(tampung[9]) && tampung[9].length() > 70)
-                    || (tampung[a].equalsIgnoreCase(tampung[10]) && tampung[10].length() > 20)
-                    || (tampung[a].equalsIgnoreCase(tampung[11]) && tampung[11].length() > 20)) {
-                kondisi = true;
+        for (int j = 0; j < masterDosen.length; j++) {
+            for (int i = 0; i < masterMahasiswa.length; i++) {
+                if ((tampung[a].equalsIgnoreCase(tampung[0]) && tampung[0].length() > 30)
+                        || (tampung[a].equalsIgnoreCase(tampung[1]) && (tampung[1].length() != 10
+                                || tampung[1].equalsIgnoreCase(masterMahasiswa[i][1])
+                                || tampung[1].equalsIgnoreCase(masterDosen[j][1])))
+                        || (tampung[a].equalsIgnoreCase(tampung[2])
+                                && (!tampung[2].equalsIgnoreCase("laki-laki")
+                                        && !tampung[2].equalsIgnoreCase("perempuan")))
+                        || (tampung[a].equalsIgnoreCase(tampung[3]) && tampung[3].length() > 70)
+                        || (tampung[a].equalsIgnoreCase(tampung[4]) && tampung[4].length() > 70)
+                        || (tampung[a].equalsIgnoreCase(tampung[5]) && tampung[5].length() > 70)
+                        || (tampung[a].equalsIgnoreCase(tampung[6]) && tampung[6].length() > 30)
+                        || (tampung[a].equalsIgnoreCase(tampung[7]) && tampung[7].length() > 30)
+                        || (tampung[a].equalsIgnoreCase(tampung[8]) && tampung[8].length() > 70)
+                        || (tampung[a].equalsIgnoreCase(tampung[9]) && tampung[9].length() > 70)
+                        || (tampung[a].equalsIgnoreCase(tampung[10]) && tampung[10].length() > 20)
+                        || (tampung[a].equalsIgnoreCase(tampung[11]) && tampung[11].length() > 20)) {
+                    kondisi = true;
+                    break;
+                } else {
+                    kondisi = false;
+                }
+            }
+            if (kondisi) {
                 break;
-            } else {
-                kondisi = false;
             }
         }
         if (!kondisi) {
             tampungMahasiswa[b][a] = tampung[a];
+        } else {
+            tampung[a] = "";
         }
     }
 
@@ -1959,11 +1843,144 @@ public class projek2 {
     }
 
     // tabel
-    public static void tabelDosenMahasiswa(String tampung[][], String nomor) {
+
+    public static void fCetakBiodataMahasiswa(int a) {
+        for (int i = 0; i < 101; i++) {
+            System.out.print("=");
+        }
+        System.out.println();
+        System.out.printf("|%-46sBIODATA%-46s|\n", " ", " ");
+        for (int i = 0; i < 101; i++) {
+            System.out.print("=");
+        }
+        System.out.println();
+        for (int k = 0; k < biodataMahasiswa.length - a; k++) {
+            System.out.printf("|  %-20s  |  %-70s  |", biodataMahasiswa[k], masterMahasiswa[ambilAngka[0]][k]);
+            System.out.println();
+            if (k < biodataMahasiswa.length - (a + 1)) {
+                for (int i = 0; i < 101; i++) {
+                    System.out.print("-");
+                }
+                System.out.println();
+            }
+        }
+        for (int i = 0; i < 101; i++) {
+            System.out.print("=");
+        }
+        System.out.println();
+    }
+
+    public static void lihatKHS() {
+        fTotalSKS();
+        double ips[] = new double[masterMahasiswa.length];
+        String grade[][] = new String[masterMatkul.length][masterMatkul.length];
+        fIps(ips, grade);
+        for (int i = 0; i < grade.length; i++) {
+            fGrade(ambilAngka[0], i, grade);
+        }
+        totalSks = 0;
+        for (int i = 0; i < 45 * 2; i++) {
+            System.out.print("=");
+        }
+        System.out.printf("\n|%-8s : %-77s|", atribut[6], masterMahasiswa[ambilAngka[0]][0]);
+        System.out.printf("\n|NIM %-4s : %-77s|\n", atribut[4], masterMahasiswa[ambilAngka[0]][1]);
+        for (int i = 0; i < 45 * 2; i++) {
+            System.out.print("=");
+        }
+        System.out.println();
+        System.out.printf("|NOMOR|%-15s%-11s%15s|%-2s%-13s| GRADE |%-2s%-14s|", " ", atribut[0], " ", " ",
+                "NILAI AKHIR", " ", atribut[3]);
+        System.out.println();
+        for (int i = 0; i < 45 * 2; i++) {
+            System.out.print("=");
+        }
+        System.out.println();
+        for (int k = 0; k < masterMatkul.length; k++) {
+            System.out.printf("|%-1s %-3s|%-41s|%-5s%-10.2f|%-3s%-4s|%-6s%-10s|\n", atribut[4], (k + 1),
+                    masterMatkul[k][0][0], atribut[4], masterNilai[ambilAngka[0]][k][4], " ", grade[ambilAngka[0]][k],
+                    " ", masterNilai[ambilAngka[0]][k][5]);
+        }
+        for (int i = 0; i < 45 * 2; i++) {
+            System.out.print("-");
+        }
+        System.out.printf("\n|%-1s %-3s|%-41s|%-18s%-22.2f|\n", atribut[4], " ", "Indeks Prestasi Semester", " ",
+                ips[ambilAngka[0]]);
+        for (int i = 0; i < 45 * 2; i++) {
+            System.out.print("=");
+        }
+        System.out.println();
+        fReset();
+    }
+
+    public static void tabelPersentase() {
         System.out.println(
                 "============================================================");
-        System.out.printf("| %s  |%-15s%s%-15s|     %s      |\n", atribut[7], atribut[4],
-                atribut[6], atribut[4], nomor);
+        System.out.printf("|  %-45s  |  %-4s  |\n", masterMatkul[ambilAngka[0]][0][0],
+                masterMatkul[ambilAngka[0]][0][1]);
+        System.out.println(
+                "============================================================");
+        for (int i = 0; i < scorePersentase.length; i++) {
+            if (i < scorePersentase.length - 1) {
+                System.out.printf("|  Persentase %-34s  |  %.1f   |\n", scorePersentase[i],
+                        masterPersentase[ambilAngka[0]][i]);
+                System.out.println(
+                        "------------------------------------------------------------");
+            } else if (i == scorePersentase.length - 1) {
+                System.out.printf("|  %-45s  |  %.1f   |\n", "SKS",
+                        masterPersentase[ambilAngka[0]][i]);
+            }
+        }
+        System.out.println(
+                "============================================================");
+    }
+
+    public static void tabelTampilan(String bagian, String item[]) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j <= 34; j++) {
+                if ((i == 0 || i == 2) && (j >= 0 && j <= 34)) {
+                    System.out.print("=");
+                } else if ((i == 1 && (j == 0 || j == (35 - bagian.length())))) {
+                    System.out.print("|");
+                } else if (i == 1 && j == ((34 / 2) - (bagian.length() / 2))) {
+                    System.out.print(bagian);
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+        for (int i = 0; i < item.length; i++) {
+            System.out.printf("| [%s] %-28s|\n", i + 1, item[i]);
+        }
+        System.out.print("| [T] Keluar                      |\n===================================\npilih -->  : ");
+    }
+
+    public static void tabelNilaiPerMatkul(int a, int b) {
+        System.out.println(
+                "==============================================================");
+        System.out.printf("|  %-45s  |  NILAI   |\n", masterMatkul[ambilAngka[b]][0][0]);
+        System.out.println(
+                "==============================================================");
+
+        for (int i = 0; i < score.length - 1; i++) {
+            System.out.printf("|  %-45s  |  %-6.2f  |\n", score[i],
+                    masterNilai[ambilAngka[a]][ambilAngka[b]][i]);
+            System.out.println(
+                    "--------------------------------------------------------------");
+            masterNilai[ambilAngka[a]][ambilAngka[b]][4] += masterNilai[ambilAngka[a]][ambilAngka[b]][i]
+                    * masterPersentase[ambilAngka[b]][i];
+        }
+        System.out.printf("|  %-45s  |  %-6.2f  |\n", score[4],
+                masterNilai[ambilAngka[a]][ambilAngka[b]][4]);
+        System.out.println(
+                "==============================================================");
+        masterNilai[ambilAngka[a]][ambilAngka[b]][4] = 0;
+    }
+
+    public static void tabelDosenMahasiswa(String tampung[][], String nomorInduk) {
+        System.out.println(
+                "============================================================");
+        System.out.printf("| NOMOR  |%-15sNAMA%-15s|     %s      |\n", " ", " ", nomorInduk);
         System.out.println(
                 "============================================================");
         for (int i = 0; i < tampung.length; i++) {
@@ -1978,8 +1995,8 @@ public class projek2 {
                 "============================================================");
     }
 
-    public static void tabelPengajar() {
-        if (masterMatkul[ambilAngka[0]][1].length == 0) {
+    public static void tabelPengajar(int a) {
+        if (masterMatkul[ambilAngka[a]][1].length == 0) {
             System.out.println("Tidak ada Pengajar");
         } else {
             int tampungInt = 0;
@@ -2002,8 +2019,8 @@ public class projek2 {
             }
             System.out.println(
                     "============================================================");
-            System.out.printf("| %s  |%-15s%s%-15s|     %s      |\n", atribut[7], atribut[4],
-                    atribut[6], atribut[4], atribut[8]);
+            System.out.printf("| NOMOR  |%-15s%s%-15s|     %s      |\n", " ",
+                    "NAMA", " ", "NIP");
             System.out.println(
                     "============================================================");
             for (int i = 0; i < tempint[0].length; i++) {
@@ -2019,13 +2036,13 @@ public class projek2 {
         }
     }
 
-    public static void tabelBioDosen() {
+    public static void tabelBioDosen(int a, int b) {
         System.out.println(
                 "============================================================");
-        for (int i = 0; i < bioDosen.length; i++) {
+        for (int i = 0; i < b; i++) {
             System.out.printf("| %-5s |  %-30s%-18s|\n", bioDosen[i],
-                    masterDosen[ambilAngka[0]][i], atribut[4]);
-            if (i < bioDosen.length - 1) {
+                    masterDosen[ambilAngka[a]][i], " ");
+            if (i < b - 1) {
                 System.out.println(
                         "------------------------------------------------------------");
             }
@@ -2038,8 +2055,7 @@ public class projek2 {
     public static void tabelMatkul() {
         System.out.println(
                 "============================================================");
-        System.out.printf("| %s  |%-19s%s%-19s|\n", atribut[7], atribut[4], atribut[0],
-                atribut[4]);
+        System.out.printf("| NOMOR  |%-19sMATA KULIAH%-19s|\n", " ", " ");
         System.out.println(
                 "============================================================");
         for (int i = 0; i < masterMatkul.length; i++) {
@@ -2058,17 +2074,17 @@ public class projek2 {
             System.out.print("=");
         }
         System.out.println();
-        System.out.printf("|  %s |  %-30s  |", atribut[7], atribut[6]);
+        System.out.printf("| NOMOR  |  %-30s  |", "NAMA");
         for (int i = 0; i < masterMatkul.length; i++) {
             System.out.printf("  %-4s    |", masterMatkul[i][0][1]);
         }
-        System.out.printf("  %-4s    |  STATUS  |\n", atribut[5]);
+        System.out.printf("  IPS     |  STATUS  |\n");
         for (int i = 0; i < 45 + (11 * (masterMatkul.length + 2)); i++) {
             System.out.print("=");
         }
         System.out.println();
         for (int i = 0; i < masterMahasiswa.length; i++) {
-            System.out.printf("|  %-5s |  %-30s  |", i + 1, masterMahasiswa[i][0]);
+            System.out.printf("|   %-5s|  %-30s  |", i + 1, masterMahasiswa[i][0]);
             for (int j = 0; j < masterMatkul.length; j++) {
                 System.out.printf("    %-2s    |", grade[i][j]);
             }
@@ -2077,13 +2093,13 @@ public class projek2 {
                 if (grade[i][j].equalsIgnoreCase("e")) {
                     kondisi = false;
                     break;
-                }else{
+                } else {
                     kondisi = true;
                 }
             }
             if (kondisi) {
                 System.out.println("    L     |");
-            }else{
+            } else {
                 System.out.println("    TL    |");
             }
             for (int k = 0; k < 45 + (11 * (masterMatkul.length + 2)); k++) {
@@ -2139,9 +2155,9 @@ public class projek2 {
             for (int j = i; j < masterMahasiswa.length; j++) {
                 if (masterMahasiswa[i][0].compareToIgnoreCase(masterMahasiswa[j][0]) > 0) {
                     for (int j2 = 0; j2 < biodataMahasiswa.length; j2++) {
-                        tempString[0] = masterMahasiswa[i][j2];
+                        tempStr = masterMahasiswa[i][j2];
                         masterMahasiswa[i][j2] = masterMahasiswa[j][j2];
-                        masterMahasiswa[j][j2] = tempString[0];
+                        masterMahasiswa[j][j2] = tempStr;
                     }
                     for (int j2 = 0; j2 < masterMatkul.length; j2++) {
                         for (int k = 0; k < 6; k++) {
@@ -2163,9 +2179,9 @@ public class projek2 {
                     ips[i] = ips[j];
                     ips[j] = tempDouble;
                     for (int j2 = 0; j2 < biodataMahasiswa.length; j2++) {
-                        tempString[0] = masterMahasiswa[i][j2];
+                        tempStr = masterMahasiswa[i][j2];
                         masterMahasiswa[i][j2] = masterMahasiswa[j][j2];
-                        masterMahasiswa[j][j2] = tempString[0];
+                        masterMahasiswa[j][j2] = tempStr;
                     }
                     for (int j2 = 0; j2 < masterMatkul.length; j2++) {
                         for (int k = 0; k < 6; k++) {
@@ -2175,9 +2191,9 @@ public class projek2 {
                         }
                     }
                     for (int j2 = 0; j2 < masterMatkul.length; j2++) {
-                        tempString[0] = grade[i][j2];
+                        tempStr = grade[i][j2];
                         grade[i][j2] = grade[j][j2];
-                        grade[j][j2] = tempString[0];
+                        grade[j][j2] = tempStr;
                     }
                 } else if (ips[i] == ips[j]) {
                     if (masterMahasiswa[i][0].compareTo(masterMahasiswa[j][0]) > 0) {
@@ -2185,9 +2201,9 @@ public class projek2 {
                         ips[i] = ips[j];
                         ips[j] = tempDouble;
                         for (int j2 = 0; j2 < biodataMahasiswa.length; j2++) {
-                            tempString[0] = masterMahasiswa[i][j2];
+                            tempStr = masterMahasiswa[i][j2];
                             masterMahasiswa[i][j2] = masterMahasiswa[j][j2];
-                            masterMahasiswa[j][j2] = tempString[0];
+                            masterMahasiswa[j][j2] = tempStr;
                         }
                         for (int j2 = 0; j2 < masterMatkul.length; j2++) {
                             for (int k = 0; k < 6; k++) {
@@ -2197,9 +2213,9 @@ public class projek2 {
                             }
                         }
                         for (int j2 = 0; j2 < masterMatkul.length; j2++) {
-                            tempString[0] = grade[i][j2];
+                            tempStr = grade[i][j2];
                             grade[i][j2] = grade[j][j2];
-                            grade[j][j2] = tempString[0];
+                            grade[j][j2] = tempStr;
                         }
                     }
                 }
@@ -2208,167 +2224,134 @@ public class projek2 {
     }
 
     // kembali
-    public static void fKembaliFBioDosen() {
+    public static void fKembali(String tampung) {
         kondisi = true;
         while (kondisi) {
-            System.out.print("Masukkan :\n[T]   untuk keluar\npilih -->  : ");
+            System.out.print("Masukkan :\n[T]   untuk kembali\npilih -->  : ");
             kembali = scStr.nextLine();
             System.out.println("\033[H\033[2J");
             if (kembali.equalsIgnoreCase("t")) {
-                fBioDosen();
+                if (tampung.equalsIgnoreCase("berandaMahasiswa")) {// mahasiswa
+                    berandaMahasiswa();
+                } else if (tampung.equalsIgnoreCase("biodataMahasiswa")) {
+                    fBiodataMahasiswa();
+                } else if (tampung.equalsIgnoreCase("nilaiMahasiswa")) {
+                    nilaiMahasiswa();
+                } else if (tampung.equalsIgnoreCase("berandaDosen")) {// dosen
+                    berandaDosen();
+                } else if (tampung.equalsIgnoreCase("kembaliKeLihatNilai")) {
+                    fInputLihatNilai("dosen");
+                } else if (tampung.equalsIgnoreCase("kembaliKeLihatNilaiAwal")) {
+                    berandaDosen();
+                } else if (tampung.equalsIgnoreCase("dosen")) {// admin
+                    fBioDosen();
+                } else if (tampung.equalsIgnoreCase("pengajar")) {
+                    fBioPengajar();
+                } else if (tampung.equalsIgnoreCase("mahasiswa")) {
+                    fBioMahasiswa();
+                } else if (tampung.equalsIgnoreCase("matkul")) {
+                    fMatkul();
+                } else if (tampung.equalsIgnoreCase("nilai")) {
+                    fNilai();
+                }
                 kondisi = false;
             }
         }
     }
 
-    public static void fKembaliFBioPengajar() {
+    public static void fKembali1(String tampung1, String tampung2) {
         kondisi = true;
         while (kondisi) {
-            System.out.print("Masukkan :\n[T]   untuk keluar\npilih -->  : ");
+            System.out.print("Masukkan :\n[T]   untuk kembali\n[R]   untuk mengulang\npilih -->  : ");
             kembali = scStr.nextLine();
             System.out.println("\033[H\033[2J");
             if (kembali.equalsIgnoreCase("t")) {
-                fBioPengajar();
-                kondisi = false;
-            }
-        }
-    }
-
-    public static void fKembaliFBioPengajarUlangCFUbahPengajar1() {
-        kondisi = true;
-        while (kondisi) {
-            System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-            kembali = scStr.nextLine();
-            System.out.println("\033[H\033[2J");
-            if (kembali.equalsIgnoreCase("t")) {
-                fBioPengajar();
+                if (tampung1.equalsIgnoreCase("login")) {// login
+                    berandaLogin();
+                } else if (tampung1.equalsIgnoreCase("nilaiMahasiswa")) {// mahasiswa
+                    nilaiMahasiswa();
+                } else if (tampung1.equalsIgnoreCase("berandaDosen")) {// dosen
+                    berandaDosen();
+                } else if (tampung1.equalsIgnoreCase("dosen")) {// admin
+                    fBioDosen();
+                } else if (tampung1.equalsIgnoreCase("pengajar")) {
+                    fBioPengajar();
+                } else if (tampung1.equalsIgnoreCase("ulangUbahPengajar")) {
+                    fBioPengajar();
+                } else if (tampung1.equalsIgnoreCase("mahasiswa")) {
+                    fBioMahasiswa();
+                } else if (tampung2.equalsIgnoreCase("ulangUbahMahasiswa")) {
+                    fUbahMahasiswa();
+                } else if (tampung1.equalsIgnoreCase("matkul")) {
+                    fMatkul();
+                } else if (tampung1.equalsIgnoreCase("ulanglihatMahasiswa")) {
+                    fLihatMahasiswa();
+                } else if (tampung1.equalsIgnoreCase("ulangUbahMatkul")) {
+                    fUbahMatkul();
+                } else if (tampung1.equalsIgnoreCase("nilai")) {
+                    fNilai();
+                } else if (tampung1.equalsIgnoreCase("ulangInputNilai")) {
+                    fInputLihatNilai("admin");
+                } else if (tampung1.equalsIgnoreCase("ulangLihatNilai")) {
+                    fInputLihatNilai("admin");
+                }
                 kondisi = false;
             } else if (kembali.equalsIgnoreCase("r")) {
-                cfUbahPengajar1();
+                if (tampung2.equalsIgnoreCase("ulangLogin")) {// login
+                    fLoginAwal();
+                } else if (tampung2.equalsIgnoreCase("ulangNilaiMahasiswa")) {// mahasiswa
+                    lihatNilaiMahasiswa();
+                } else if (tampung2.equalsIgnoreCase("ulangLihatMatkulDosen")) {// dosen
+                    fLihatMatkul("dosen");
+                } else if (tampung2.equalsIgnoreCase("ulangKurangiDosen")) {// admin
+                    fKurangDosen();
+                } else if (tampung2.equalsIgnoreCase("ulangUbahDosen")) {
+                    fUbahDosen();
+                } else if (tampung2.equalsIgnoreCase("ulangCabangUbahDosen")) {
+                    cfUbahDosen1();
+                } else if (tampung2.equalsIgnoreCase("ulangLihatDosen")) {
+                    fLihatDosen();
+                } else if (tampung2.equalsIgnoreCase("ulangPengajar")) {
+                    fPengajar();
+                } else if (tampung2.equalsIgnoreCase("ulangTambahPengajar")) {
+                    fTambahPengajar();
+                } else if (tampung2.equalsIgnoreCase("ulangKurangiPengajar")) {
+                    fKurangPengajar();
+                } else if (tampung2.equalsIgnoreCase("ulangUbahPengajar")) {
+                    fUbahPengajar();
+                } else if (tampung2.equalsIgnoreCase("ulangCabangUbahPengajar")) {
+                    cfUbahPengajar1();
+                } else if (tampung2.equalsIgnoreCase("ulangKurangiMahasiswa")) {
+                    fKurangMahasiswa();
+                } else if (tampung2.equalsIgnoreCase("ulangUbahMahasiswa")) {
+                    fUbahMahasiswa();
+                } else if (tampung2.equalsIgnoreCase("ulangCabangUbahMahasiswa")) {
+                    cfUbahMahasiswa1();
+                } else if (tampung2.equalsIgnoreCase("ulangLihatMahasiswa")) {
+                    fLihatMahasiswa();
+                } else if (tampung2.equalsIgnoreCase("ulangCabanglihatMahasiswa")) {
+                    cfLihatMahasiswa11();
+                } else if (tampung2.equalsIgnoreCase("ulangKurangiMatkul")) {
+                    fKurangMatkul();
+                } else if (tampung2.equalsIgnoreCase("ulangUbahMatkul")) {
+                    fUbahMatkul();
+                } else if (tampung2.equalsIgnoreCase("ulangCabangUbahMatkul")) {
+                    cfUbahMatkul1();
+                } else if (tampung2.equalsIgnoreCase("ulangLihatMatkul")) {
+                    fLihatMatkul("admin");
+                } else if (tampung2.equalsIgnoreCase("ulangInputNilai")) {
+                    fInputNilai();
+                } else if (tampung2.equalsIgnoreCase("ulangCabangInputNilai")) {
+                    cfInputNilai1();
+                } else if (tampung2.equalsIgnoreCase("ulangCabangLihatNilai")) {
+                    cfLihatNilai1();
+                }
                 kondisi = false;
             }
         }
     }
 
-    public static void fKembaliFBioMahasiswa() {
-        kondisi = true;
-        while (kondisi) {
-            System.out.print("Masukkan :\n[T]   untuk keluar\npilih -->  : ");
-            kembali = scStr.nextLine();
-            System.out.println("\033[H\033[2J");
-            if (kembali.equalsIgnoreCase("t")) {
-                fBioMahasiswa();
-                kondisi = false;
-            }
-        }
-    }
-
-    public static void fUlangLihatMahasiswa() {
-        kondisi = true;
-        while (kondisi) {
-            System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-            kembali = scStr.nextLine();
-            System.out.println("\033[H\033[2J");
-            if (kembali.equalsIgnoreCase("t")) {
-                fLihatMahasiswa();
-                kondisi = false;
-            } else if (kembali.equalsIgnoreCase("r")) {
-                cfLihatMahasiswa11();
-                kondisi = false;
-            }
-        }
-    }
-
-    public static void fKembaliFMatkul() {
-        kondisi = true;
-        while (kondisi) {
-            System.out.print("Masukkan :\n[T]   untuk keluar\npilih -->  : ");
-            kembali = scStr.nextLine();
-            System.out.println("\033[H\033[2J");
-            if (kembali.equalsIgnoreCase("t")) {
-                fMatkul();
-                kondisi = false;
-            }
-        }
-    }
-
-    public static void fUlangCfUbahMatkul1() {
-        kondisi = true;
-        while (kondisi) {
-            System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-            kembali = scStr.nextLine();
-            System.out.println("\033[H\033[2J");
-            if (kembali.equalsIgnoreCase("t")) {
-                fUbahMatkul();
-                kondisi = false;
-            } else if (kembali.equalsIgnoreCase("r")) {
-                cfUbahMatkul1();
-                kondisi = false;
-            }
-        }
-    }
-
-    public static void fKembaliFLihatMatkul() {
-        kondisi = true;
-        while (kondisi) {
-            System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-            kembali = scStr.nextLine();
-            System.out.println("\033[H\033[2J");
-            if (kembali.equalsIgnoreCase("t")) {
-                fMatkul();
-                kondisi = false;
-            } else if (kembali.equalsIgnoreCase("r")) {
-                fLihatMatkul();
-                kondisi = false;
-            }
-        }
-    }
-
-    public static void fKembaliFInputNilai() {
-        kondisi = true;
-        while (kondisi) {
-            System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-            kembali = scStr.nextLine();
-            System.out.println("\033[H\033[2J");
-            if (kembali.equalsIgnoreCase("t")) {
-                fInputNilai();
-                kondisi = false;
-            } else if (kembali.equalsIgnoreCase("r")) {
-                cfInputNilai1();
-                kondisi = false;
-            }
-        }
-    }
-
-    public static void fKembaliFLihatNilai() {
-        kondisi = true;
-        while (kondisi) {
-            System.out.print("Masukkan :\n[T]   untuk keluar\n[R]   untuk mengulang\npilih -->  : ");
-            kembali = scStr.nextLine();
-            System.out.println("\033[H\033[2J");
-            if (kembali.equalsIgnoreCase("t")) {
-                fLihatNilai();
-                kondisi = false;
-            } else if (kembali.equalsIgnoreCase("r")) {
-                cfLihatNilai1();
-                kondisi = false;
-            }
-        }
-    }
-
-    public static void fKembaliNilai() {
-        kondisi = true;
-        while (kondisi) {
-            System.out.print("Masukkan :\n[T]   untuk keluar\npilih -->  : ");
-            kembali = scStr.nextLine();
-            System.out.println("\033[H\033[2J");
-            if (kembali.equalsIgnoreCase("t")) {
-                fNilai();
-                kondisi = false;
-            }
-        }
-    }
-
+    // searching
     public static void searchingTanpaAngka(int a, int b, int c, int d, String tampung[][]) {
         ambilAngka[c] = 0;
         for (int i = 0; i < a; i++) {
@@ -2391,6 +2374,7 @@ public class projek2 {
     }
 
     public static void searchingPengajar(int a) {
+        tempint[0] = null;
         int tampungInt = 0;
         for (int i = 0; i < masterMatkul.length; i++) {
             for (int j = 0; j < masterMatkul[i][1].length; j++) {
